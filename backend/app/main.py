@@ -8,6 +8,7 @@ from fastapi.exceptions import RequestValidationError
 
 from backend.app.core.config import settings
 from backend.app.core.logging import logger
+from backend.app.data.seed_data import seed_database
 from backend.app.api.health import router as health_router
 
 
@@ -16,6 +17,10 @@ async def lifespan(app: FastAPI):
     """Lifecycle events on startup and shutdown."""
     logger.info("Starting %s v%s in %s mode", settings.PROJECT_NAME, settings.VERSION, settings.ENVIRONMENT)
     logger.info("CORS origins allowed: %s", settings.CORS_ORIGINS)
+    
+    # Initialize and seed database if necessary
+    seed_database()
+
     if settings.GEMINI_API_KEY:
         logger.info("Google Gemini API is configured.")
     else:
