@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { recognizeFridgePhoto, getRecipeRecommendations } from './services/api'
 
 type Screen = 'home' | 'input' | 'ingredients' | 'vibe' | 'results' | 'recipe'
 type VibeTheme = 'cozy' | 'spicy' | 'fresh' | 'chef'
@@ -180,7 +181,7 @@ const RECIPES = [
   },
 ]
 
-type Recipe = (typeof RECIPES)[number]
+type Recipe = (typeof RECIPES)[number] & { ai_reason?: string }
 
 // ─── SVG Illustrations ────────────────────────────────────────────────────────
 
@@ -641,6 +642,8 @@ function InputScreen({ onNavigate, onContinue }: { onNavigate: (s: Screen) => vo
   const [typed, setTyped] = useState<string[]>([])
   const [dragging, setDragging] = useState(false)
   const [uploaded, setUploaded] = useState(false)
+  const [scanning, setScanning] = useState(false)
+  const [scannedItems, setScannedItems] = useState<Ingredient[] | null>(null)
 
   function addItem() {
     const v = newItem.trim()
@@ -651,13 +654,25 @@ function InputScreen({ onNavigate, onContinue }: { onNavigate: (s: Screen) => vo
     }
   }
 
+  async function handleFileScan(file: File) {
+    setMethod('scan')
+    setScanning(true)
+    try {
+      const res = await recognizeFridgePhoto(file)
+      setScannedItems(res.ingredients)
+    } finally {
+      setScanning(false)
+      setUploaded(true)
+    }
+  }
+
   function continueToIngredients() {
     if (method === 'type' && typed.length) {
       onContinue(typed.map((name, index) => ({ id: Date.now() + index, name, qty: '1', emoji: getEmoji(name) })))
       return
     }
     if (method === 'scan' && uploaded) {
-      onContinue([
+      onContinue(scannedItems || [
         ...INITIAL_INGREDIENTS,
         { id: 9, name: 'Carrots', qty: '3', emoji: '🥕' },
         { id: 10, name: 'Mushrooms', qty: '200g', emoji: '🍄' },
@@ -698,13 +713,28 @@ function InputScreen({ onNavigate, onContinue }: { onNavigate: (s: Screen) => vo
                 className={`fridge-drop border-2 border-dashed rounded-2xl p-8 text-center transition-all ${dragging ? 'border-tomato bg-peach/30 is-open' : 'border-yellow/55 bg-vanilla/70 hover:border-yellow hover:bg-vanilla'}`}
                 onDragEnter={() => { setDragging(true); setMethod('scan') }}
                 onDragLeave={() => setDragging(false)}
-                onDrop={() => { setDragging(false); setUploaded(true); setMethod('scan') }}
+                onDrop={e => {
+                  e.preventDefault()
+                  setDragging(false)
+                  const file = e.dataTransfer.files?.[0]
+                  if (file) handleFileScan(file)
+                  else { setUploaded(true); setMethod('scan') }
+                }}
                 onDragOver={e => e.preventDefault()}
               >
                 {uploaded ? (
                   <div className="space-y-2">
                     <div className="text-4xl success-pop">✨</div>
-                    <p className="font-body font-bold text-olive text-sm">Your fridge is looking fabulous. We spotted 12 ingredients!</p>
+                    <p className="font-body font-bold text-olive text-sm">
+                      Your fridge is looking fabulous. We spotted {scannedItems ? scannedItems.length : 12} ingredients!
+                    </p>
+                  </div>
+                ) : scanning ? (
+                  <div className="space-y-2">
+                    <div className="text-4xl animate-bounce">🔍</div>
+                    <p className="font-body font-bold text-olive text-sm">
+                      Consulting the tiny chefs… Scanning your kitchen!
+                    </p>
                   </div>
                 ) : (
                   <>
@@ -712,13 +742,23 @@ function InputScreen({ onNavigate, onContinue }: { onNavigate: (s: Screen) => vo
                     <p className="font-body text-olive/50 text-sm mb-3">Drag & drop your fridge photo here</p>
                     <label className="inline-block bg-tomato text-white font-body font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-[#D4614F] transition-colors cursor-pointer">
                       Upload a photo 📸
-                      <input type="file" accept="image/*" className="hidden" onChange={() => { setUploaded(true); setMethod('scan') }} />
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={e => {
+                          const file = e.target.files?.[0]
+                          if (file) handleFileScan(file)
+                          else { setUploaded(true); setMethod('scan') }
+                        }}
+                      />
                     </label>
                     <p className="font-body text-olive/30 text-xs mt-2.5">PNG, JPG, WEBP up to 10 MB</p>
                   </>
                 )}
               </div>
             </div>
+
 
             {/* Card B — Type */}
             <div
@@ -938,7 +978,7 @@ function IngredientsScreen({ onNavigate, ingredients, setIngredients }: { onNavi
 
 // ─── Screen 4: Vibe ──────────────────────────────────────────────────────────
 
-function VibeScreen({ onNavigate, onFind, initialPreferences }: { onNavigate: (s: Screen) => void; onFind: (theme: VibeTheme, preferences: Preferences) => void; initialPreferences: Preferences }) {
+function VibeScreen({ onNavigate, onFind, initialPreferences, ingredients }: { onNavigate: (s: Screen) => void; onFind: (theme: VibeTheme, preferences: Preferences, recipes?: Recipe[]) => void; initialPreferences: Preferences; ingredients: Ingredient[] }) {
   const [tastes, setTastes] = useState(new Set(initialPreferences.tastes))
   const [effort, setEffort] = useState<string | null>(initialPreferences.effort)
   const [time, setTime] = useState<string | null>(initialPreferences.time)
@@ -951,14 +991,21 @@ function VibeScreen({ onNavigate, onFind, initialPreferences }: { onNavigate: (s
     return n
   }
 
-  function findMeal(surprise = false) {
+  async function findMeal(surprise = false) {
     setGenerating(true)
     const selectedTheme: VibeTheme = surprise
       ? (['cozy', 'spicy', 'fresh', 'chef'] as VibeTheme[])[Math.floor(Math.random() * 4)]
       : tastes.has('spicy') ? 'spicy' : tastes.has('fresh') ? 'fresh' : effort === 'chef' ? 'chef' : 'cozy'
     const nextPreferences = { tastes: [...tastes], effort, time, diets: [...diets] }
-    window.setTimeout(() => onFind(selectedTheme, nextPreferences), 1400)
+    try {
+      const res = await getRecipeRecommendations(ingredients, nextPreferences, selectedTheme, surprise)
+      const finalTheme = (['cozy', 'spicy', 'fresh', 'chef'].includes(res.theme) ? res.theme : selectedTheme) as VibeTheme
+      window.setTimeout(() => onFind(finalTheme, nextPreferences, res.recipes.length ? res.recipes : undefined), 1200)
+    } catch {
+      window.setTimeout(() => onFind(selectedTheme, nextPreferences), 1200)
+    }
   }
+
 
   return (
     <div className="experience-shell screen-enter min-h-screen bg-butter flex flex-col paper-texture">
@@ -1103,13 +1150,17 @@ function VibeScreen({ onNavigate, onFind, initialPreferences }: { onNavigate: (s
 
 // ─── Screen 5: Results ───────────────────────────────────────────────────────
 
-function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredients }: { onNavigate: (s: Screen) => void; onViewRecipe: (recipe: Recipe) => void; onStartOver: () => void; theme: VibeTheme; ingredients: Ingredient[] }) {
+function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredients, recipes = RECIPES }: { onNavigate: (s: Screen) => void; onViewRecipe: (recipe: Recipe) => void; onStartOver: () => void; theme: VibeTheme; ingredients: Ingredient[]; recipes?: Recipe[] }) {
   const [saved, setSaved] = useState(() => {
     try { return new Set<number>(JSON.parse(localStorage.getItem('fridgemind-saved') ?? '[]')) }
     catch { return new Set<number>() }
   })
   const [filter, setFilter] = useState<string | null>(null)
-  const [recipeOrder, setRecipeOrder] = useState(RECIPES.map(recipe => recipe.id))
+  const [recipeOrder, setRecipeOrder] = useState(recipes.map(recipe => recipe.id))
+
+  useEffect(() => {
+    setRecipeOrder(recipes.map(recipe => recipe.id))
+  }, [recipes])
 
   function toggleSave(id: number) {
     setSaved(prev => {
@@ -1120,13 +1171,15 @@ function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredien
     })
   }
 
-  const allTags = [...new Set(RECIPES.flatMap(r => r.tags))]
+  const allTags = [...new Set(recipes.flatMap(r => r.tags))]
   const pantryNames = new Set(ingredients.map(item => item.name.toLowerCase()))
   const pantryMatch = (recipe: Recipe) => recipe.ingredients.filter(item => pantryNames.has(item.name.toLowerCase())).length
   const orderedRecipes = recipeOrder
-    .map(id => RECIPES.find(recipe => recipe.id === id)!)
-    .sort((a, b) => pantryMatch(b) - pantryMatch(a))
+    .map(id => recipes.find(recipe => recipe.id === id)!)
+    .filter(Boolean)
+    .sort((a, b) => (b.match ?? pantryMatch(b)) - (a.match ?? pantryMatch(a)))
   const displayed = filter ? orderedRecipes.filter(r => r.tags.includes(filter)) : orderedRecipes
+
 
   function shuffleRecipes() {
     setRecipeOrder(previous => [...previous].sort(() => Math.random() - 0.5))
@@ -1233,8 +1286,9 @@ function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredien
                   <p className="font-body text-olive/55 text-sm leading-relaxed mb-4">{recipe.desc}</p>
                   <div className="ai-reason mb-4">
                     <span>✦</span>
-                    <p>You have {pantryMatch(recipe)} of {recipe.ingredients.length} ingredients already, so this is a low-waste {theme} match.</p>
+                    <p>{recipe.ai_reason || `You have ${pantryMatch(recipe)} of ${recipe.ingredients.length} ingredients already, so this is a low-waste ${theme} match.`}</p>
                   </div>
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-0.5">
                       {[1, 2, 3, 4, 5].map(star => (
@@ -1454,6 +1508,7 @@ export default function App() {
   const [ingredients, setIngredients] = useState<Ingredient[]>(() => readSaved('fridgemind-ingredients', INITIAL_INGREDIENTS))
   const [theme, setTheme] = useState<VibeTheme>(() => readSaved('fridgemind-theme', 'cozy'))
   const [preferences, setPreferences] = useState<Preferences>(() => readSaved('fridgemind-preferences', DEFAULT_PREFERENCES))
+  const [recipesList, setRecipesList] = useState<Recipe[]>(RECIPES)
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe>(() => {
     const id = readSaved('fridgemind-recipe', RECIPES[0].id)
     return RECIPES.find(recipe => recipe.id === id) ?? RECIPES[0]
@@ -1500,12 +1555,13 @@ export default function App() {
       {screen === 'home'        && <HomeScreen        onNavigate={navigate} />}
       {screen === 'input'       && <InputScreen       onNavigate={navigate} onContinue={items => { setIngredients(items); navigate('ingredients') }} />}
       {screen === 'ingredients' && <IngredientsScreen onNavigate={navigate} ingredients={ingredients} setIngredients={setIngredients} />}
-      {screen === 'vibe'        && <VibeScreen onNavigate={navigate} initialPreferences={preferences} onFind={(nextTheme, nextPreferences) => { setTheme(nextTheme); setPreferences(nextPreferences); navigate('results') }} />}
-      {screen === 'results'     && <ResultsScreen onNavigate={navigate} onStartOver={() => {
+      {screen === 'vibe'        && <VibeScreen onNavigate={navigate} ingredients={ingredients} initialPreferences={preferences} onFind={(nextTheme, nextPreferences, nextRecipes) => { setTheme(nextTheme); setPreferences(nextPreferences); if (nextRecipes?.length) setRecipesList(nextRecipes); navigate('results') }} />}
+      {screen === 'results'     && <ResultsScreen onNavigate={navigate} recipes={recipesList} onStartOver={() => {
         if (window.confirm('Start fresh and clear your ingredients and preferences?')) {
           setIngredients(INITIAL_INGREDIENTS)
           setPreferences(DEFAULT_PREFERENCES)
           setTheme('cozy')
+          setRecipesList(RECIPES)
           localStorage.removeItem('fridgemind-saved')
           navigate('home')
         }
@@ -1514,3 +1570,4 @@ export default function App() {
     </div>
   )
 }
+
