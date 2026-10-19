@@ -75,8 +75,17 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
+from backend.app.api.health import router as health_router
+from backend.app.api.ingredients import router as ingredients_router
+from backend.app.api.recipes import router as recipes_router
+
+
 # Include API Routers
 app.include_router(health_router, prefix=settings.API_V1_PREFIX)
+app.include_router(ingredients_router, prefix=settings.API_V1_PREFIX)
+app.include_router(recipes_router, prefix=settings.API_V1_PREFIX)
+
+
 
 
 @app.get("/")
