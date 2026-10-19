@@ -8,6 +8,8 @@ export interface Ingredient {
   name: string
   qty: string
   emoji: string
+  category?: string
+  shelf?: 'use_first' | 'fresh_finds'
   confidence?: number
 }
 
@@ -20,6 +22,7 @@ export interface RecipeIngredient {
 export interface Recipe {
   id: number
   name: string
+  cuisine?: string
   time: string
   difficulty: string
   tags: string[]
@@ -35,6 +38,9 @@ export interface Recipe {
   stepTimers: number[]
   substitution: string
   ai_reason?: string
+  matched_ingredients?: string[]
+  missing_ingredients?: string[]
+  badges?: string[]
 }
 
 export interface Preferences {
@@ -53,6 +59,12 @@ export interface NutritionSummary {
   servings: number
   basis: string
   assumptions: string
+  badges?: string[]
+  macro_ratios?: {
+    protein_pct: number
+    carbs_pct: number
+    fat_pct: number
+  }
 }
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api').replace(/\/+$/, '')
@@ -85,18 +97,18 @@ export async function recognizeFridgePhoto(file: File): Promise<{ ingredients: I
     console.warn('[FridgeMind API] Vision endpoint unavailable, using local fallback:', err)
     return {
       ingredients: [
-        { id: 1, name: 'Eggs', qty: '6', emoji: '🥚' },
-        { id: 2, name: 'Milk', qty: '500ml', emoji: '🥛' },
-        { id: 3, name: 'Cheese', qty: '200g', emoji: '🧀' },
-        { id: 4, name: 'Tomatoes', qty: '3', emoji: '🍅' },
-        { id: 5, name: 'Spinach', qty: '1 bunch', emoji: '🥬' },
-        { id: 6, name: 'Garlic', qty: '4 cloves', emoji: '🧄' },
-        { id: 7, name: 'Onion', qty: '1', emoji: '🧅' },
-        { id: 8, name: 'Bread', qty: '½ loaf', emoji: '🍞' },
-        { id: 9, name: 'Carrots', qty: '3', emoji: '🥕' },
-        { id: 10, name: 'Mushrooms', qty: '200g', emoji: '🍄' },
-        { id: 11, name: 'Lemon', qty: '1', emoji: '🍋' },
-        { id: 12, name: 'Butter', qty: '100g', emoji: '🧈' },
+        { id: 1, name: 'Eggs', qty: '6', emoji: '🥚', shelf: 'use_first', category: 'dairy_eggs' },
+        { id: 2, name: 'Milk', qty: '500ml', emoji: '🥛', shelf: 'use_first', category: 'dairy_eggs' },
+        { id: 3, name: 'Cheese', qty: '200g', emoji: '🧀', shelf: 'use_first', category: 'dairy_eggs' },
+        { id: 4, name: 'Tomatoes', qty: '3', emoji: '🍅', shelf: 'use_first', category: 'produce' },
+        { id: 5, name: 'Spinach', qty: '1 bunch', emoji: '🥬', shelf: 'use_first', category: 'produce' },
+        { id: 6, name: 'Garlic', qty: '4 cloves', emoji: '🧄', shelf: 'fresh_finds', category: 'aromatics' },
+        { id: 7, name: 'Onion', qty: '1', emoji: '🧅', shelf: 'fresh_finds', category: 'aromatics' },
+        { id: 8, name: 'Bread', qty: '½ loaf', emoji: '🍞', shelf: 'fresh_finds', category: 'bakery' },
+        { id: 9, name: 'Carrots', qty: '3', emoji: '🥕', shelf: 'fresh_finds', category: 'produce' },
+        { id: 10, name: 'Mushrooms', qty: '200g', emoji: '🍄', shelf: 'use_first', category: 'produce' },
+        { id: 11, name: 'Lemon', qty: '1', emoji: '🍋', shelf: 'fresh_finds', category: 'produce' },
+        { id: 12, name: 'Butter', qty: '100g', emoji: '🧈', shelf: 'fresh_finds', category: 'dairy_eggs' },
       ],
       source: 'offline_fallback',
       notes: 'Backend offline, loaded default fridge staples.',
@@ -124,12 +136,16 @@ export async function normalizeManualIngredients(items: string[]): Promise<Ingre
   }
 
   // Client-side fallback if backend unreachable
-  return items.map((name, idx) => ({
-    id: Date.now() + idx,
-    name,
-    qty: '1',
-    emoji: '🥗',
-  }))
+  return items.map((name, idx) => {
+    const isPerishable = ['spinach', 'milk', 'cheese', 'tomato', 'egg', 'yogurt', 'curd', 'herb', 'cilantro', 'berries', 'mushroom'].some(k => name.toLowerCase().includes(k))
+    return {
+      id: Date.now() + idx,
+      name,
+      qty: '1',
+      emoji: '🥗',
+      shelf: isPerishable ? 'use_first' : 'fresh_finds',
+    }
+  })
 }
 
 /**

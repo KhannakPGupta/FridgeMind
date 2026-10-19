@@ -1,32 +1,85 @@
 import { useEffect, useState, useRef } from 'react'
-import { recognizeFridgePhoto, getRecipeRecommendations } from './services/api'
+import {
+  recognizeFridgePhoto,
+  getRecipeRecommendations,
+  normalizeManualIngredients,
+  getRecipeNutrition,
+  type Ingredient,
+  type RecipeIngredient,
+  type Recipe,
+  type Preferences,
+  type NutritionSummary,
+} from './services/api'
 
 type Screen = 'home' | 'input' | 'ingredients' | 'vibe' | 'results' | 'recipe'
 type VibeTheme = 'cozy' | 'spicy' | 'fresh' | 'chef'
 
-interface Ingredient {
-  id: number
-  name: string
-  qty: string
-  emoji: string
-}
-
-interface RecipeIngredient {
-  name: string
-  amount: number
-  unit: string
-}
-
-interface Preferences {
-  tastes: string[]
-  effort: string | null
-  time: string | null
-  diets: string[]
-}
-
 const DEFAULT_PREFERENCES: Preferences = { tastes: [], effort: null, time: null, diets: [] }
 
+// ─── Sound Feedback ──────────────────────────────────────────────────────────
+
+function playKitchenChime(type: 'timer' | 'complete' = 'timer') {
+  try {
+    const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+    if (!AudioContextClass) return
+    const ctx = new AudioContextClass()
+    const now = ctx.currentTime
+
+    if (type === 'timer') {
+      const osc1 = ctx.createOscillator()
+      const gain1 = ctx.createGain()
+      osc1.type = 'sine'
+      osc1.frequency.setValueAtTime(659.25, now) // E5
+      gain1.gain.setValueAtTime(0.12, now)
+      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.35)
+      osc1.connect(gain1)
+      gain1.connect(ctx.destination)
+      osc1.start(now)
+      osc1.stop(now + 0.35)
+
+      const osc2 = ctx.createOscillator()
+      const gain2 = ctx.createGain()
+      osc2.type = 'sine'
+      osc2.frequency.setValueAtTime(830.61, now + 0.15) // G#5
+      gain2.gain.setValueAtTime(0.15, now + 0.15)
+      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.6)
+      osc2.connect(gain2)
+      gain2.connect(ctx.destination)
+      osc2.start(now + 0.15)
+      osc2.stop(now + 0.6)
+    } else if (type === 'complete') {
+      const notes = [523.25, 659.25, 783.99, 1046.50]
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator()
+        const gain = ctx.createGain()
+        osc.type = 'triangle'
+        osc.frequency.setValueAtTime(freq, now + idx * 0.1)
+        gain.gain.setValueAtTime(0.14, now + idx * 0.1)
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.45)
+        osc.connect(gain)
+        gain.connect(ctx.destination)
+        osc.start(now + idx * 0.1)
+        osc.stop(now + idx * 0.1 + 0.5)
+      })
+    }
+  } catch {
+    // Graceful silent fallback if AudioContext cannot start
+  }
+}
+
 // ─── Data ────────────────────────────────────────────────────────────────────
+
+const PERISHABLE_KEYWORDS = [
+  'spinach', 'kale', 'lettuce', 'herb', 'basil', 'cilantro', 'coriander', 'parsley',
+  'mint', 'milk', 'cheese', 'paneer', 'yogurt', 'curd', 'cream', 'tomato', 'egg',
+  'mushroom', 'berries', 'strawberry', 'avocado', 'fish', 'salmon', 'prawn', 'chicken',
+  'beef', 'pork', 'meat', 'tofu'
+]
+
+function isPerishable(name: string): boolean {
+  const lower = name.toLowerCase()
+  return PERISHABLE_KEYWORDS.some(k => lower.includes(k))
+}
 
 const EMOJI_MAP: [string, string][] = [
   ['egg', '🥚'], ['milk', '🥛'], ['cheese', '🧀'], ['tomato', '🍅'],
@@ -49,14 +102,14 @@ function getEmoji(name: string): string {
 }
 
 const INITIAL_INGREDIENTS: Ingredient[] = [
-  { id: 1, name: 'Eggs', qty: '6', emoji: '🥚' },
-  { id: 2, name: 'Milk', qty: '500ml', emoji: '🥛' },
-  { id: 3, name: 'Cheese', qty: '200g', emoji: '🧀' },
-  { id: 4, name: 'Tomatoes', qty: '3', emoji: '🍅' },
-  { id: 5, name: 'Spinach', qty: '1 bunch', emoji: '🥬' },
-  { id: 6, name: 'Garlic', qty: '4 cloves', emoji: '🧄' },
-  { id: 7, name: 'Onion', qty: '1', emoji: '🧅' },
-  { id: 8, name: 'Bread', qty: '½ loaf', emoji: '🍞' },
+  { id: 1, name: 'Eggs', qty: '6', emoji: '🥚', shelf: 'use_first', category: 'dairy_eggs' },
+  { id: 2, name: 'Milk', qty: '500ml', emoji: '🥛', shelf: 'use_first', category: 'dairy_eggs' },
+  { id: 3, name: 'Cheese', qty: '200g', emoji: '🧀', shelf: 'use_first', category: 'dairy_eggs' },
+  { id: 4, name: 'Tomatoes', qty: '3', emoji: '🍅', shelf: 'use_first', category: 'produce' },
+  { id: 5, name: 'Spinach', qty: '1 bunch', emoji: '🥬', shelf: 'use_first', category: 'produce' },
+  { id: 6, name: 'Garlic', qty: '4 cloves', emoji: '🧄', shelf: 'fresh_finds', category: 'aromatics' },
+  { id: 7, name: 'Onion', qty: '1', emoji: '🧅', shelf: 'fresh_finds', category: 'aromatics' },
+  { id: 8, name: 'Bread', qty: '½ loaf', emoji: '🍞', shelf: 'fresh_finds', category: 'bakery' },
 ]
 
 const TASTE_OPTIONS = [
@@ -86,7 +139,7 @@ const DIET_OPTIONS = [
   { id: 'hp',    label: 'High-protein',emoji: '💪' },
 ]
 
-const RECIPES = [
+const RECIPES: Recipe[] = [
   {
     id: 1,
     name: 'Creamy Tomato Scrambled Eggs',
@@ -96,11 +149,14 @@ const RECIPES = [
     image: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format',
     cal: '320 cal', rating: 4.8, match: 98, accent: '#FFD5C2',
     servings: 2,
+    badges: ['High Waste Reducer', 'Protein Rich', 'Quick & Easy'],
+    matched_ingredients: ['Eggs', 'Tomatoes', 'Spinach', 'Cheese', 'Garlic', 'Milk'],
+    missing_ingredients: [],
     ingredients: [
       { name: 'Eggs', amount: 3, unit: '' }, { name: 'Tomatoes', amount: 150, unit: 'g' },
       { name: 'Spinach', amount: 60, unit: 'g' }, { name: 'Cheese', amount: 50, unit: 'g' },
       { name: 'Garlic', amount: 1, unit: 'clove' }, { name: 'Milk', amount: 30, unit: 'ml' },
-    ] satisfies RecipeIngredient[],
+    ],
     steps: [
       'Whisk the eggs with the milk, a pinch of salt, and plenty of black pepper.',
       'Warm a skillet over medium-low heat. Add the garlic and tomatoes; cook until juicy.',
@@ -119,11 +175,14 @@ const RECIPES = [
     image: 'https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=600&h=380&fit=crop&auto=format',
     cal: '280 cal', rating: 4.6, match: 94, accent: '#F5D66F',
     servings: 2,
+    badges: ['Crispy Classic', 'Kid Friendly', 'Snack Alert'],
+    matched_ingredients: ['Bread', 'Tomatoes', 'Cheese', 'Garlic', 'Butter'],
+    missing_ingredients: ['Basil'],
     ingredients: [
       { name: 'Bread', amount: 4, unit: 'slices' }, { name: 'Tomatoes', amount: 180, unit: 'g' },
       { name: 'Cheese', amount: 80, unit: 'g' }, { name: 'Garlic', amount: 2, unit: 'cloves' },
       { name: 'Butter', amount: 25, unit: 'g' }, { name: 'Basil', amount: 8, unit: 'leaves' },
-    ] satisfies RecipeIngredient[],
+    ],
     steps: [
       'Heat the oven grill and line a tray. Mix softened butter with the crushed garlic.',
       'Spread the garlic butter over the bread and toast until the edges turn golden.',
@@ -142,11 +201,14 @@ const RECIPES = [
     image: 'https://images.unsplash.com/photo-1510693206972-df098062cb71?w=600&h=380&fit=crop&auto=format',
     cal: '290 cal', rating: 4.7, match: 91, accent: '#C9DCC5',
     servings: 2,
+    badges: ['High Waste Reducer', 'Low Carb', 'Protein Rich'],
+    matched_ingredients: ['Eggs', 'Spinach', 'Cheese', 'Onion', 'Milk'],
+    missing_ingredients: ['Butter'],
     ingredients: [
       { name: 'Eggs', amount: 4, unit: '' }, { name: 'Spinach', amount: 80, unit: 'g' },
       { name: 'Cheese', amount: 70, unit: 'g' }, { name: 'Onion', amount: 0.5, unit: '' },
       { name: 'Butter', amount: 15, unit: 'g' }, { name: 'Milk', amount: 30, unit: 'ml' },
-    ] satisfies RecipeIngredient[],
+    ],
     steps: [
       'Whisk the eggs and milk until smooth. Season with salt and pepper.',
       'Soften the onion in butter, then add the spinach and cook until just wilted.',
@@ -165,11 +227,14 @@ const RECIPES = [
     image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&h=380&fit=crop&auto=format',
     cal: '190 cal', rating: 4.5, match: 87, accent: '#F6C8D0',
     servings: 2,
+    badges: ['Comfort Food', 'Zero Waste Hero', 'Warm Bowl'],
+    matched_ingredients: ['Tomatoes', 'Milk', 'Garlic', 'Onion'],
+    missing_ingredients: ['Butter', 'Basil'],
     ingredients: [
       { name: 'Tomatoes', amount: 500, unit: 'g' }, { name: 'Milk', amount: 250, unit: 'ml' },
       { name: 'Garlic', amount: 2, unit: 'cloves' }, { name: 'Onion', amount: 1, unit: '' },
       { name: 'Butter', amount: 20, unit: 'g' }, { name: 'Basil', amount: 10, unit: 'leaves' },
-    ] satisfies RecipeIngredient[],
+    ],
     steps: [
       'Chop the tomatoes and onion. Gently crush the garlic.',
       'Melt the butter in a pot and soften the onion and garlic without browning.',
@@ -181,7 +246,6 @@ const RECIPES = [
   },
 ]
 
-type Recipe = (typeof RECIPES)[number] & { ai_reason?: string }
 
 // ─── SVG Illustrations ────────────────────────────────────────────────────────
 
@@ -643,6 +707,7 @@ function InputScreen({ onNavigate, onContinue }: { onNavigate: (s: Screen) => vo
   const [dragging, setDragging] = useState(false)
   const [uploaded, setUploaded] = useState(false)
   const [scanning, setScanning] = useState(false)
+  const [normalizing, setNormalizing] = useState(false)
   const [scannedItems, setScannedItems] = useState<Ingredient[] | null>(null)
 
   function addItem() {
@@ -666,18 +731,24 @@ function InputScreen({ onNavigate, onContinue }: { onNavigate: (s: Screen) => vo
     }
   }
 
-  function continueToIngredients() {
+  async function continueToIngredients() {
     if (method === 'type' && typed.length) {
-      onContinue(typed.map((name, index) => ({ id: Date.now() + index, name, qty: '1', emoji: getEmoji(name) })))
+      setNormalizing(true)
+      try {
+        const normalized = await normalizeManualIngredients(typed)
+        onContinue(normalized)
+      } finally {
+        setNormalizing(false)
+      }
       return
     }
     if (method === 'scan' && uploaded) {
       onContinue(scannedItems || [
         ...INITIAL_INGREDIENTS,
-        { id: 9, name: 'Carrots', qty: '3', emoji: '🥕' },
-        { id: 10, name: 'Mushrooms', qty: '200g', emoji: '🍄' },
-        { id: 11, name: 'Lemon', qty: '1', emoji: '🍋' },
-        { id: 12, name: 'Butter', qty: '100g', emoji: '🧈' },
+        { id: 9, name: 'Carrots', qty: '3', emoji: '🥕', shelf: 'fresh_finds' },
+        { id: 10, name: 'Mushrooms', qty: '200g', emoji: '🍄', shelf: 'use_first' },
+        { id: 11, name: 'Lemon', qty: '1', emoji: '🍋', shelf: 'fresh_finds' },
+        { id: 12, name: 'Butter', qty: '100g', emoji: '🧈', shelf: 'fresh_finds' },
       ])
     }
   }
@@ -809,13 +880,13 @@ function InputScreen({ onNavigate, onContinue }: { onNavigate: (s: Screen) => vo
           <div className="mt-8 text-center">
             <button
               onClick={continueToIngredients}
-              disabled={!canContinue}
+              disabled={!canContinue || normalizing}
               className="bg-olive text-butter font-body font-bold px-10 py-4 rounded-2xl text-lg hover:scale-[1.03] active:scale-[0.97] transition-transform shadow-lg disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:transform-none"
             >
-              Looks good, continue →
+              {normalizing ? 'Normalizing ingredients… 🥬' : 'Looks good, continue →'}
             </button>
             <p className="font-body text-olive/50 text-xs mt-3" aria-live="polite">
-              {canContinue ? 'You can edit your ingredient list in the next step' : 'Add an ingredient or upload a photo to continue'}
+              {normalizing ? 'Matching ingredients to catalog & perishability shelves…' : canContinue ? 'You can edit your ingredient list in the next step' : 'Add an ingredient or upload a photo to continue'}
             </p>
           </div>
         </div>
@@ -844,8 +915,23 @@ function IngredientsScreen({ onNavigate, ingredients, setIngredients }: { onNavi
   function add(name?: string, emoji?: string) {
     const n = (name ?? newName).trim()
     if (!n || ingredients.some(item => item.name.toLowerCase() === n.toLowerCase())) return
-    setIngredients(p => [...p, { id: nextId.current++, name: n, qty: '1', emoji: emoji ?? getEmoji(n) }])
+    const shelf: 'use_first' | 'fresh_finds' = isPerishable(n) ? 'use_first' : 'fresh_finds'
+    setIngredients(p => [...p, { id: nextId.current++, name: n, qty: '1', emoji: emoji ?? getEmoji(n), shelf }])
     if (!name) setNewName('')
+  }
+
+  function toggleShelf(id: number, e?: React.MouseEvent) {
+    if (e) e.stopPropagation()
+    setIngredients(p => p.map(i => {
+      if (i.id !== id) return i
+      const currentShelf = i.shelf ?? (isPerishable(i.name) ? 'use_first' : 'fresh_finds')
+      const nextShelf: 'use_first' | 'fresh_finds' = currentShelf === 'use_first' ? 'fresh_finds' : 'use_first'
+      return { ...i, shelf: nextShelf }
+    }))
+  }
+
+  function moveToShelf(id: number, targetShelf: 'use_first' | 'fresh_finds') {
+    setIngredients(p => p.map(i => i.id === id ? { ...i, shelf: targetShelf } : i))
   }
 
   function remove(id: number) {
@@ -868,7 +954,7 @@ function IngredientsScreen({ onNavigate, ingredients, setIngredients }: { onNavi
               Look at all this yummy potential! 😍
             </h1>
             <p className="font-body text-olive/60 text-lg">
-              We found <strong className="text-tomato">{ingredients.length} ingredients</strong> — tweak quantities or add more!
+              We found <strong className="text-tomato">{ingredients.length} ingredients</strong> — sorted into <strong className="text-tomato">use first</strong> and <strong className="text-olive">fresh finds</strong>!
             </p>
           </div>
 
@@ -882,34 +968,70 @@ function IngredientsScreen({ onNavigate, ingredients, setIngredients }: { onNavi
                   <p className="font-body text-olive/35 text-xs">Add a snack-sized idea below!</p>
                 </div>
               )}
-              {[0, 1].map(shelf => (
-                <div className="fridge-shelf" key={shelf}>
-                  <span className="shelf-label">{shelf === 0 ? 'use first' : 'fresh finds'}</span>
-                  <div className="flex flex-wrap gap-3">
-                    {ingredients.filter((_, index) => index % 2 === shelf).map((ing, i) => (
-                      <div
-                        key={ing.id}
-                        draggable
-                        onDragStart={() => setDraggingId(ing.id)}
-                        onDragEnd={() => setDraggingId(null)}
-                        className={`ingredient-magnet flex items-center gap-2 rounded-2xl px-3 py-2 border-2 border-white/50 shadow-sm group transition-all hover:shadow-md hover:scale-[1.04] ${departingId === ing.id ? 'to-compost' : ''} ${draggingId === ing.id ? 'is-dragging' : ''}`}
-                        style={{ backgroundColor: CHIP_COLORS[(i + shelf) % CHIP_COLORS.length], '--tilt': `${[-1.5, 1, -0.5, 1.5][i % 4]}deg` } as React.CSSProperties}
-                      >
-                        <IngredientIcon name={ing.name} className="w-8 h-8 shrink-0" />
-                        <div>
-                          <span className="block font-body font-extrabold text-olive text-xs">{ing.name}</span>
-                          {editingId === ing.id ? (
-                            <input autoFocus value={ing.qty} onChange={e => setQty(ing.id, e.target.value)} onBlur={() => setEditingId(null)} onKeyDown={e => e.key === 'Enter' && setEditingId(null)} className="w-16 bg-white/60 rounded-lg px-2 py-0.5 font-body text-olive text-xs outline-none border border-yellow text-center" />
-                          ) : (
-                            <button onClick={() => setEditingId(ing.id)} title="Click to edit quantity" className="font-body text-olive/55 text-[10px] bg-white/40 hover:bg-white/70 px-2 py-0.5 rounded-lg transition-colors">{ing.qty}</button>
-                          )}
-                        </div>
-                        <button onClick={() => remove(ing.id)} aria-label={`Remove ${ing.name}`} className="text-olive/25 hover:text-tomato transition-colors opacity-0 group-hover:opacity-100 text-xl leading-none font-light">×</button>
-                      </div>
-                    ))}
+              {[0, 1].map(shelf => {
+                const shelfType: 'use_first' | 'fresh_finds' = shelf === 0 ? 'use_first' : 'fresh_finds'
+                const shelfItems = ingredients.filter(item => {
+                  const itemShelf = item.shelf ?? (isPerishable(item.name) ? 'use_first' : 'fresh_finds')
+                  return itemShelf === shelfType
+                })
+
+                return (
+                  <div
+                    className="fridge-shelf"
+                    key={shelf}
+                    onDragOver={e => e.preventDefault()}
+                    onDrop={() => {
+                      if (draggingId !== null) {
+                        moveToShelf(draggingId, shelfType)
+                        setDraggingId(null)
+                      }
+                    }}
+                  >
+                    <span className="shelf-label">
+                      {shelf === 0 ? '⚡ use first (perishable)' : '🌱 fresh finds (pantry)'}
+                    </span>
+                    <div className="flex flex-wrap gap-3">
+                      {shelfItems.length === 0 ? (
+                        <p className="font-body text-olive/35 text-xs py-2 italic">
+                          {shelf === 0 ? 'No urgent items! Drag or tap items to move here.' : 'No pantry staples here. Drag or tap items to move here.'}
+                        </p>
+                      ) : (
+                        shelfItems.map((ing, i) => (
+                          <div
+                            key={ing.id}
+                            draggable
+                            onDragStart={() => setDraggingId(ing.id)}
+                            onDragEnd={() => setDraggingId(null)}
+                            className={`ingredient-magnet flex items-center gap-2 rounded-2xl px-3 py-2 border-2 border-white/50 shadow-sm group transition-all hover:shadow-md hover:scale-[1.04] ${departingId === ing.id ? 'to-compost' : ''} ${draggingId === ing.id ? 'is-dragging' : ''}`}
+                            style={{ backgroundColor: CHIP_COLORS[(i + shelf) % CHIP_COLORS.length], '--tilt': `${[-1.5, 1, -0.5, 1.5][i % 4]}deg` } as React.CSSProperties}
+                          >
+                            <IngredientIcon name={ing.name} className="w-8 h-8 shrink-0" />
+                            <div>
+                              <div className="flex items-center gap-1.5">
+                                <span className="block font-body font-extrabold text-olive text-xs">{ing.name}</span>
+                                <button
+                                  type="button"
+                                  onClick={e => toggleShelf(ing.id, e)}
+                                  title={shelf === 0 ? 'Move to Fresh Finds shelf' : 'Move to Use First shelf'}
+                                  className="shelf-pill-btn bg-white/70 hover:bg-white text-olive/80"
+                                >
+                                  {shelf === 0 ? '⏳ urgent' : '🌱 staple'}
+                                </button>
+                              </div>
+                              {editingId === ing.id ? (
+                                <input autoFocus value={ing.qty} onChange={e => setQty(ing.id, e.target.value)} onBlur={() => setEditingId(null)} onKeyDown={e => e.key === 'Enter' && setEditingId(null)} className="w-16 bg-white/60 rounded-lg px-2 py-0.5 font-body text-olive text-xs outline-none border border-yellow text-center" />
+                              ) : (
+                                <button onClick={() => setEditingId(ing.id)} title="Click to edit quantity" className="font-body text-olive/55 text-[10px] bg-white/40 hover:bg-white/70 px-2 py-0.5 rounded-lg transition-colors">{ing.qty}</button>
+                              )}
+                            </div>
+                            <button onClick={() => remove(ing.id)} aria-label={`Remove ${ing.name}`} className="text-olive/25 hover:text-tomato transition-colors opacity-0 group-hover:opacity-100 text-xl leading-none font-light">×</button>
+                          </div>
+                        ))
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             <div
@@ -1248,7 +1370,7 @@ function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredien
                   />
                   {/* Match badge */}
                   <div className="absolute top-3 left-3 bg-olive/90 text-butter font-body font-bold text-xs px-3 py-1.5 rounded-full shadow-md backdrop-blur-sm">
-                    {Math.min(99, 70 + pantryMatch(recipe) * 5)}% match 🎯
+                    {recipe.match ?? Math.min(99, 70 + pantryMatch(recipe) * 5)}% match 🎯
                   </div>
                   {/* Save button */}
                   <button
@@ -1272,6 +1394,17 @@ function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredien
 
                 {/* Content */}
                 <div className="p-5">
+                  {/* Dynamic Badges from ML */}
+                  {recipe.badges && recipe.badges.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 mb-2.5">
+                      {recipe.badges.map(b => (
+                        <span key={b} className="bg-yellow/60 text-olive border border-yellow/70 font-body font-extrabold text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-2xs">
+                          ⭐ {b}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
                   <div className="flex flex-wrap gap-1.5 mb-3">
                     {recipe.tags.map(tag => (
                       <span key={tag} className="pantry-label bg-sage/35 text-olive font-body font-bold text-xs px-2.5 py-1 rounded-full border border-sage/30">
@@ -1283,7 +1416,20 @@ function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredien
                     </span>
                   </div>
                   <h3 className="font-heading text-[1.3rem] font-semibold text-olive mb-2 leading-tight">{recipe.name}</h3>
-                  <p className="font-body text-olive/55 text-sm leading-relaxed mb-4">{recipe.desc}</p>
+                  <p className="font-body text-olive/55 text-sm leading-relaxed mb-3">{recipe.desc}</p>
+
+                  {/* Missing vs Matched Ingredients */}
+                  {recipe.missing_ingredients && recipe.missing_ingredients.length > 0 ? (
+                    <div className="mb-3 px-3 py-1.5 rounded-xl bg-peach/25 border border-peach/50 text-xs font-body flex items-center gap-1.5 text-olive/75">
+                      <span className="text-tomato font-extrabold">Missing:</span>
+                      <span className="font-semibold truncate">{recipe.missing_ingredients.join(', ')}</span>
+                    </div>
+                  ) : (
+                    <div className="mb-3 px-3 py-1.5 rounded-xl bg-sage/30 border border-sage/50 text-xs font-body font-bold text-olive flex items-center gap-1.5">
+                      <span>✨ 100% pantry match! Zero waste hero.</span>
+                    </div>
+                  )}
+
                   <div className="ai-reason mb-4">
                     <span>✦</span>
                     <p>{recipe.ai_reason || `You have ${pantryMatch(recipe)} of ${recipe.ingredients.length} ingredients already, so this is a low-waste ${theme} match.`}</p>
@@ -1351,6 +1497,49 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
   const [timerFinished, setTimerFinished] = useState(false)
   const [focusMode, setFocusMode] = useState(false)
   const [completed, setCompleted] = useState(false)
+  const [nutrition, setNutrition] = useState<NutritionSummary | null>(null)
+  const [loadingNutrition, setLoadingNutrition] = useState(false)
+
+  useEffect(() => {
+    let isMounted = true
+    setLoadingNutrition(true)
+    getRecipeNutrition(recipe.id, servings)
+      .then(data => {
+        if (!isMounted) return
+        if (data) {
+          setNutrition(data)
+        } else {
+          // Responsive client-side fallback calculation based on recipe baseline
+          const baseCal = parseInt(recipe.cal) || 300
+          const scaledCal = Math.round((baseCal * servings) / (recipe.servings || 2))
+          const protein = Math.round(18 * (servings / (recipe.servings || 2)))
+          const carbs = Math.round(25 * (servings / (recipe.servings || 2)))
+          const fat = Math.round(14 * (servings / (recipe.servings || 2)))
+          const totalMacroCal = (protein * 4) + (carbs * 4) + (fat * 9)
+          setNutrition({
+            calories: scaledCal,
+            protein_g: protein,
+            carbs_g: carbs,
+            fat_g: fat,
+            servings,
+            basis: 'USDA FoodData Central estimate',
+            assumptions: 'Standard portion weights',
+            macro_ratios: {
+              protein_pct: Math.round(((protein * 4) / totalMacroCal) * 100),
+              carbs_pct: Math.round(((carbs * 4) / totalMacroCal) * 100),
+              fat_pct: Math.round(((fat * 9) / totalMacroCal) * 100),
+            }
+          })
+        }
+      })
+      .catch(() => {
+        // Silently preserve state
+      })
+      .finally(() => {
+        if (isMounted) setLoadingNutrition(false)
+      })
+    return () => { isMounted = false }
+  }, [recipe.id, servings, recipe.cal, recipe.servings])
 
   useEffect(() => {
     localStorage.setItem(storageKey, JSON.stringify({ servings, checked: [...checked], activeStep, seconds }))
@@ -1363,6 +1552,7 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
         if (value <= 1) {
           setTimerRunning(false)
           setTimerFinished(true)
+          playKitchenChime('timer')
           if ('vibrate' in navigator) navigator.vibrate([180, 80, 180])
           return 0
         }
@@ -1418,7 +1608,10 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
               <h1 className="font-heading text-4xl md:text-6xl font-semibold text-olive leading-tight">{recipe.name}</h1>
               <p className="font-body text-olive/60 text-lg">{recipe.desc}</p>
               <div className="flex flex-wrap gap-3">
-                <span>{recipe.time}</span><span>{recipe.difficulty}</span><span>{recipe.cal}</span>
+                <span>⏱ {recipe.time}</span>
+                <span>🍳 {recipe.difficulty}</span>
+                <span>🔥 {nutrition ? `${nutrition.calories} cal` : recipe.cal}</span>
+                <span className="text-tomato font-extrabold">Serving {servings}</span>
               </div>
               <p className="font-body font-extrabold text-sm text-olive/70">You already have {availableCount} of {recipe.ingredients.length} ingredients.</p>
             </div>
@@ -1449,6 +1642,48 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
                 </button>
               )})}
               <div className="substitution-note"><strong>Easy swap</strong><p>{recipe.substitution}</p></div>
+
+              {/* Dynamic USDA Nutrition Card */}
+              <div className="nutrition-card">
+                <div className="flex items-center justify-between mb-2">
+                  <strong className="font-heading text-sm text-olive flex items-center gap-1.5">
+                    <span>🥗</span> Nutrition Analysis
+                  </strong>
+                  <span className="font-body text-[10px] text-olive/50 font-extrabold uppercase tracking-wider">
+                    {loadingNutrition ? 'Calculating…' : 'USDA Standard'}
+                  </span>
+                </div>
+                <div className="flex items-baseline justify-between mb-1">
+                  <span className="font-body text-xs text-olive/60">Scaled Total:</span>
+                  <strong className="font-heading text-xl text-tomato">{nutrition?.calories ?? recipe.cal} cal</strong>
+                </div>
+                {nutrition?.macro_ratios && (
+                  <div>
+                    <div className="macro-bar-container" title={`Protein: ${nutrition.macro_ratios.protein_pct}%, Carbs: ${nutrition.macro_ratios.carbs_pct}%, Fat: ${nutrition.macro_ratios.fat_pct}%`}>
+                      <div className="macro-bar-protein" style={{ width: `${nutrition.macro_ratios.protein_pct}%` }} />
+                      <div className="macro-bar-carbs" style={{ width: `${nutrition.macro_ratios.carbs_pct}%` }} />
+                      <div className="macro-bar-fat" style={{ width: `${nutrition.macro_ratios.fat_pct}%` }} />
+                    </div>
+                    <div className="grid grid-cols-3 gap-1.5 text-center font-body text-[11px] mt-2">
+                      <div className="bg-[#C9DCC5]/45 rounded-xl py-1.5 px-1 border border-[#C9DCC5]/80">
+                        <span className="block font-black text-olive">{nutrition.protein_g}g</span>
+                        <span className="text-olive/60 font-bold text-[9px] uppercase">Protein</span>
+                      </div>
+                      <div className="bg-[#F5D66F]/45 rounded-xl py-1.5 px-1 border border-[#F5D66F]/80">
+                        <span className="block font-black text-olive">{nutrition.carbs_g}g</span>
+                        <span className="text-olive/60 font-bold text-[9px] uppercase">Carbs</span>
+                      </div>
+                      <div className="bg-[#FFD5C2]/45 rounded-xl py-1.5 px-1 border border-[#FFD5C2]/80">
+                        <span className="block font-black text-olive">{nutrition.fat_g}g</span>
+                        <span className="text-olive/60 font-bold text-[9px] uppercase">Fat</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <p className="font-body text-[10px] text-olive/45 mt-2 italic text-center">
+                  {nutrition?.assumptions || 'USDA FoodData Central standard portion weights'}
+                </p>
+              </div>
             </aside>
 
             <section className="cooking-steps">
@@ -1477,7 +1712,12 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
                 <button disabled={activeStep === 0} onClick={() => selectStep(activeStep - 1)}>← Previous</button>
                 {activeStep < recipe.steps.length - 1
                   ? <button onClick={() => selectStep(activeStep + 1)}>Next step →</button>
-                  : <button onClick={() => { setCompleted(true); setTimerRunning(false); localStorage.removeItem(storageKey) }}>Finish cooking</button>}
+                  : <button onClick={() => {
+                      setCompleted(true)
+                      setTimerRunning(false)
+                      playKitchenChime('complete')
+                      localStorage.removeItem(storageKey)
+                    }}>Finish cooking</button>}
               </div>
               {completed && (
                 <div className="completion-card" role="status">

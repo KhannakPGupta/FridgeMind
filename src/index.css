@@ -1381,3 +1381,56 @@ input:focus-visible {
   background-color: #F5D66F;
   border-radius: 99px;
 }
+
+/* ─── Step 5: Dynamic Nutrition & Shelf Management ──────────────────────── */
+
+.nutrition-card {
+  margin-top: 18px;
+  padding: 16px;
+  border: 2px solid rgba(57, 67, 49, 0.14);
+  border-radius: 20px;
+  background: #fff9e9;
+  box-shadow: 3px 4px 0 rgba(57, 67, 49, 0.07);
+}
+
+.macro-bar-container {
+  height: 9px;
+  border-radius: 99px;
+  overflow: hidden;
+  background: rgba(57, 67, 49, 0.08);
+  display: flex;
+  margin: 10px 0 8px;
+}
+
+.macro-bar-protein {
+  background: #8bb885;
+  transition: width 350ms cubic-bezier(.2, .9, .3, 1);
+}
+
+.macro-bar-carbs {
+  background: #f5d66f;
+  transition: width 350ms cubic-bezier(.2, .9, .3, 1);
+}
+
+.macro-bar-fat {
+  background: #e97861;
+  transition: width 350ms cubic-bezier(.2, .9, .3, 1);
+}
+
+.shelf-pill-btn {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 99px;
+  transition: all 180ms ease;
+  border: 1px solid rgba(57, 67, 49, 0.2);
+  cursor: pointer;
+}
+
+.shelf-pill-btn:hover {
+  transform: scale(1.06);
+}
+
