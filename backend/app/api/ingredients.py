@@ -12,7 +12,9 @@ from backend.app.ml.normalizer import (
     normalize_ingredient_name,
     get_emoji_for_ingredient,
     parse_quantity_and_name,
+    lookup_ingredient_def,
 )
+
 
 router = APIRouter(prefix="/ingredients", tags=["Ingredients"])
 
@@ -42,24 +44,28 @@ async def normalize_manual_ingredients(payload: ManualIngredientRequest) -> Manu
             continue
 
         raw_qty, raw_name = parse_quantity_and_name(raw_item)
-        canonical = normalize_ingredient_name(raw_name)
+        definition = lookup_ingredient_def(raw_name)
+        canonical = definition.canonical
 
         if canonical.lower() in seen_names:
             duplicates_count += 1
             continue
 
         seen_names.add(canonical.lower())
-        emoji = get_emoji_for_ingredient(canonical)
 
         ingredients.append(
             IngredientItem(
                 id=idx,
                 name=canonical,
                 qty=raw_qty,
-                emoji=emoji,
+                emoji=definition.emoji,
                 confidence=1.0,
+                category=definition.category,
+                shelf=definition.shelf,
+                cuisine=definition.cuisine,
             )
         )
+
 
     return ManualIngredientResponse(
         ingredients=ingredients,

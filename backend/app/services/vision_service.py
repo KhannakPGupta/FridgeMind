@@ -12,7 +12,13 @@ from google.genai import types
 from backend.app.core.config import settings
 from backend.app.core.logging import logger
 from backend.app.schemas.ingredients import IngredientItem, RecognizeResponse
-from backend.app.ml.normalizer import normalize_ingredient_name, get_emoji_for_ingredient
+
+from backend.app.ml.normalizer import (
+    normalize_ingredient_name,
+    get_emoji_for_ingredient,
+    lookup_ingredient_def,
+)
+
 
 
 FALLBACK_INGREDIENTS = [
@@ -103,18 +109,20 @@ async def recognize_ingredients_from_image(image_bytes: bytes, mime_type: str) -
                 raw_name = str(item.get("name", "")).strip()
                 if not raw_name:
                     continue
-                canonical_name = normalize_ingredient_name(raw_name)
+                definition = lookup_ingredient_def(raw_name)
                 qty = str(item.get("qty", "1")).strip() or "1"
                 conf = float(item.get("confidence", 0.9))
-                emoji = get_emoji_for_ingredient(canonical_name)
 
                 ingredients.append(
                     IngredientItem(
                         id=index,
-                        name=canonical_name,
+                        name=definition.canonical,
                         qty=qty,
-                        emoji=emoji,
+                        emoji=definition.emoji,
                         confidence=round(conf, 2),
+                        category=definition.category,
+                        shelf=definition.shelf,
+                        cuisine=definition.cuisine,
                     )
                 )
 
@@ -133,16 +141,22 @@ async def recognize_ingredients_from_image(image_bytes: bytes, mime_type: str) -
 
     # 3. Fallback when API key is missing or fails
     logger.info("Using curated fridge starter ingredients fallback.")
-    fallback_items = [
-        IngredientItem(
-            id=idx,
-            name=item["name"],
-            qty=item["qty"],
-            emoji=item["emoji"],
-            confidence=item["confidence"],
+    fallback_items = []
+    for idx, item in enumerate(FALLBACK_INGREDIENTS, start=1):
+        defn = lookup_ingredient_def(item["name"])
+        fallback_items.append(
+            IngredientItem(
+                id=idx,
+                name=defn.canonical,
+                qty=item["qty"],
+                emoji=defn.emoji,
+                confidence=item["confidence"],
+                category=defn.category,
+                shelf=defn.shelf,
+                cuisine=defn.cuisine,
+            )
         )
-        for idx, item in enumerate(FALLBACK_INGREDIENTS, start=1)
-    ]
+
     return RecognizeResponse(
         ingredients=fallback_items,
         detected_count=len(fallback_items),

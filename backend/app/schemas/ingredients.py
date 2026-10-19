@@ -5,13 +5,16 @@ from pydantic import BaseModel, Field
 
 
 class IngredientItem(BaseModel):
-    """Ingredient item model matching the frontend Ingredient interface."""
+    """Ingredient item model matching the frontend Ingredient interface with world cuisine metadata."""
 
     id: int
     name: str
     qty: str = "1"
     emoji: str = "🥗"
     confidence: Optional[float] = Field(default=None, description="Detection confidence between 0 and 1")
+    category: Optional[str] = Field(default="Pantry", description="Produce, Dairy, Protein, Grain, Legume, Condiment, Spice, etc.")
+    shelf: Optional[str] = Field(default="fresh_finds", description="'use_first' (perishable) or 'fresh_finds' (stable)")
+    cuisine: Optional[str] = Field(default="Global", description="Regional cuisine association if applicable")
 
 
 class RecognizeResponse(BaseModel):
@@ -31,13 +34,15 @@ class ManualIngredientRequest(BaseModel):
 
 
 class NormalizedIngredient(BaseModel):
-    """Single normalized ingredient response."""
+    """Single normalized ingredient response with complete world metadata."""
 
     original: str
     canonical: str
     qty: str
     emoji: str
     category: str
+    shelf: str
+    cuisine: str
 
 
 class ManualIngredientResponse(BaseModel):
