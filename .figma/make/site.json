@@ -1,0 +1,10 @@
+{
+  "description": "Discover personalized recipes by uploading fridge photos or listing ingredients, then select taste and effort preferences for easy, tailored meal ideas.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
