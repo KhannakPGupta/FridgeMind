@@ -5,7 +5,7 @@ from typing import List, Dict, Any, Optional
 from backend.app.data.database import get_all_recipes, get_recipe_by_id
 from backend.app.ml.hard_filters import filter_recipes_by_diet
 from backend.app.ml.ranking import rank_recipes
-from backend.app.services.llm_recipe_adapter import generate_custom_recipe_with_llm
+from backend.app.services.llm_recipe_adapter import generate_dynamic_recipes
 from backend.app.schemas.ingredients import IngredientItem
 from backend.app.schemas.recipes import (
     PreferencesInput,
@@ -31,19 +31,19 @@ async def get_recipe_recommendations(
         logger.warning("No recipes matched strict dietary filters %s. Using all candidates with warning.", preferences.diets)
         filtered_candidates = candidates
 
-    # 3. Optional LLM creative adaptation for odd ingredient combos
-    ai_recipe = None
-    if not surprise:
-        ai_recipe = await generate_custom_recipe_with_llm(pantry, preferences, theme)
-        if ai_recipe:
-            filtered_candidates.insert(0, ai_recipe)
+    # 3. Dynamic LLM multi-cuisine recipe synthesis
+    ai_recipes = []
+    if not surprise and pantry:
+        ai_recipes = await generate_dynamic_recipes(pantry, preferences, theme, count=2)
+        for ar in ai_recipes:
+            filtered_candidates.insert(0, ar)
 
-    # 4. Hybrid Ranking (0.45 coverage + 0.25 taste + 0.20 effort + 0.10 practicality)
+    # 4. Hybrid ML Ranking (0.45 coverage + 0.25 taste + 0.20 effort + 0.10 practicality)
     ranked = rank_recipes(filtered_candidates, pantry, preferences, theme)
 
     # 5. Handle Surprise Mode
     selected_theme = theme
-    source = "hybrid" if ai_recipe else "catalog"
+    source = "hybrid" if ai_recipes else "catalog"
 
     if surprise:
         source = "surprise_sampler"

@@ -1,0 +1,4822 @@
+[
+  {
+    "id": 1,
+    "name": "Creamy Tomato Scrambled Eggs",
+    "cuisine": "Continental",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "High-protein"
+    ],
+    "desc": "Silky eggs with burst cherry tomatoes, fresh spinach & gooey melted cheese.",
+    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "cal": "320 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Eggs",
+        "amount": 3,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Spinach",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "Cheese",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "Garlic",
+        "amount": 1,
+        "unit": "clove"
+      },
+      {
+        "name": "Milk",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Whisk the eggs with the milk, a pinch of salt, and plenty of black pepper.",
+      "Warm a skillet over medium-low heat. Add the garlic and tomatoes; cook until juicy.",
+      "Wilt in the spinach, then pour in the eggs and fold slowly until soft and glossy.",
+      "Scatter over the cheese, fold once more, and serve immediately."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      240,
+      60
+    ],
+    "substitution": "No spinach? Kale or frozen peas work beautifully here.",
+    "tastes": [
+      "savory",
+      "creamy",
+      "comfort"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 2,
+    "name": "Cheesy Garlic Bruschetta",
+    "cuisine": "Italian",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Crispy toast with golden garlic butter, melted cheese & vine-ripened tomatoes.",
+    "image": "https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=600&h=380&fit=crop&auto=format",
+    "cal": "280 cal",
+    "rating": 4.6,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Bread",
+        "amount": 4,
+        "unit": "slices"
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "Cheese",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "Garlic",
+        "amount": 2,
+        "unit": "cloves"
+      },
+      {
+        "name": "Butter",
+        "amount": 25,
+        "unit": "g"
+      },
+      {
+        "name": "Basil",
+        "amount": 8,
+        "unit": "leaves"
+      }
+    ],
+    "steps": [
+      "Heat the oven grill and line a tray. Mix softened butter with the crushed garlic.",
+      "Spread the garlic butter over the bread and toast until the edges turn golden.",
+      "Top with chopped tomatoes and cheese, then grill until bubbling.",
+      "Finish with torn basil, black pepper, and a tiny pinch of salt."
+    ],
+    "stepTimers": [
+      0,
+      240,
+      300,
+      0
+    ],
+    "substitution": "No fresh basil? Parsley, oregano, or a spoonful of pesto all work.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 3,
+    "name": "Spinach & Cheese Omelette",
+    "cuisine": "Continental",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Fluffy omelette filled with wilted spinach, caramelised onions & gooey cheese.",
+    "image": "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=600&h=380&fit=crop&auto=format",
+    "cal": "290 cal",
+    "rating": 4.7,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Eggs",
+        "amount": 4,
+        "unit": ""
+      },
+      {
+        "name": "Spinach",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "Cheese",
+        "amount": 70,
+        "unit": "g"
+      },
+      {
+        "name": "Onion",
+        "amount": 0.5,
+        "unit": ""
+      },
+      {
+        "name": "Butter",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "Milk",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Whisk the eggs and milk until smooth. Season with salt and pepper.",
+      "Soften the onion in butter, then add the spinach and cook until just wilted.",
+      "Pour in the eggs. Pull the cooked edges inward until the top is almost set.",
+      "Add the cheese, fold the omelette, and rest for one minute before serving."
+    ],
+    "stepTimers": [
+      0,
+      240,
+      240,
+      60
+    ],
+    "substitution": "Swap spinach for mushrooms, peas, or any tender greens you have.",
+    "tastes": [
+      "savory",
+      "fresh"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 4,
+    "name": "Golden Tomato Milk Soup",
+    "cuisine": "Continental",
+    "time": "25 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Velvety tomato soup made creamy with warm milk, roasted garlic & fresh herbs.",
+    "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&h=380&fit=crop&auto=format",
+    "cal": "190 cal",
+    "rating": 4.5,
+    "match": 95,
+    "accent": "#F6C8D0",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Tomatoes",
+        "amount": 500,
+        "unit": "g"
+      },
+      {
+        "name": "Milk",
+        "amount": 250,
+        "unit": "ml"
+      },
+      {
+        "name": "Garlic",
+        "amount": 2,
+        "unit": "cloves"
+      },
+      {
+        "name": "Onion",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Butter",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "Basil",
+        "amount": 10,
+        "unit": "leaves"
+      }
+    ],
+    "steps": [
+      "Chop the tomatoes and onion. Gently crush the garlic.",
+      "Melt the butter in a pot and soften the onion and garlic without browning.",
+      "Add the tomatoes and simmer until collapsed, then blend until velvety.",
+      "Stir in the warm milk over low heat. Season and finish with basil."
+    ],
+    "stepTimers": [
+      0,
+      300,
+      900,
+      180
+    ],
+    "substitution": "Use unsweetened oat milk for a dairy-free bowl with the same silky finish.",
+    "tastes": [
+      "comfort",
+      "creamy",
+      "tangy"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 5,
+    "name": "Amritsari Paneer Bhurji",
+    "cuisine": "Indian",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "High-protein",
+      "Gluten-free"
+    ],
+    "desc": "Spiced crumbled paneer tossed with buttery onions, juicy tomatoes, and fresh green chilies.",
+    "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=380&fit=crop&auto=format",
+    "cal": "340 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Paneer",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Onion",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 2,
+        "unit": ""
+      },
+      {
+        "name": "Green Chili",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Butter",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "Coriander",
+        "amount": 1,
+        "unit": "bunch"
+      }
+    ],
+    "steps": [
+      "Crumble the fresh paneer gently with your fingers.",
+      "Melt butter in a skillet, sauté finely chopped onions until translucent, then add green chili and ginger.",
+      "Add chopped tomatoes, turmeric, and salt; cook until soft and oil leaves the edges.",
+      "Fold in crumbled paneer, cook on medium heat for 3 minutes, and garnish with fresh coriander."
+    ],
+    "stepTimers": [
+      0,
+      240,
+      300,
+      180
+    ],
+    "substitution": "Substitute paneer with firm pressed tofu for a high-protein vegan scramble.",
+    "tastes": [
+      "spicy",
+      "savory"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 6,
+    "name": "Homestyle Tadka Dal",
+    "cuisine": "Indian",
+    "time": "25 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "High-protein",
+      "Gluten-free"
+    ],
+    "desc": "Golden simmered yellow lentils tempered with ghee, sizzled garlic, cumin seeds & chili.",
+    "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&h=380&fit=crop&auto=format",
+    "cal": "240 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 3,
+    "ingredients": [
+      {
+        "name": "Lentils",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Garlic",
+        "amount": 4,
+        "unit": "cloves"
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Cumin Seeds",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "Turmeric",
+        "amount": 0.5,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Rinse the lentils and pressure-cook or boil with water, turmeric, and salt until completely soft.",
+      "Whisk the dal lightly to a smooth, pourable consistency.",
+      "In a small tempering pan, heat oil/ghee and crackle the cumin seeds with sliced garlic until golden.",
+      "Add chopped tomato and red chili to the tadka, sizzle for 1 minute, and pour immediately into the hot dal."
+    ],
+    "stepTimers": [
+      0,
+      900,
+      180,
+      60
+    ],
+    "substitution": "Use toor dal, moong dal, or masoor dal interchangeably.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 7,
+    "name": "Quick Aloo Jeera",
+    "cuisine": "Indian",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Crispy golden potato cubes tossed with aromatic cumin seeds, green chilies, and fresh lemon juice.",
+    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&h=380&fit=crop&auto=format",
+    "cal": "210 cal",
+    "rating": 4.7,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Potato",
+        "amount": 3,
+        "unit": ""
+      },
+      {
+        "name": "Cumin Seeds",
+        "amount": 1.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "Green Chili",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "Lemon",
+        "amount": 0.5,
+        "unit": ""
+      }
+    ],
+    "steps": [
+      "Dice boiled or steamed potatoes into bite-sized cubes.",
+      "Heat oil in a pan over medium heat; crackle the cumin seeds until fragrant and nutty.",
+      "Toss in the potato cubes, slit green chilies, turmeric, and salt.",
+      "Pan-fry for 5 minutes until crispy on the edges, then finish with a squeeze of fresh lemon juice."
+    ],
+    "stepTimers": [
+      0,
+      60,
+      120,
+      300
+    ],
+    "substitution": "Swap potatoes for sweet potatoes or baby potatoes.",
+    "tastes": [
+      "savory",
+      "tangy"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 8,
+    "name": "Parsi Egg Akuri (Masala Scramble)",
+    "cuisine": "Indian",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "High-protein",
+      "Gluten-free"
+    ],
+    "desc": "Velvety spiced scrambled eggs cooked with caramelised onions, tomatoes, ginger, and fresh herbs.",
+    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "cal": "270 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Eggs",
+        "amount": 4,
+        "unit": ""
+      },
+      {
+        "name": "Onion",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Butter",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "Green Chili",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Coriander",
+        "amount": 1,
+        "unit": "bunch"
+      }
+    ],
+    "steps": [
+      "Whisk eggs lightly in a bowl with a pinch of turmeric and salt.",
+      "Melt butter in a pan, fry chopped onions until light brown, then stir in garlic, chili, and tomato.",
+      "Lower heat to gentle, pour in whisked eggs, and pull slowly from the sides to keep it creamy.",
+      "Remove from heat while still slightly soft and fold in fresh chopped coriander."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      180,
+      60
+    ],
+    "substitution": "Serve with buttered toast or warm pav bread.",
+    "tastes": [
+      "spicy",
+      "savory"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 9,
+    "name": "Maharashtrian Kanda Poha",
+    "cuisine": "Indian",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian"
+    ],
+    "desc": "Light, fluffy flattened rice tossed with sauteed onions, mustard seeds, crunchy peanuts, and lemon.",
+    "image": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&h=380&fit=crop&auto=format",
+    "cal": "260 cal",
+    "rating": 4.7,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Poha",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Onion",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Mustard Seeds",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "Lemon",
+        "amount": 0.5,
+        "unit": ""
+      },
+      {
+        "name": "Green Chili",
+        "amount": 1,
+        "unit": ""
+      }
+    ],
+    "steps": [
+      "Rinse poha in a colander for 30 seconds and drain completely; gently fluff with hands.",
+      "Heat oil in a pan, crackle mustard seeds, and soften diced onions with green chilies.",
+      "Add turmeric and salt, then gently fold in the softened poha on low heat.",
+      "Cover with lid for 2 minutes to steam through, then squeeze fresh lemon juice on top."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      120,
+      120
+    ],
+    "substitution": "Add boiled potatoes or green peas for extra substance.",
+    "tastes": [
+      "tangy",
+      "fresh"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 10,
+    "name": "Mumbai Masala Toast Sandwich",
+    "cuisine": "Indian",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Crispy grilled bread packed with spiced mashed potatoes, cheese, and fresh tomato slices.",
+    "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=380&fit=crop&auto=format",
+    "cal": "350 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Bread",
+        "amount": 4,
+        "unit": "slices"
+      },
+      {
+        "name": "Potato",
+        "amount": 2,
+        "unit": ""
+      },
+      {
+        "name": "Cheese",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "Butter",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 1,
+        "unit": ""
+      }
+    ],
+    "steps": [
+      "Mash the boiled potatoes with salt, a pinch of turmeric, and green chili.",
+      "Butter the bread slices and spread the spiced potato filling generously.",
+      "Layer with thin tomato slices and grated cheese, then top with the second bread slice.",
+      "Toast in a buttered pan or sandwich griller until deeply golden and crunchy."
+    ],
+    "stepTimers": [
+      0,
+      120,
+      60,
+      300
+    ],
+    "substitution": "Add sliced cucumber or onion rings for classic Mumbai street food crunch.",
+    "tastes": [
+      "spicy",
+      "comfort"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 11,
+    "name": "Dhaba Style Palak Paneer",
+    "cuisine": "Indian",
+    "time": "25 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegetarian",
+      "High-protein",
+      "Gluten-free"
+    ],
+    "desc": "Fresh cottage cheese cubes simmered in a vibrant garlic-infused spinach puree with warm spices.",
+    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&h=380&fit=crop&auto=format",
+    "cal": "360 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 3,
+    "ingredients": [
+      {
+        "name": "Spinach",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "Paneer",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Garlic",
+        "amount": 4,
+        "unit": "cloves"
+      },
+      {
+        "name": "Onion",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Butter",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "Milk",
+        "amount": 50,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Blanch the spinach in boiling water for 2 minutes, plunge into cold water, and blend into a bright green puree.",
+      "In a heavy pan, melt butter and sauté minced garlic and chopped onion until golden.",
+      "Pour in the spinach puree, simmer gently with salt and garam masala for 5 minutes.",
+      "Add milk/cream and gently slide in the paneer cubes; simmer 3 more minutes and serve warm."
+    ],
+    "stepTimers": [
+      0,
+      120,
+      300,
+      180
+    ],
+    "substitution": "Use firm tofu or boiled potatoes (Aloo Palak) in place of paneer.",
+    "tastes": [
+      "savory",
+      "creamy"
+    ],
+    "effort": "chef"
+  },
+  {
+    "id": 12,
+    "name": "Besan Chilla (Savory Gram Flour Pancakes)",
+    "cuisine": "Indian",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Crispy spiced gram flour crepes loaded with chopped onions, tomatoes, and fresh coriander.",
+    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&h=380&fit=crop&auto=format",
+    "cal": "220 cal",
+    "rating": 4.6,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Besan",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "Onion",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Green Chili",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "Coriander",
+        "amount": 1,
+        "unit": "bunch"
+      }
+    ],
+    "steps": [
+      "Whisk besan with water into a smooth, pourable pancake batter.",
+      "Fold in finely chopped onions, tomatoes, green chilies, coriander, and salt.",
+      "Grease a hot skillet and pour a ladleful, spreading in circular motions.",
+      "Cook until golden on both sides (about 2 minutes per side) and serve crisp."
+    ],
+    "stepTimers": [
+      0,
+      120,
+      120,
+      120
+    ],
+    "substitution": "Add grated paneer on top while cooking for extra richness.",
+    "tastes": [
+      "savory",
+      "fresh"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 13,
+    "name": "Classic Shakshuka",
+    "cuisine": "Mediterranean",
+    "time": "20 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "High-protein",
+      "Gluten-free"
+    ],
+    "desc": "Eggs poached gently in a bubbling sauce of spiced crushed tomatoes, bell peppers, garlic & onions.",
+    "image": "https://images.unsplash.com/photo-1590412200988-a436970781fa?w=600&h=380&fit=crop&auto=format",
+    "cal": "310 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Eggs",
+        "amount": 4,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "Bell Pepper",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Onion",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Garlic",
+        "amount": 3,
+        "unit": "cloves"
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Heat olive oil in a wide skillet; cook diced onion and bell pepper until tender.",
+      "Stir in minced garlic, crushed tomatoes, and cumin; simmer until sauce thickens.",
+      "Create 4 small wells in the sauce and crack an egg into each well.",
+      "Cover and simmer on low for 6 to 8 minutes until egg whites are set and yolks are runny."
+    ],
+    "stepTimers": [
+      0,
+      300,
+      360,
+      480
+    ],
+    "substitution": "Crumble feta cheese or goat cheese on top before serving.",
+    "tastes": [
+      "spicy",
+      "savory",
+      "tangy"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 14,
+    "name": "Garlic Butter Mushroom Toast",
+    "cuisine": "Continental",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Golden caramelized mushrooms sautéed with garlic butter and herbs piled on crusty bread.",
+    "image": "https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=600&h=380&fit=crop&auto=format",
+    "cal": "260 cal",
+    "rating": 4.7,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Mushroom",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Bread",
+        "amount": 4,
+        "unit": "slices"
+      },
+      {
+        "name": "Butter",
+        "amount": 25,
+        "unit": "g"
+      },
+      {
+        "name": "Garlic",
+        "amount": 2,
+        "unit": "cloves"
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Slice the mushrooms and crush the garlic cloves.",
+      "Toast the bread slices until golden brown and set aside.",
+      "Heat butter and olive oil in a pan; sear mushrooms over high heat without overcrowding.",
+      "Add garlic, black pepper, and salt in the last minute, then heap over the warm toast."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      240,
+      60
+    ],
+    "substitution": "A dash of soy sauce enhances the umami richness.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 15,
+    "name": "Creamy One-Pan Garlic Pasta",
+    "cuisine": "Italian",
+    "time": "18 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Tender pasta coated in a luxurious garlic butter sauce with melted cheese and fresh parsley.",
+    "image": "https://images.unsplash.com/photo-1621996346565-e3d5d6281048?w=600&h=380&fit=crop&auto=format",
+    "cal": "420 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F6C8D0",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Pasta",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "Garlic",
+        "amount": 4,
+        "unit": "cloves"
+      },
+      {
+        "name": "Butter",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "Cheese",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "Milk",
+        "amount": 100,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Boil pasta in salted water until al dente; reserve 1/2 cup of pasta cooking water.",
+      "Melt butter in a skillet, gently toast minced garlic until aromatic.",
+      "Pour in milk and reserved pasta water, stirring until emulsified.",
+      "Toss in the cooked pasta and cheese until silky and coated."
+    ],
+    "stepTimers": [
+      0,
+      480,
+      180,
+      120
+    ],
+    "substitution": "Add sautéed spinach or mushrooms for extra nutrition.",
+    "tastes": [
+      "creamy",
+      "comfort",
+      "savory"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 16,
+    "name": "Mediterranean Chickpea Salad",
+    "cuisine": "Mediterranean",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Crisp cucumber, sweet cherry tomatoes, and hearty chickpeas tossed with olive oil and lemon.",
+    "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=380&fit=crop&auto=format",
+    "cal": "250 cal",
+    "rating": 4.7,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Chickpeas",
+        "amount": 250,
+        "unit": "g"
+      },
+      {
+        "name": "Cucumber",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 2,
+        "unit": ""
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "Lemon",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Onion",
+        "amount": 0.5,
+        "unit": ""
+      }
+    ],
+    "steps": [
+      "Rinse and drain the cooked or canned chickpeas.",
+      "Dice the cucumber, tomatoes, and red onion into uniform bite-sized pieces.",
+      "Whisk the olive oil, fresh lemon juice, salt, and black pepper into a bright dressing.",
+      "Toss everything together in a bowl and serve immediately."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      60,
+      60
+    ],
+    "substitution": "Add chopped parsley, mint, or black olives for extra Mediterranean aroma.",
+    "tastes": [
+      "fresh",
+      "tangy"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 29,
+    "name": "Punjabi Chana Masala",
+    "cuisine": "Indian",
+    "time": "25 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Hearty chickpeas simmered in a tangy ginger, garlic, and tomato-onion gravy with aromatic spices.",
+    "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&h=380&fit=crop&auto=format",
+    "cal": "320 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 3,
+    "ingredients": [
+      {
+        "name": "Chickpeas",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "Onion",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 2,
+        "unit": ""
+      },
+      {
+        "name": "Garlic",
+        "amount": 4,
+        "unit": "cloves"
+      },
+      {
+        "name": "Ginger",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Sauté finely chopped onions, ginger, and garlic in oil until deep golden.",
+      "Add crushed tomatoes, turmeric, garam masala, and salt; cook until thick.",
+      "Fold in cooked chickpeas with 1/2 cup water; simmer for 10 minutes, lightly mashing some chickpeas.",
+      "Finish with a squeeze of fresh lemon juice and fresh coriander."
+    ],
+    "stepTimers": [
+      0,
+      300,
+      300,
+      600
+    ],
+    "substitution": "Canned chickpeas work immediately without pre-soaking.",
+    "tastes": [
+      "spicy",
+      "tangy",
+      "comfort"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 30,
+    "name": "Tangy South Indian Tomato Rasam",
+    "cuisine": "Indian",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Aromatic and peppery South Indian soup made with ripe tomatoes, crushed garlic, cumin & mustard seeds.",
+    "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&h=380&fit=crop&auto=format",
+    "cal": "110 cal",
+    "rating": 4.7,
+    "match": 95,
+    "accent": "#F6C8D0",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Tomatoes",
+        "amount": 3,
+        "unit": ""
+      },
+      {
+        "name": "Garlic",
+        "amount": 4,
+        "unit": "cloves"
+      },
+      {
+        "name": "Mustard Seeds",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Cumin Seeds",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Black Pepper",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Curry Leaves",
+        "amount": 8,
+        "unit": "leaves"
+      }
+    ],
+    "steps": [
+      "Crush tomatoes with your hands into 2 cups of water with turmeric and salt.",
+      "Coarsely pound garlic cloves with cumin and black peppercorns in a mortar.",
+      "Simmer the tomato water until tomatoes soften and raw smell disappears.",
+      "Temper mustard seeds and curry leaves in hot oil, pour into the rasam, and turn off heat immediately."
+    ],
+    "stepTimers": [
+      0,
+      60,
+      480,
+      60
+    ],
+    "substitution": "Add a teaspoon of tamarind paste for deeper traditional tartness.",
+    "tastes": [
+      "tangy",
+      "spicy"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 31,
+    "name": "Cantonese Tomato & Egg Stir-Fry",
+    "cuisine": "East Asian",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "A beloved Chinese homestyle classic: silky scrambled eggs tossed with juicy, sweet-savory tomatoes and scallions.",
+    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "cal": "250 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Eggs",
+        "amount": 4,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 3,
+        "unit": ""
+      },
+      {
+        "name": "Scallion",
+        "amount": 2,
+        "unit": ""
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "Soy Sauce",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Beat eggs with a pinch of salt. Soft scramble in a hot oiled wok for 60 seconds, then remove while still runny.",
+      "Add a touch more oil to the wok and cook wedged tomatoes until juicy and bursting.",
+      "Season with soy sauce and a pinch of sugar to balance the tomato acidity.",
+      "Slide eggs back in, gently fold with the tomatoes, and scatter chopped scallions on top."
+    ],
+    "stepTimers": [
+      0,
+      60,
+      180,
+      60
+    ],
+    "substitution": "Serve over hot steamed jasmine rice.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 32,
+    "name": "Kimchi Fried Rice (Kimchi Bokkeumbap)",
+    "cuisine": "East Asian",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Spicy, savory Korean comfort food fried rice with tangy fermented kimchi, garlic, and a crispy fried egg.",
+    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=380&fit=crop&auto=format",
+    "cal": "380 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Rice",
+        "amount": 250,
+        "unit": "g"
+      },
+      {
+        "name": "Eggs",
+        "amount": 2,
+        "unit": ""
+      },
+      {
+        "name": "Onion",
+        "amount": 0.5,
+        "unit": ""
+      },
+      {
+        "name": "Garlic",
+        "amount": 2,
+        "unit": "cloves"
+      },
+      {
+        "name": "Sesame Oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "Soy Sauce",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Heat half the sesame oil in a wok and fry the diced onion and garlic until fragrant.",
+      "Add chopped kimchi and cook for 3 minutes until softened and caramelized.",
+      "Toss in cold day-old rice and soy sauce, breaking up lumps over high heat until grains are coated.",
+      "Fry the eggs sunny-side up in a separate pan and crown each bowl of fried rice."
+    ],
+    "stepTimers": [
+      0,
+      120,
+      180,
+      180
+    ],
+    "substitution": "Add diced tofu or mushrooms for added texture.",
+    "tastes": [
+      "spicy",
+      "savory",
+      "tangy"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 33,
+    "name": "Garlic Bok Choy & Tofu Stir-Fry",
+    "cuisine": "East Asian",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Crispy pan-seared tofu cubes and tender bok choy tossed in a fragrant ginger-garlic soy reduction.",
+    "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=380&fit=crop&auto=format",
+    "cal": "230 cal",
+    "rating": 4.7,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Tofu",
+        "amount": 250,
+        "unit": "g"
+      },
+      {
+        "name": "Bok Choy",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Garlic",
+        "amount": 3,
+        "unit": "cloves"
+      },
+      {
+        "name": "Ginger",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "Soy Sauce",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "Sesame Oil",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Press tofu dry with a towel, cube it, and pan-fry in sesame oil until golden on all sides.",
+      "Remove tofu; in the same pan, stir-fry minced garlic and ginger for 30 seconds.",
+      "Toss in halved baby bok choy and stir-fry over high heat for 2 minutes until bright green.",
+      "Return tofu, drizzle soy sauce, toss well, and serve hot."
+    ],
+    "stepTimers": [
+      0,
+      300,
+      30,
+      120
+    ],
+    "substitution": "Swap bok choy for spinach, napa cabbage, or broccoli florets.",
+    "tastes": [
+      "savory",
+      "fresh"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 34,
+    "name": "10-Minute Sesame Garlic Noodles",
+    "cuisine": "East Asian",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian"
+    ],
+    "desc": "Chewy noodles tossed in a rich toasted sesame oil, garlic, soy sauce, and scallion sauce.",
+    "image": "https://images.unsplash.com/photo-1621996346565-e3d5d6281048?w=600&h=380&fit=crop&auto=format",
+    "cal": "390 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Noodles",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Garlic",
+        "amount": 4,
+        "unit": "cloves"
+      },
+      {
+        "name": "Soy Sauce",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "Sesame Oil",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "Scallion",
+        "amount": 2,
+        "unit": ""
+      }
+    ],
+    "steps": [
+      "Boil noodles according to package instructions (about 4 minutes); drain.",
+      "In a serving bowl, mix minced garlic, soy sauce, toasted sesame oil, and sliced scallions.",
+      "Pour hot noodles directly into the bowl and toss vigorously until every strand is glossy.",
+      "Top with extra scallions and chili oil if desired."
+    ],
+    "stepTimers": [
+      0,
+      240,
+      60,
+      60
+    ],
+    "substitution": "Any noodles work: ramen, udon, soba, or spaghetti.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 35,
+    "name": "Huevos a la Mexicana",
+    "cuisine": "Latin American",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Classic Mexican breakfast scramble featuring the colors of the Mexican flag: tomatoes, onions, and jalapeños.",
+    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "cal": "260 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Eggs",
+        "amount": 4,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 2,
+        "unit": ""
+      },
+      {
+        "name": "Onion",
+        "amount": 0.5,
+        "unit": ""
+      },
+      {
+        "name": "Jalapeño",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Finely dice the onion, tomato, and jalapeño pepper.",
+      "Heat oil in a skillet, sauté onion and jalapeño until soft, then add tomato and cook for 2 minutes.",
+      "Pour in beaten eggs with salt, folding gently over medium-low heat until fluffy and glossy.",
+      "Serve immediately with warm corn tortillas."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      120,
+      180
+    ],
+    "substitution": "Serrano peppers can replace jalapeños for more heat.",
+    "tastes": [
+      "spicy",
+      "savory",
+      "fresh"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 36,
+    "name": "Black Bean & Sweet Corn Quesadillas",
+    "cuisine": "Latin American",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Crispy golden tortillas folded with seasoned black beans, sweet corn, and melty cheese.",
+    "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=380&fit=crop&auto=format",
+    "cal": "380 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Tortilla",
+        "amount": 4,
+        "unit": ""
+      },
+      {
+        "name": "Cheese",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Black Beans",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Sweet Corn",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "Butter",
+        "amount": 15,
+        "unit": "g"
+      }
+    ],
+    "steps": [
+      "Layer shredded cheese, rinsed black beans, and sweet corn over half of each tortilla.",
+      "Fold the tortilla over to form half-moons.",
+      "Melt a touch of butter in a skillet; cook quesadillas for 3 minutes per side until crisp and cheese is fully melted.",
+      "Slice into wedges and serve with salsa or avocado."
+    ],
+    "stepTimers": [
+      0,
+      60,
+      180,
+      180
+    ],
+    "substitution": "Add diced avocado or jalapeños inside for extra kick.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 37,
+    "name": "Chilaquiles Rojos con Queso",
+    "cuisine": "Latin American",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Crisp tortilla chips lightly simmered in warm salsa roja, topped with crumbled cheese and onions.",
+    "image": "https://images.unsplash.com/photo-1590412200988-a436970781fa?w=600&h=380&fit=crop&auto=format",
+    "cal": "340 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Tortilla",
+        "amount": 6,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 3,
+        "unit": ""
+      },
+      {
+        "name": "Jalapeño",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Onion",
+        "amount": 0.5,
+        "unit": ""
+      },
+      {
+        "name": "Cheese",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 20,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Cut tortillas into triangles and fry or bake until golden and crisp.",
+      "Blend tomatoes, jalapeño, onion, and garlic with salt into a smooth red salsa.",
+      "Simmer the salsa in a skillet for 4 minutes until thickened.",
+      "Toss in the crispy tortilla chips until coated but still crunch-tender; top with cheese and onion."
+    ],
+    "stepTimers": [
+      0,
+      240,
+      240,
+      60
+    ],
+    "substitution": "Top with a fried egg for the ultimate Mexican brunch.",
+    "tastes": [
+      "spicy",
+      "tangy",
+      "comfort"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 38,
+    "name": "Authentic Shakshuka",
+    "cuisine": "Mediterranean",
+    "time": "20 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "High-protein",
+      "Gluten-free"
+    ],
+    "desc": "Eggs poached gently in a bubbling sauce of spiced crushed tomatoes, bell peppers, garlic & onions.",
+    "image": "https://images.unsplash.com/photo-1590412200988-a436970781fa?w=600&h=380&fit=crop&auto=format",
+    "cal": "310 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Eggs",
+        "amount": 4,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "Bell Pepper",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Onion",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Garlic",
+        "amount": 3,
+        "unit": "cloves"
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Heat olive oil in a wide skillet; cook diced onion and bell pepper until tender.",
+      "Stir in minced garlic, crushed tomatoes, cumin, and paprika; simmer until sauce thickens.",
+      "Create 4 small wells in the sauce and crack an egg into each well.",
+      "Cover and simmer on low for 6 to 8 minutes until egg whites are set and yolks remain runny."
+    ],
+    "stepTimers": [
+      0,
+      300,
+      360,
+      480
+    ],
+    "substitution": "Crumble feta cheese or goat cheese on top before serving.",
+    "tastes": [
+      "spicy",
+      "savory",
+      "tangy"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 42,
+    "name": "Turkish Menemen (Soft Egg & Tomato Scramble)",
+    "cuisine": "Mediterranean",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Silky, tender Turkish eggs folded into a fragrant stew of tomatoes, green peppers, and olive oil.",
+    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "cal": "270 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Eggs",
+        "amount": 4,
+        "unit": ""
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 3,
+        "unit": ""
+      },
+      {
+        "name": "Bell Pepper",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "Black Pepper",
+        "amount": 0.5,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Heat olive oil in a skillet, cook diced peppers until tender.",
+      "Add grated or finely chopped tomatoes and simmer for 5 minutes until juicy.",
+      "Crack eggs directly into the pan, gently stirring whites into tomatoes while leaving yolks partially intact.",
+      "Remove from heat while soft and creamy; season with black pepper and serve with crusty bread."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      300,
+      120
+    ],
+    "substitution": "Crumble feta cheese over the top just before serving.",
+    "tastes": [
+      "savory",
+      "tangy"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 43,
+    "name": "Classic Spaghetti Aglio e Olio",
+    "cuisine": "Italian",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian"
+    ],
+    "desc": "The quintessential Roman late-night pasta: spaghetti tossed in golden garlic-infused olive oil and chili flakes.",
+    "image": "https://images.unsplash.com/photo-1621996346565-e3d5d6281048?w=600&h=380&fit=crop&auto=format",
+    "cal": "390 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Spaghetti",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Garlic",
+        "amount": 6,
+        "unit": "cloves"
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 40,
+        "unit": "ml"
+      },
+      {
+        "name": "Red Chili",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Parsley",
+        "amount": 1,
+        "unit": "bunch"
+      }
+    ],
+    "steps": [
+      "Boil spaghetti in salted water until just shy of al dente; reserve 1/2 cup pasta water.",
+      "Sizzle thinly sliced garlic in olive oil over low heat until pale golden and fragrant.",
+      "Add chili flakes and reserved pasta water, swirling vigorously to create a silky emulsion.",
+      "Toss spaghetti in the pan with chopped parsley until every strand is coated."
+    ],
+    "stepTimers": [
+      0,
+      480,
+      180,
+      120
+    ],
+    "substitution": "Grate pecorino or parmesan cheese over the top if desired.",
+    "tastes": [
+      "spicy",
+      "savory"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 44,
+    "name": "French Herb Omelette with Sautéed Spinach",
+    "cuisine": "Continental",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Velvety, pale-golden rolled omelette stuffed with tender buttered spinach and fresh herbs.",
+    "image": "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=600&h=380&fit=crop&auto=format",
+    "cal": "280 cal",
+    "rating": 4.7,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Eggs",
+        "amount": 4,
+        "unit": ""
+      },
+      {
+        "name": "Spinach",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Butter",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "Parsley",
+        "amount": 1,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      "Sauté spinach in 5g butter for 90 seconds until wilted; season and set aside.",
+      "Vigorously whisk eggs with chopped parsley and salt until completely uniform.",
+      "Melt remaining butter in a non-stick pan over medium heat; pour in eggs, stirring in small circles with a spatula.",
+      "Lay sautéed spinach across the center, roll the omelette smoothly, and slide onto a plate seam-side down."
+    ],
+    "stepTimers": [
+      0,
+      90,
+      60,
+      120
+    ],
+    "substitution": "Add goat cheese or grated parmesan before rolling.",
+    "tastes": [
+      "savory",
+      "fresh"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 73,
+    "name": "Quick Homestyle Paneer Butter Masala",
+    "cuisine": "Indian",
+    "time": "20 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Soft paneer cubes simmered in a silky spiced tomato butter sauce scented with kasuri methi.",
+    "image": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&h=380&fit=crop&auto=format",
+    "cal": "380 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 200,
+        "name": "Paneer",
+        "unit": "g"
+      },
+      {
+        "amount": 3,
+        "name": "Tomatoes",
+        "unit": ""
+      },
+      {
+        "amount": 25,
+        "name": "Butter",
+        "unit": "g"
+      },
+      {
+        "amount": 1,
+        "name": "Ginger",
+        "unit": "inch"
+      },
+      {
+        "amount": 3,
+        "name": "Garlic",
+        "unit": "cloves"
+      },
+      {
+        "amount": 0.5,
+        "name": "Garam Masala",
+        "unit": "tsp"
+      },
+      {
+        "amount": 30,
+        "name": "Cream",
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Blend tomatoes, ginger, and garlic into a smooth, vibrant puree.",
+      "Melt butter in a pan, pour in the puree, and simmer until butter begins to separate.",
+      "Stir in garam masala, a pinch of chili powder, and cream for richness.",
+      "Gently fold in paneer cubes and simmer for 3 minutes until heated through."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      480,
+      180
+    ],
+    "substitution": "Swap paneer for firm tofu to make it vegan.",
+    "tastes": [
+      "savory",
+      "creamy",
+      "comfort"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 74,
+    "name": "Slow-Simmered Dal Makhani",
+    "cuisine": "Indian",
+    "time": "30 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Rich, velvety black lentils slow-cooked with fresh ginger, butter, and mild aromatic spices.",
+    "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&h=380&fit=crop&auto=format",
+    "cal": "390 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 3,
+    "ingredients": [
+      {
+        "amount": 200,
+        "name": "Lentils",
+        "unit": "g"
+      },
+      {
+        "amount": 30,
+        "name": "Butter",
+        "unit": "g"
+      },
+      {
+        "amount": 2,
+        "name": "Tomatoes",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Ginger",
+        "unit": "inch"
+      },
+      {
+        "amount": 4,
+        "name": "Garlic",
+        "unit": "cloves"
+      },
+      {
+        "amount": 30,
+        "name": "Cream",
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Pressure cook or boil black lentils until completely tender and creamy.",
+      "In a heavy pot, sizzle grated ginger and minced garlic in melted butter.",
+      "Add tomato puree and simmer for 8 minutes until thickened.",
+      "Pour in cooked lentils with their liquor, mash slightly with the back of a ladle, and simmer with cream."
+    ],
+    "stepTimers": [
+      0,
+      600,
+      480,
+      600
+    ],
+    "substitution": "Use coconut milk instead of dairy cream for a plant-based twist.",
+    "tastes": [
+      "savory",
+      "creamy",
+      "comfort"
+    ],
+    "effort": "chef"
+  },
+  {
+    "id": 75,
+    "name": "Smoky Baingan Bharta",
+    "cuisine": "Indian",
+    "time": "25 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Fire-roasted smoky eggplant mashed and sautéed with sweet onions, green chilies, and ripe tomatoes.",
+    "image": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&h=380&fit=crop&auto=format",
+    "cal": "210 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 1,
+        "name": "Eggplant",
+        "unit": "large"
+      },
+      {
+        "amount": 1,
+        "name": "Onion",
+        "unit": "medium"
+      },
+      {
+        "amount": 2,
+        "name": "Tomatoes",
+        "unit": ""
+      },
+      {
+        "amount": 2,
+        "name": "Green Chili",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Ginger",
+        "unit": "inch"
+      },
+      {
+        "amount": 1,
+        "name": "Coriander",
+        "unit": "bunch"
+      }
+    ],
+    "steps": [
+      "Roast the whole eggplant directly over open flame until skin is completely charred and flesh is tender.",
+      "Peel the charred skin off, mash the smoky flesh thoroughly with a fork.",
+      "Heat oil in a pan, sauté onions, ginger, and green chilies until light golden.",
+      "Add tomatoes and cook until soft, then stir in mashed eggplant and finish with fresh coriander."
+    ],
+    "stepTimers": [
+      0,
+      600,
+      300,
+      300
+    ],
+    "substitution": "Roast in an oven at 220°C (425°F) for 30 minutes if you don't have an open flame.",
+    "tastes": [
+      "savory",
+      "spicy"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 76,
+    "name": "Homestyle Matar Paneer",
+    "cuisine": "Indian",
+    "time": "20 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Sweet green peas and golden paneer cubes in a lightly spiced, fragrant onion-tomato curry.",
+    "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&h=380&fit=crop&auto=format",
+    "cal": "340 cal",
+    "rating": 4.7,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 180,
+        "name": "Paneer",
+        "unit": "g"
+      },
+      {
+        "amount": 120,
+        "name": "Peas",
+        "unit": "g"
+      },
+      {
+        "amount": 1,
+        "name": "Onion",
+        "unit": ""
+      },
+      {
+        "amount": 2,
+        "name": "Tomatoes",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Cumin",
+        "unit": "tsp"
+      },
+      {
+        "amount": 0.5,
+        "name": "Turmeric",
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Briefly sear cubed paneer in a drop of oil until edges are lightly golden; set aside.",
+      "Sauté cumin seeds, finely diced onion, and ginger in the same pan.",
+      "Add pureed tomatoes, turmeric, and salt; cook until oil begins to release.",
+      "Toss in green peas and seared paneer with 100ml water; simmer for 5 minutes."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      240,
+      300
+    ],
+    "substitution": "Frozen peas require no thawing; just toss straight into the bubbling gravy.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 77,
+    "name": "Street-Style Samosa Chaat",
+    "cuisine": "Indian",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Crispy samosas crushed and smothered with warm spiced chickpeas, cool yogurt, and tangy chutneys.",
+    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&h=380&fit=crop&auto=format",
+    "cal": "420 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 2,
+        "name": "Samosa",
+        "unit": ""
+      },
+      {
+        "amount": 150,
+        "name": "Chickpeas",
+        "unit": "g"
+      },
+      {
+        "amount": 80,
+        "name": "Yogurt",
+        "unit": "g"
+      },
+      {
+        "amount": 0.5,
+        "name": "Onion",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Coriander",
+        "unit": "handful"
+      },
+      {
+        "amount": 1,
+        "name": "Chaat Masala",
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Warm the samosas in a pan or oven until super crisp.",
+      "Crush each samosa gently into a shallow serving bowl.",
+      "Ladle warm cooked chickpeas generously over the samosas.",
+      "Drizzle with whisked yogurt, sprinkle finely diced onions, chaat masala, and fresh coriander."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      60,
+      60
+    ],
+    "substitution": "If samosas aren't on hand, use crushed papdi or toasted pita chips.",
+    "tastes": [
+      "tangy",
+      "spicy",
+      "savory"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 78,
+    "name": "Dhaba Style Spiced Egg Curry",
+    "cuisine": "Indian",
+    "time": "20 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Golden-seared hard boiled eggs simmered in a deeply spiced rustic tomato, onion, and garlic masala.",
+    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&h=380&fit=crop&auto=format",
+    "cal": "320 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 4,
+        "name": "Eggs",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Onion",
+        "unit": "large"
+      },
+      {
+        "amount": 2,
+        "name": "Tomatoes",
+        "unit": ""
+      },
+      {
+        "amount": 4,
+        "name": "Garlic",
+        "unit": "cloves"
+      },
+      {
+        "amount": 1,
+        "name": "Ginger",
+        "unit": "inch"
+      },
+      {
+        "amount": 0.5,
+        "name": "Turmeric",
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Prick boiled eggs with a fork and fry in hot oil with a pinch of turmeric until skin blisters golden.",
+      "In the same pan, brown chopped onions until rich golden brown.",
+      "Add ginger-garlic paste and diced tomatoes; cook until oil glints on the surface.",
+      "Add 150ml warm water, slide in the fried eggs, and simmer for 5 minutes."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      360,
+      300
+    ],
+    "substitution": "Add a dollop of yogurt to the gravy for a creamy Mughal flair.",
+    "tastes": [
+      "spicy",
+      "savory"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 79,
+    "name": "Fragrant Vegetable Cumin Pulao",
+    "cuisine": "Indian",
+    "time": "20 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Fluffy long-grain basmati rice tempered with whole cumin seeds, bay leaf, peas, and crisp carrots.",
+    "image": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&h=380&fit=crop&auto=format",
+    "cal": "290 cal",
+    "rating": 4.7,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 180,
+        "name": "Rice",
+        "unit": "g"
+      },
+      {
+        "amount": 1.5,
+        "name": "Cumin",
+        "unit": "tsp"
+      },
+      {
+        "amount": 60,
+        "name": "Peas",
+        "unit": "g"
+      },
+      {
+        "amount": 1,
+        "name": "Carrot",
+        "unit": ""
+      },
+      {
+        "amount": 15,
+        "name": "Ghee",
+        "unit": "ml"
+      },
+      {
+        "amount": 1,
+        "name": "Bay Leaf",
+        "unit": ""
+      }
+    ],
+    "steps": [
+      "Rinse basmati rice until water runs clear; drain well.",
+      "Warm ghee in a pot, sizzle cumin seeds and bay leaf until deeply aromatic.",
+      "Add diced carrots and peas, tossing for 1 minute.",
+      "Add rice, 350ml water, and salt. Cover and steam undisturbed for 12 minutes until fluffy."
+    ],
+    "stepTimers": [
+      0,
+      120,
+      60,
+      720
+    ],
+    "substitution": "Substitute olive oil or vegan butter for ghee to make it 100% plant-based.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 80,
+    "name": "South Indian Tempered Curd Rice",
+    "cuisine": "Indian",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Soothing soft rice folded into fresh creamy yogurt with a crisp mustard-curry leaf tadka.",
+    "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&h=380&fit=crop&auto=format",
+    "cal": "260 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F6C8D0",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 150,
+        "name": "Rice",
+        "unit": "g (cooked)"
+      },
+      {
+        "amount": 180,
+        "name": "Yogurt",
+        "unit": "g"
+      },
+      {
+        "amount": 1,
+        "name": "Mustard Seeds",
+        "unit": "tsp"
+      },
+      {
+        "amount": 8,
+        "name": "Curry Leaves",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Green Chili",
+        "unit": ""
+      },
+      {
+        "amount": 0.5,
+        "name": "Ginger",
+        "unit": "inch"
+      }
+    ],
+    "steps": [
+      "Mash warm cooked rice lightly with a fork, then fold in cool yogurt and a splash of milk.",
+      "Heat oil in a small ladle; crackle mustard seeds, curry leaves, and minced ginger.",
+      "Pour the sputtering aromatic tadka directly over the creamy rice.",
+      "Mix gently and serve chilled or at room temperature."
+    ],
+    "stepTimers": [
+      0,
+      60,
+      60,
+      30
+    ],
+    "substitution": "Garnish with pomegranate arils or grated cucumber for a crisp refreshing crunch.",
+    "tastes": [
+      "tangy",
+      "fresh",
+      "comfort"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 81,
+    "name": "Japanese Miso Ramen with Tofu & Scallions",
+    "cuisine": "Japanese",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian"
+    ],
+    "desc": "Steaming, rich umami miso broth with chewy noodles, pan-seared silken tofu, and crisp green onions.",
+    "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&h=380&fit=crop&auto=format",
+    "cal": "380 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 160,
+        "name": "Ramen Noodles",
+        "unit": "g"
+      },
+      {
+        "amount": 150,
+        "name": "Tofu",
+        "unit": "g"
+      },
+      {
+        "amount": 2,
+        "name": "Miso Paste",
+        "unit": "tbsp"
+      },
+      {
+        "amount": 15,
+        "name": "Soy Sauce",
+        "unit": "ml"
+      },
+      {
+        "amount": 3,
+        "name": "Scallions",
+        "unit": "stalks"
+      },
+      {
+        "amount": 10,
+        "name": "Sesame Oil",
+        "unit": "ml"
+      },
+      {
+        "amount": 2,
+        "name": "Garlic",
+        "unit": "cloves"
+      }
+    ],
+    "steps": [
+      "Boil ramen noodles according to package directions; drain and divide into bowls.",
+      "Sear cubed tofu in sesame oil until golden on all sides.",
+      "In a saucepan, sauté minced garlic, whisk in 500ml water and miso paste over gentle heat without boiling.",
+      "Ladle hot miso broth over noodles, top with seared tofu, scallions, and a drizzle of sesame oil."
+    ],
+    "stepTimers": [
+      0,
+      240,
+      300,
+      180
+    ],
+    "substitution": "Add a soft-boiled egg if you're not strictly vegan.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 82,
+    "name": "Japanese Tamagoyaki (Rolled Omelette)",
+    "cuisine": "Japanese",
+    "time": "10 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Delicately sweet and savory golden rolled eggs, layered into a tender, pillow-soft omelette log.",
+    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "cal": "220 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 4,
+        "name": "Eggs",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Soy Sauce",
+        "unit": "tsp"
+      },
+      {
+        "amount": 1,
+        "name": "Sugar",
+        "unit": "tsp"
+      },
+      {
+        "amount": 5,
+        "name": "Cooking Oil",
+        "unit": "ml"
+      },
+      {
+        "amount": 1,
+        "name": "Mirin",
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Whisk eggs with soy sauce, sugar, and mirin gently without creating too many bubbles.",
+      "Oil a rectangular or small round skillet over medium-low heat; pour a thin layer of egg.",
+      "When set underneath but still soft on top, roll from one side to the other.",
+      "Push roll to one end, oil empty space, pour another thin layer, lift the roll to let egg flow under, and roll again."
+    ],
+    "stepTimers": [
+      0,
+      60,
+      90,
+      120
+    ],
+    "substitution": "Wrap with nori seaweed strips or sprinkle with toasted sesame seeds.",
+    "tastes": [
+      "savory",
+      "sweet"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 83,
+    "name": "Classic Pad Thai with Crispy Tofu",
+    "cuisine": "Thai",
+    "time": "20 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Chewy rice noodles stir-fried in sweet-tangy tamarind sauce with golden tofu, crunchy peanuts, and fresh lime.",
+    "image": "https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&h=380&fit=crop&auto=format",
+    "cal": "420 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 150,
+        "name": "Rice Noodles",
+        "unit": "g"
+      },
+      {
+        "amount": 120,
+        "name": "Tofu",
+        "unit": "g"
+      },
+      {
+        "amount": 2,
+        "name": "Eggs",
+        "unit": ""
+      },
+      {
+        "amount": 30,
+        "name": "Peanuts",
+        "unit": "g"
+      },
+      {
+        "amount": 80,
+        "name": "Bean Sprouts",
+        "unit": "g"
+      },
+      {
+        "amount": 1,
+        "name": "Lime",
+        "unit": ""
+      },
+      {
+        "amount": 20,
+        "name": "Soy Sauce",
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Soak rice noodles in warm water for 15 minutes until pliable.",
+      "Sear cubed tofu in high heat until crisp; push to the side and scramble eggs.",
+      "Add drained noodles and tamarind-soy sauce; toss vigorously for 2 minutes.",
+      "Fold in bean sprouts and crushed roasted peanuts, squeeze fresh lime over top."
+    ],
+    "stepTimers": [
+      0,
+      300,
+      120,
+      60
+    ],
+    "substitution": "Tamarind paste can be substituted with equal parts lime juice and brown sugar.",
+    "tastes": [
+      "tangy",
+      "sweet",
+      "savory"
+    ],
+    "effort": "chef"
+  },
+  {
+    "id": 84,
+    "name": "Aromatic Thai Green Coconut Curry",
+    "cuisine": "Thai",
+    "time": "20 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Fragrant green curry infused with coconut milk, tender bamboo shoots, crisp bell peppers, and fresh Thai basil.",
+    "image": "https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&h=380&fit=crop&auto=format",
+    "cal": "360 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 300,
+        "name": "Coconut Milk",
+        "unit": "ml"
+      },
+      {
+        "amount": 150,
+        "name": "Tofu",
+        "unit": "g"
+      },
+      {
+        "amount": 1,
+        "name": "Bell Pepper",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Zucchini",
+        "unit": ""
+      },
+      {
+        "amount": 2,
+        "name": "Curry Paste",
+        "unit": "tbsp"
+      },
+      {
+        "amount": 10,
+        "name": "Basil",
+        "unit": "leaves"
+      }
+    ],
+    "steps": [
+      "Heat 2 tbsp of thick coconut cream in a pot, fry green curry paste until fragrant oil emerges.",
+      "Pour in remaining coconut milk and bring to a gentle bubble.",
+      "Add cubed zucchini, bell pepper slices, and tofu; simmer for 8 minutes.",
+      "Turn off heat, stir in fresh Thai basil leaves and a squeeze of lime juice."
+    ],
+    "stepTimers": [
+      0,
+      120,
+      120,
+      480
+    ],
+    "substitution": "Add button mushrooms or eggplant if zucchini is unavailable.",
+    "tastes": [
+      "spicy",
+      "creamy",
+      "fresh"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 85,
+    "name": "Chinese Scallion Oil Tossed Noodles",
+    "cuisine": "Chinese",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian"
+    ],
+    "desc": "Chewy noodles tossed in dark savory soy sauce and fragrant slow-caramelized spring onion oil.",
+    "image": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=600&h=380&fit=crop&auto=format",
+    "cal": "340 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 180,
+        "name": "Noodles",
+        "unit": "g"
+      },
+      {
+        "amount": 6,
+        "name": "Scallions",
+        "unit": "stalks"
+      },
+      {
+        "amount": 30,
+        "name": "Cooking Oil",
+        "unit": "ml"
+      },
+      {
+        "amount": 25,
+        "name": "Soy Sauce",
+        "unit": "ml"
+      },
+      {
+        "amount": 1,
+        "name": "Sugar",
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Slice scallions into 2-inch segments, separating white and green parts.",
+      "Simmer scallions in oil over low heat for 8 minutes until crisp and browned; drain infused oil.",
+      "Boil noodles al dente and transfer directly into serving bowls.",
+      "Whisk soy sauce and sugar into hot scallion oil, pour over noodles, and top with crispy scallions."
+    ],
+    "stepTimers": [
+      0,
+      480,
+      240,
+      60
+    ],
+    "substitution": "Any wheat noodle or ramen works perfectly here.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 86,
+    "name": "Classic Chinese Egg Fried Rice",
+    "cuisine": "Chinese",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Wok-seared jasmine rice tossed with golden eggs, sweet peas, crisp scallions, and toasted sesame oil.",
+    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=380&fit=crop&auto=format",
+    "cal": "360 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 250,
+        "name": "Rice",
+        "unit": "g (cold day-old)"
+      },
+      {
+        "amount": 3,
+        "name": "Eggs",
+        "unit": ""
+      },
+      {
+        "amount": 3,
+        "name": "Scallions",
+        "unit": "stalks"
+      },
+      {
+        "amount": 60,
+        "name": "Peas",
+        "unit": "g"
+      },
+      {
+        "amount": 15,
+        "name": "Soy Sauce",
+        "unit": "ml"
+      },
+      {
+        "amount": 10,
+        "name": "Sesame Oil",
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Scramble whisked eggs in a smoking hot wok with 1 tbsp oil; remove while still slightly soft.",
+      "Add another splash of oil, toss cold rice breaking up any clumps with a spatula.",
+      "Pour soy sauce around the rim of the wok for instant caramelization.",
+      "Toss in cooked eggs, peas, scallions, and sesame oil for 90 seconds of high-heat stir-fry."
+    ],
+    "stepTimers": [
+      0,
+      90,
+      180,
+      90
+    ],
+    "substitution": "Cold, dry leftover rice prevents the fried rice from becoming mushy.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 87,
+    "name": "Korean Dubu Jorim (Spicy Braised Tofu)",
+    "cuisine": "Korean",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "High-protein"
+    ],
+    "desc": "Pan-crisped golden tofu simmered in a savory, spicy Korean chili, garlic, and scallion sauce.",
+    "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=380&fit=crop&auto=format",
+    "cal": "250 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 250,
+        "name": "Tofu",
+        "unit": "g"
+      },
+      {
+        "amount": 25,
+        "name": "Soy Sauce",
+        "unit": "ml"
+      },
+      {
+        "amount": 1,
+        "name": "Gochugaru",
+        "unit": "tbsp"
+      },
+      {
+        "amount": 3,
+        "name": "Garlic",
+        "unit": "cloves"
+      },
+      {
+        "amount": 2,
+        "name": "Scallions",
+        "unit": "stalks"
+      },
+      {
+        "amount": 1,
+        "name": "Sesame Seeds",
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Slice firm tofu into thick slabs; pat dry with paper towels.",
+      "Pan-fry in oil over medium heat for 4 minutes per side until crusty golden.",
+      "Whisk soy sauce, gochugaru, minced garlic, scallions, and 50ml water together.",
+      "Pour braising sauce over the tofu; simmer for 4 minutes until sauce reduces to a glaze."
+    ],
+    "stepTimers": [
+      0,
+      480,
+      60,
+      240
+    ],
+    "substitution": "If gochugaru isn't available, substitute red chili flakes mixed with a touch of smoked paprika.",
+    "tastes": [
+      "spicy",
+      "savory"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 88,
+    "name": "Vietnamese Fresh Summer Spring Rolls",
+    "cuisine": "Vietnamese",
+    "time": "15 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Crisp translucent rice paper rolls stuffed with fresh cucumber, mint, carrots, and vermicelli with rich peanut dip.",
+    "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=600&h=380&fit=crop&auto=format",
+    "cal": "220 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 6,
+        "name": "Rice Paper",
+        "unit": "sheets"
+      },
+      {
+        "amount": 80,
+        "name": "Rice Noodles",
+        "unit": "g"
+      },
+      {
+        "amount": 1,
+        "name": "Cucumber",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Carrot",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Mint",
+        "unit": "handful"
+      },
+      {
+        "amount": 40,
+        "name": "Peanut Butter",
+        "unit": "g"
+      }
+    ],
+    "steps": [
+      "Cook rice noodles for 3 minutes, rinse under cold water, and drain well.",
+      "Julienne cucumber and carrot into matchstick strips.",
+      "Dip one rice paper sheet into warm water for 5 seconds; lay flat on cutting board.",
+      "Layer noodles, veggies, and fresh mint on the lower third; roll tightly like a burrito."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      180,
+      120
+    ],
+    "substitution": "Whisk peanut butter, warm water, and soy sauce for an instant dipping sauce.",
+    "tastes": [
+      "fresh",
+      "crunchy"
+    ],
+    "effort": "chef"
+  },
+  {
+    "id": 89,
+    "name": "Authentic Huevos Rancheros",
+    "cuisine": "Mexican",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Crisp lightly fried corn tortillas layered with warm refried black beans, sunny eggs, and spicy salsa ranchera.",
+    "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=380&fit=crop&auto=format",
+    "cal": "350 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 4,
+        "name": "Corn Tortillas",
+        "unit": ""
+      },
+      {
+        "amount": 4,
+        "name": "Eggs",
+        "unit": ""
+      },
+      {
+        "amount": 150,
+        "name": "Black Beans",
+        "unit": "g"
+      },
+      {
+        "amount": 2,
+        "name": "Tomatoes",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Jalapeño",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Coriander",
+        "unit": "handful"
+      }
+    ],
+    "steps": [
+      "Briefly fry corn tortillas in oil for 20 seconds each until warm and pliable.",
+      "Simmer blended tomatoes, jalapeño, and garlic in a skillet until thickened into ranchero salsa.",
+      "Fry eggs sunny-side up in a separate skillet.",
+      "Spread warm mashed beans over each tortilla, crown with an egg, and spoon salsa generously over top."
+    ],
+    "stepTimers": [
+      0,
+      120,
+      300,
+      180
+    ],
+    "substitution": "Top with sliced ripe avocado and crumbled cotija or feta cheese.",
+    "tastes": [
+      "spicy",
+      "savory",
+      "comfort"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 90,
+    "name": "Fresh Chunky Guacamole with Pico de Gallo",
+    "cuisine": "Mexican",
+    "time": "8 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Buttery hass avocados hand-mashed with lime juice, fresh cilantro, fiery jalapeño, and diced plum tomatoes.",
+    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=380&fit=crop&auto=format",
+    "cal": "240 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 2,
+        "name": "Avocado",
+        "unit": "ripe"
+      },
+      {
+        "amount": 1,
+        "name": "Lime",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Tomatoes",
+        "unit": ""
+      },
+      {
+        "amount": 0.5,
+        "name": "Onion",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Coriander",
+        "unit": "handful"
+      },
+      {
+        "amount": 1,
+        "name": "Jalapeño",
+        "unit": ""
+      }
+    ],
+    "steps": [
+      "Halve avocados, scoop flesh into a molcajete or bowl, and mash roughly with a fork.",
+      "Immediately fold in fresh lime juice and coarse sea salt to prevent browning.",
+      "Fold in finely diced red onion, seeded jalapeño, and tomatoes.",
+      "Finish with chopped cilantro and serve immediately with warm tortilla chips."
+    ],
+    "stepTimers": [
+      0,
+      60,
+      60,
+      60
+    ],
+    "substitution": "Keep one avocado pit in the bowl to help keep the guacamole vibrant green.",
+    "tastes": [
+      "fresh",
+      "tangy",
+      "creamy"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 91,
+    "name": "Loaded Vegetarian Burrito Bowl",
+    "cuisine": "Mexican",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Zesty cilantro-lime rice topped with cumin-spiced black beans, sweet corn, salsa roja, and creamy cheese.",
+    "image": "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=600&h=380&fit=crop&auto=format",
+    "cal": "410 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 200,
+        "name": "Rice",
+        "unit": "g (cooked)"
+      },
+      {
+        "amount": 150,
+        "name": "Black Beans",
+        "unit": "g"
+      },
+      {
+        "amount": 80,
+        "name": "Corn",
+        "unit": "g"
+      },
+      {
+        "amount": 50,
+        "name": "Cheese",
+        "unit": "g"
+      },
+      {
+        "amount": 1,
+        "name": "Lime",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Coriander",
+        "unit": "handful"
+      }
+    ],
+    "steps": [
+      "Toss warm rice with fresh lime juice, salt, and chopped cilantro.",
+      "Warm black beans and corn in a skillet with a pinch of cumin and garlic powder.",
+      "Divide rice into bowls; arrange black beans, sweet corn, and shredded cheese in sections.",
+      "Garnish with salsa and fresh avocado slices."
+    ],
+    "stepTimers": [
+      0,
+      60,
+      180,
+      60
+    ],
+    "substitution": "Add sour cream or Greek yogurt for extra creaminess.",
+    "tastes": [
+      "savory",
+      "fresh",
+      "comfort"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 92,
+    "name": "Mexican Street Corn Salad (Esquites)",
+    "cuisine": "Mexican",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Charred sweet corn tossed in creamy lime dressing, chili powder, and salty crumbled cheese.",
+    "image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&h=380&fit=crop&auto=format",
+    "cal": "230 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 250,
+        "name": "Corn",
+        "unit": "g"
+      },
+      {
+        "amount": 30,
+        "name": "Mayonnaise",
+        "unit": "g"
+      },
+      {
+        "amount": 40,
+        "name": "Cheese",
+        "unit": "g (cotija/feta)"
+      },
+      {
+        "amount": 1,
+        "name": "Lime",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Chili Powder",
+        "unit": "tsp"
+      },
+      {
+        "amount": 1,
+        "name": "Coriander",
+        "unit": "handful"
+      }
+    ],
+    "steps": [
+      "Sauté sweet corn in a hot skillet with 1 tsp butter until kernels take on charred, golden spots.",
+      "Transfer charred corn to a bowl and let cool for 2 minutes.",
+      "Fold in mayonnaise, lime juice, and chopped cilantro.",
+      "Dust generously with chili powder and crumbled cotija or feta cheese."
+    ],
+    "stepTimers": [
+      0,
+      360,
+      60,
+      60
+    ],
+    "substitution": "Greek yogurt works well in place of mayonnaise for a lighter version.",
+    "tastes": [
+      "tangy",
+      "creamy",
+      "spicy"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "id": 93,
+    "name": "Silky Homemade Hummus with Spiced Chickpeas",
+    "cuisine": "Lebanese",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Ultra-smooth whipped chickpeas with nutty tahini, fresh garlic, lemon, and a pool of golden olive oil.",
+    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=380&fit=crop&auto=format",
+    "cal": "290 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 240,
+        "name": "Chickpeas",
+        "unit": "g"
+      },
+      {
+        "amount": 45,
+        "name": "Tahini",
+        "unit": "g"
+      },
+      {
+        "amount": 1,
+        "name": "Garlic",
+        "unit": "clove"
+      },
+      {
+        "amount": 1,
+        "name": "Lemon",
+        "unit": ""
+      },
+      {
+        "amount": 25,
+        "name": "Olive Oil",
+        "unit": "ml"
+      },
+      {
+        "amount": 0.5,
+        "name": "Cumin",
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Blend tahini and lemon juice in a food processor for 1 minute until creamy and pale.",
+      "Add garlic, cumin, salt, and drained chickpeas; blend until coarse.",
+      "Drizzle in 3 tablespoons of ice water with the processor running until remarkably silky.",
+      "Spread into a shallow bowl, create a swirl with a spoon, and flood with extra virgin olive oil."
+    ],
+    "stepTimers": [
+      0,
+      60,
+      60,
+      120
+    ],
+    "substitution": "Ice water is the secret to fluffy, cloud-like Mediterranean hummus.",
+    "tastes": [
+      "savory",
+      "creamy",
+      "tangy"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 94,
+    "name": "Greek Spanakopita Skillet with Feta",
+    "cuisine": "Greek",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Tender sautéed spinach, fragrant fresh dill, scallions, and melted Greek feta cheese cooked in one skillet.",
+    "image": "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=600&h=380&fit=crop&auto=format",
+    "cal": "260 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 200,
+        "name": "Spinach",
+        "unit": "g"
+      },
+      {
+        "amount": 80,
+        "name": "Feta Cheese",
+        "unit": "g"
+      },
+      {
+        "amount": 3,
+        "name": "Scallions",
+        "unit": "stalks"
+      },
+      {
+        "amount": 2,
+        "name": "Eggs",
+        "unit": ""
+      },
+      {
+        "amount": 15,
+        "name": "Olive Oil",
+        "unit": "ml"
+      },
+      {
+        "amount": 1,
+        "name": "Dill",
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      "Sauté sliced scallions in olive oil until soft and glossy.",
+      "Wilt in fresh spinach in batches until completely tender; drain excess liquid.",
+      "Stir in chopped dill, black pepper, and crumbled feta cheese.",
+      "Crack eggs into pockets between the spinach and cover until whites are set."
+    ],
+    "stepTimers": [
+      0,
+      120,
+      240,
+      240
+    ],
+    "substitution": "Serve with warm pita bread or toasted sourdough.",
+    "tastes": [
+      "savory",
+      "fresh"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 95,
+    "name": "Crispy Falafel Pita Pocket",
+    "cuisine": "Middle Eastern",
+    "time": "15 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "High-protein"
+    ],
+    "desc": "Golden herb-packed chickpea falafels nestled inside warm fluffy pita with crisp tomatoes and tahini sauce.",
+    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=380&fit=crop&auto=format",
+    "cal": "390 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 200,
+        "name": "Chickpeas",
+        "unit": "g"
+      },
+      {
+        "amount": 2,
+        "name": "Pita Bread",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Parsley",
+        "unit": "cup"
+      },
+      {
+        "amount": 0.5,
+        "name": "Coriander",
+        "unit": "cup"
+      },
+      {
+        "amount": 3,
+        "name": "Garlic",
+        "unit": "cloves"
+      },
+      {
+        "amount": 30,
+        "name": "Tahini",
+        "unit": "g"
+      }
+    ],
+    "steps": [
+      "Pulse chickpeas, garlic, parsley, coriander, and cumin in a processor until finely minced.",
+      "Form into patties and pan-fry in hot oil for 3 minutes per side until deeply crisp and browned.",
+      "Warm the pita breads and slice open the pockets.",
+      "Stuff with falafels, sliced cucumber, tomatoes, and drizzle with creamy tahini."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      360,
+      60
+    ],
+    "substitution": "Air fry at 190°C (375°F) for 12 minutes with a light spray of oil for a low-oil version.",
+    "tastes": [
+      "savory",
+      "fresh",
+      "crunchy"
+    ],
+    "effort": "chef"
+  },
+  {
+    "id": 96,
+    "name": "Penne all'Arrabbiata",
+    "cuisine": "Italian",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian"
+    ],
+    "desc": "Al dente penne pasta tossed in a fiery, sweet tomato sauce with golden garlic and crushed chili flakes.",
+    "image": "https://images.unsplash.com/photo-1621996346565-e3d5d6281048?w=600&h=380&fit=crop&auto=format",
+    "cal": "360 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 200,
+        "name": "Penne",
+        "unit": "g"
+      },
+      {
+        "amount": 300,
+        "name": "Tomatoes",
+        "unit": "g (canned or ripe)"
+      },
+      {
+        "amount": 4,
+        "name": "Garlic",
+        "unit": "cloves"
+      },
+      {
+        "amount": 1,
+        "name": "Red Chili",
+        "unit": "tsp"
+      },
+      {
+        "amount": 25,
+        "name": "Olive Oil",
+        "unit": "ml"
+      },
+      {
+        "amount": 1,
+        "name": "Parsley",
+        "unit": "handful"
+      }
+    ],
+    "steps": [
+      "Boil penne pasta in well-salted water until al dente.",
+      "Sauté sliced garlic and red chili flakes gently in olive oil until golden.",
+      "Add crushed tomatoes and simmer vigorously for 10 minutes until sauce thickens.",
+      "Toss pasta and fresh parsley directly in the simmering arrabbiata sauce."
+    ],
+    "stepTimers": [
+      0,
+      600,
+      180,
+      600
+    ],
+    "substitution": "Top with freshly grated pecorino or parmesan cheese.",
+    "tastes": [
+      "spicy",
+      "savory"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 97,
+    "name": "Creamy Wild Mushroom Risotto",
+    "cuisine": "Italian",
+    "time": "25 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Slow-simmered arborio rice with caramelized garlic butter mushrooms, white wine aroma, and parmesan.",
+    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=380&fit=crop&auto=format",
+    "cal": "420 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 180,
+        "name": "Rice",
+        "unit": "g (Arborio)"
+      },
+      {
+        "amount": 200,
+        "name": "Mushrooms",
+        "unit": "g"
+      },
+      {
+        "amount": 30,
+        "name": "Butter",
+        "unit": "g"
+      },
+      {
+        "amount": 2,
+        "name": "Garlic",
+        "unit": "cloves"
+      },
+      {
+        "amount": 0.5,
+        "name": "Onion",
+        "unit": ""
+      },
+      {
+        "amount": 40,
+        "name": "Cheese",
+        "unit": "g (Parmesan)"
+      }
+    ],
+    "steps": [
+      "Sear sliced mushrooms in half the butter until deeply browned and caramelized; set aside.",
+      "Sauté minced onion and rice in remaining butter until grains turn translucent.",
+      "Add warm broth one ladle at a time, stirring steadily until absorbed before adding the next.",
+      "Stir in caramelized mushrooms and parmesan cheese off the heat for ultimate creaminess."
+    ],
+    "stepTimers": [
+      0,
+      360,
+      180,
+      720
+    ],
+    "substitution": "Use standard medium-grain rice if arborio is unavailable.",
+    "tastes": [
+      "savory",
+      "creamy",
+      "comfort"
+    ],
+    "effort": "chef"
+  },
+  {
+    "id": 98,
+    "name": "Classic Spanish Tortilla de Patatas",
+    "cuisine": "Spanish",
+    "time": "25 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "The quintessential Spanish tapas omelette: tender olive-oil poached potatoes and sweet onions folded with rich eggs.",
+    "image": "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=600&h=380&fit=crop&auto=format",
+    "cal": "340 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 4,
+    "ingredients": [
+      {
+        "amount": 3,
+        "name": "Potatoes",
+        "unit": "medium"
+      },
+      {
+        "amount": 5,
+        "name": "Eggs",
+        "unit": ""
+      },
+      {
+        "amount": 1,
+        "name": "Onion",
+        "unit": "large"
+      },
+      {
+        "amount": 50,
+        "name": "Olive Oil",
+        "unit": "ml"
+      },
+      {
+        "amount": 1,
+        "name": "Salt",
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Thinly slice potatoes and onions into half-moons.",
+      "Poach potatoes and onions gently in olive oil over medium-low heat for 15 minutes until meltingly tender without browning.",
+      "Drain oil, gently combine hot potatoes and onions with whisked eggs and let sit for 5 minutes.",
+      "Pour into a non-stick pan, cook for 4 minutes, flip using a plate, and cook 2 minutes on the other side."
+    ],
+    "stepTimers": [
+      0,
+      900,
+      300,
+      360
+    ],
+    "substitution": "Delicious warm, at room temperature, or chilled in a bocadillo sandwich.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "chef"
+  },
+  {
+    "id": 99,
+    "name": "Artisanal Avocado Toast with Poached Egg",
+    "cuisine": "American",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "High-protein"
+    ],
+    "desc": "Thick toasted sourdough smothered in creamy lemon avocado, crowned with a runny poached egg and chili crunch.",
+    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "cal": "310 cal",
+    "rating": 4.9,
+    "match": 95,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 2,
+        "name": "Bread",
+        "unit": "thick slices"
+      },
+      {
+        "amount": 1,
+        "name": "Avocado",
+        "unit": "ripe"
+      },
+      {
+        "amount": 2,
+        "name": "Eggs",
+        "unit": ""
+      },
+      {
+        "amount": 0.5,
+        "name": "Lemon",
+        "unit": ""
+      },
+      {
+        "amount": 0.5,
+        "name": "Chili Flakes",
+        "unit": "tsp"
+      },
+      {
+        "amount": 5,
+        "name": "Olive Oil",
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Toast sourdough slices until deeply golden and crunchy.",
+      "Mash avocado with lemon juice, salt, and black pepper.",
+      "Poach eggs in simmering water with 1 tbsp vinegar for 3 minutes until whites are set and yolks remain liquid.",
+      "Spread mashed avocado over toast, crown each slice with a warm poached egg, and sprinkle chili flakes."
+    ],
+    "stepTimers": [
+      0,
+      180,
+      60,
+      180
+    ],
+    "substitution": "Swap poached egg for a sunny fried egg if you prefer.",
+    "tastes": [
+      "fresh",
+      "savory",
+      "creamy"
+    ],
+    "effort": "easy"
+  },
+  {
+    "id": 100,
+    "name": "Ultimate Triple-Cheese Grilled Sourdough",
+    "cuisine": "American",
+    "time": "10 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Golden butter-crusted sourdough filled with an oozing, melted blend of sharp cheddar, mozzarella, and parmesan.",
+    "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=380&fit=crop&auto=format",
+    "cal": "440 cal",
+    "rating": 4.8,
+    "match": 95,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "amount": 4,
+        "name": "Bread",
+        "unit": "slices"
+      },
+      {
+        "amount": 60,
+        "name": "Cheddar Cheese",
+        "unit": "g"
+      },
+      {
+        "amount": 60,
+        "name": "Mozzarella",
+        "unit": "g"
+      },
+      {
+        "amount": 25,
+        "name": "Butter",
+        "unit": "g"
+      },
+      {
+        "amount": 0.5,
+        "name": "Black Pepper",
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Butter one side of all bread slices right to the edges.",
+      "Layer shredded cheddar and mozzarella between the unbuttered sides of the bread.",
+      "Toast sandwich in a skillet over medium-low heat for 4 minutes until bottom is crispy golden brown.",
+      "Flip and toast the other side, pressing down lightly until cheese is fully melted and stretches."
+    ],
+    "stepTimers": [
+      0,
+      60,
+      240,
+      180
+    ],
+    "substitution": "Spread a thin scrape of Dijon mustard inside for sharp depth of flavor.",
+    "tastes": [
+      "savory",
+      "creamy",
+      "comfort"
+    ],
+    "effort": "lazy"
+  },
+  {
+    "name": "Japanese Vegetable Yakisoba",
+    "cuisine": "Japanese",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian"
+    ],
+    "desc": "Classic Japanese street-style stir-fried wheat noodles with crisp cabbage, carrots, and sweet-savory yakisoba sauce.",
+    "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&h=380&fit=crop&auto=format",
+    "cal": "360 cal",
+    "rating": 4.8,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Noodles",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Cabbage",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "Carrot",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Soy Sauce",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "Sesame Oil",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "Scallions",
+        "amount": 2,
+        "unit": "stalks"
+      }
+    ],
+    "steps": [
+      "Thinly slice cabbage and julienne carrots.",
+      "Stir-fry vegetables in sesame oil over high heat for 3 minutes until crisp-tender.",
+      "Toss in cooked noodles and whisked yakisoba sauce (soy sauce, pinch of sugar, and Worcestershire/ketchup).",
+      "Toss vigorously for 2 minutes until glossy and garnish with green scallions."
+    ],
+    "step_timers": [
+      0,
+      180,
+      120,
+      120
+    ],
+    "substitution": "Add pan-fried tofu cubes or sliced mushrooms for extra protein.",
+    "tastes": [
+      "savory",
+      "sweet"
+    ],
+    "effort": "easy",
+    "id": 101,
+    "match": 95,
+    "stepTimers": [
+      0,
+      180,
+      120,
+      120
+    ]
+  },
+  {
+    "name": "Crispy Agedashi Tofu in Dashi Broth",
+    "cuisine": "Japanese",
+    "time": "15 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Crispy cornstarch-crusted silken tofu cubes bathed in a warm, fragrant soy-mirin dashi broth.",
+    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=380&fit=crop&auto=format",
+    "cal": "240 cal",
+    "rating": 4.9,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Tofu",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "Cornstarch",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "Soy Sauce",
+        "amount": 25,
+        "unit": "ml"
+      },
+      {
+        "name": "Ginger",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "Scallions",
+        "amount": 2,
+        "unit": "stalks"
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Gently press moisture out of firm/silken tofu, then cut into bite-sized cubes.",
+      "Dredge tofu cubes evenly in cornstarch, shaking off excess.",
+      "Pan-fry in hot oil for 2-3 minutes per side until crisp and translucent pale golden.",
+      "Warm soy sauce, 100ml water, and a pinch of sugar; pour around tofu and top with grated ginger and scallions."
+    ],
+    "step_timers": [
+      0,
+      120,
+      300,
+      120
+    ],
+    "substitution": "Dust with nori flakes or toasted sesame seeds for serving.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "chef",
+    "id": 102,
+    "match": 95,
+    "stepTimers": [
+      0,
+      120,
+      300,
+      120
+    ]
+  },
+  {
+    "name": "Crispy Kimchi Jeon (Korean Kimchi Pancake)",
+    "cuisine": "Korean",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Golden, lacy-edged Korean savory pancake packed with zesty aged kimchi and sweet scallions.",
+    "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=380&fit=crop&auto=format",
+    "cal": "280 cal",
+    "rating": 4.9,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Kimchi",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Flour",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Scallions",
+        "amount": 3,
+        "unit": "stalks"
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "Soy Sauce",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Coarsely chop kimchi and mix with 3 tablespoons of its brine.",
+      "Whisk flour, ice-cold water, and kimchi into a smooth batter.",
+      "Heat plenty of oil in a skillet, pour batter thin, and cook for 4 minutes until bottom is super crisp.",
+      "Flip with confidence and fry for another 3 minutes until crunchy on both sides."
+    ],
+    "step_timers": [
+      0,
+      60,
+      240,
+      180
+    ],
+    "substitution": "Use cold seltzer water instead of tap water for extra-crisp pancake edges.",
+    "tastes": [
+      "spicy",
+      "tangy",
+      "savory"
+    ],
+    "effort": "easy",
+    "id": 103,
+    "match": 95,
+    "stepTimers": [
+      0,
+      60,
+      240,
+      180
+    ]
+  },
+  {
+    "name": "Classic Vegetarian Bibimbap Bowl",
+    "cuisine": "Korean",
+    "time": "20 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegetarian",
+      "High-protein"
+    ],
+    "desc": "Warm rice crowned with seasoned sautéed spinach, carrots, bean sprouts, fried egg, and gochujang sauce.",
+    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=380&fit=crop&auto=format",
+    "cal": "420 cal",
+    "rating": 4.9,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Rice",
+        "amount": 200,
+        "unit": "g (cooked)"
+      },
+      {
+        "name": "Spinach",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Carrot",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Eggs",
+        "amount": 2,
+        "unit": ""
+      },
+      {
+        "name": "Sesame Oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "Gochujang",
+        "amount": 2,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      "Quickly blanch spinach and squeeze dry; toss with sesame oil and salt.",
+      "Sauté julienned carrots in sesame oil for 2 minutes until tender.",
+      "Fry eggs sunny-side up until edges are crisp and yolks runny.",
+      "Arrange rice in bowls, place seasoned vegetables in neat sections, top with egg and a spoonful of gochujang."
+    ],
+    "step_timers": [
+      0,
+      120,
+      120,
+      180
+    ],
+    "substitution": "Sriracha mixed with a drop of maple syrup works if gochujang is unavailable.",
+    "tastes": [
+      "spicy",
+      "savory",
+      "comfort"
+    ],
+    "effort": "chef",
+    "id": 104,
+    "match": 95,
+    "stepTimers": [
+      0,
+      120,
+      120,
+      180
+    ]
+  },
+  {
+    "name": "Spicy Thai Basil Tofu Stir-Fry (Pad Krapow)",
+    "cuisine": "Thai",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "High-protein"
+    ],
+    "desc": "Crumbled golden tofu stir-fried with fiery bird's eye chilies, fragrant garlic, and heaps of holy basil.",
+    "image": "https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&h=380&fit=crop&auto=format",
+    "cal": "290 cal",
+    "rating": 4.8,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Tofu",
+        "amount": 250,
+        "unit": "g"
+      },
+      {
+        "name": "Basil",
+        "amount": 1,
+        "unit": "cup (Thai/sweet)"
+      },
+      {
+        "name": "Garlic",
+        "amount": 4,
+        "unit": "cloves"
+      },
+      {
+        "name": "Chili",
+        "amount": 2,
+        "unit": ""
+      },
+      {
+        "name": "Soy Sauce",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "Pound garlic and fresh chilies in a mortar into a coarse paste.",
+      "Fry the aromatic paste in hot oil for 30 seconds until intensely fragrant.",
+      "Add coarsely crumbled tofu, toss with soy sauce and a pinch of sugar over smoking heat for 3 minutes.",
+      "Turn off heat, throw in all basil leaves, and stir until just wilted."
+    ],
+    "step_timers": [
+      0,
+      60,
+      30,
+      180
+    ],
+    "substitution": "Serve with a crispy fried egg on top over jasmine rice.",
+    "tastes": [
+      "spicy",
+      "savory",
+      "fresh"
+    ],
+    "effort": "easy",
+    "id": 105,
+    "match": 95,
+    "stepTimers": [
+      0,
+      60,
+      30,
+      180
+    ]
+  },
+  {
+    "name": "Margherita Skillet Flatbread",
+    "cuisine": "Italian",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Crispy pan-toasted flatbread layered with sweet crushed plum tomatoes, melted mozzarella, and fresh basil.",
+    "image": "https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=600&h=380&fit=crop&auto=format",
+    "cal": "350 cal",
+    "rating": 4.9,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Bread",
+        "amount": 2,
+        "unit": "flatbreads/naan"
+      },
+      {
+        "name": "Mozzarella",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 2,
+        "unit": "ripe"
+      },
+      {
+        "name": "Basil",
+        "amount": 10,
+        "unit": "leaves"
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "Garlic",
+        "amount": 1,
+        "unit": "clove"
+      }
+    ],
+    "steps": [
+      "Rub flatbreads with a cut clove of raw garlic and brush with olive oil.",
+      "Spread crushed ripe tomatoes over top and scatter torn mozzarella.",
+      "Cover skillet with a lid on medium heat for 6 minutes until base is crunchy and cheese bubbles.",
+      "Scatter fresh basil leaves and a drizzle of extra virgin olive oil."
+    ],
+    "step_timers": [
+      0,
+      60,
+      120,
+      360
+    ],
+    "substitution": "Use pita bread, naan, or sliced rustic sourdough as your pizza base.",
+    "tastes": [
+      "savory",
+      "fresh",
+      "comfort"
+    ],
+    "effort": "lazy",
+    "id": 106,
+    "match": 95,
+    "stepTimers": [
+      0,
+      60,
+      120,
+      360
+    ]
+  },
+  {
+    "name": "Classic Basil Walnut Pesto Pasta",
+    "cuisine": "Italian",
+    "time": "12 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Al dente penne pasta tossed in a vibrant, velvety pesto made with fresh basil, walnuts, garlic, and parmesan.",
+    "image": "https://images.unsplash.com/photo-1621996346565-e3d5d6281048?w=600&h=380&fit=crop&auto=format",
+    "cal": "410 cal",
+    "rating": 4.8,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Pasta",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "Basil",
+        "amount": 2,
+        "unit": "cups"
+      },
+      {
+        "name": "Walnuts",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "Garlic",
+        "amount": 2,
+        "unit": "cloves"
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 40,
+        "unit": "ml"
+      },
+      {
+        "name": "Cheese",
+        "amount": 40,
+        "unit": "g (Parmesan)"
+      }
+    ],
+    "steps": [
+      "Boil pasta in salted water until al dente; reserve 1/4 cup pasta water.",
+      "Pulse basil, walnuts, garlic, and cheese in a food processor, streaming in olive oil.",
+      "Transfer pesto to a warm bowl (never cook fresh pesto directly on the stove).",
+      "Toss hot drained pasta and reserved pasta water with the pesto until silky and glossy."
+    ],
+    "step_timers": [
+      0,
+      600,
+      120,
+      60
+    ],
+    "substitution": "Walnuts or almonds are delicious and budget-friendly alternatives to pine nuts.",
+    "tastes": [
+      "fresh",
+      "savory",
+      "creamy"
+    ],
+    "effort": "easy",
+    "id": 107,
+    "match": 95,
+    "stepTimers": [
+      0,
+      600,
+      120,
+      60
+    ]
+  },
+  {
+    "name": "Quick Vegetarian Enchiladas Rojas",
+    "cuisine": "Mexican",
+    "time": "20 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Warm corn tortillas rolled with spiced black beans, sweet corn, and gooey cheese baked in smoky enchilada sauce.",
+    "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=380&fit=crop&auto=format",
+    "cal": "380 cal",
+    "rating": 4.8,
+    "accent": "#FFD5C2",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Corn Tortillas",
+        "amount": 4,
+        "unit": ""
+      },
+      {
+        "name": "Black Beans",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Cheese",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 3,
+        "unit": ""
+      },
+      {
+        "name": "Chili Powder",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Coriander",
+        "amount": 1,
+        "unit": "handful"
+      }
+    ],
+    "steps": [
+      "Simmer pureed tomatoes, garlic, and chili powder in a pan for 5 minutes into a rich sauce.",
+      "Dip each tortilla in warm sauce to soften, fill with black beans and cheese, and roll seam-down into a baking dish.",
+      "Pour remaining sauce over the rolls and top with extra cheese.",
+      "Bake or broil for 8 minutes until bubbling, then top with fresh coriander."
+    ],
+    "step_timers": [
+      0,
+      300,
+      180,
+      480
+    ],
+    "substitution": "Can also be prepared entirely in a covered non-stick skillet on the stovetop.",
+    "tastes": [
+      "spicy",
+      "savory",
+      "comfort"
+    ],
+    "effort": "easy",
+    "id": 108,
+    "match": 95,
+    "stepTimers": [
+      0,
+      300,
+      180,
+      480
+    ]
+  },
+  {
+    "name": "Traditional Mexican Sopa de Fideo",
+    "cuisine": "Mexican",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegan",
+      "Vegetarian"
+    ],
+    "desc": "Comforting Mexican noodle soup made with golden-toasted vermicelli simmered in a light tomato-garlic broth.",
+    "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&h=380&fit=crop&auto=format",
+    "cal": "220 cal",
+    "rating": 4.7,
+    "accent": "#F6C8D0",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Noodles",
+        "amount": 120,
+        "unit": "g (fideo/vermicelli)"
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 3,
+        "unit": ""
+      },
+      {
+        "name": "Garlic",
+        "amount": 2,
+        "unit": "cloves"
+      },
+      {
+        "name": "Onion",
+        "amount": 0.5,
+        "unit": ""
+      },
+      {
+        "name": "Cooking Oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "Coriander",
+        "amount": 1,
+        "unit": "handful"
+      }
+    ],
+    "steps": [
+      "Blend tomatoes, onion, and garlic with 1 cup water until smooth.",
+      "Fry noodles in hot oil over medium heat for 3 minutes, stirring constantly until toasted dark golden brown.",
+      "Pour pureed tomato broth over toasted noodles (it will sizzle loudly).",
+      "Add 2 cups hot water, cover, and simmer for 7 minutes until noodles are tender and broth is savory."
+    ],
+    "step_timers": [
+      0,
+      60,
+      180,
+      420
+    ],
+    "substitution": "Top with diced avocado and a squeeze of fresh lime.",
+    "tastes": [
+      "savory",
+      "tangy",
+      "comfort"
+    ],
+    "effort": "easy",
+    "id": 109,
+    "match": 95,
+    "stepTimers": [
+      0,
+      60,
+      180,
+      420
+    ]
+  },
+  {
+    "name": "Traditional Greek Salad with Feta & Kalamata Olives",
+    "cuisine": "Greek",
+    "time": "8 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Crisp cucumbers, sweet vine tomatoes, red onion, kalamata olives, and a slab of Greek feta drenched in oregano olive oil.",
+    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=380&fit=crop&auto=format",
+    "cal": "240 cal",
+    "rating": 4.8,
+    "accent": "#C9DCC5",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Cucumber",
+        "amount": 1,
+        "unit": "large"
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 3,
+        "unit": "vine-ripe"
+      },
+      {
+        "name": "Feta Cheese",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Olives",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "Red Onion",
+        "amount": 0.5,
+        "unit": ""
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "Oregano",
+        "amount": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Cut tomatoes and cucumbers into rustic, bite-sized wedges.",
+      "Thinly slice red onion and combine with tomatoes, cucumber, and olives in a bowl.",
+      "Drizzle lavishly with extra virgin olive oil and a splash of red wine vinegar.",
+      "Crown with a thick slab of feta cheese and sprinkle dried oregano on top."
+    ],
+    "step_timers": [
+      0,
+      120,
+      60,
+      30
+    ],
+    "substitution": "Never use lettuce in an authentic Greek horiatiki salad.",
+    "tastes": [
+      "fresh",
+      "tangy",
+      "savory"
+    ],
+    "effort": "lazy",
+    "id": 110,
+    "match": 95,
+    "stepTimers": [
+      0,
+      120,
+      60,
+      30
+    ]
+  },
+  {
+    "name": "Middle Eastern Spiced Lentil Mujadara",
+    "cuisine": "Middle Eastern",
+    "time": "25 min",
+    "difficulty": "Medium",
+    "tags": [
+      "Vegan",
+      "Vegetarian",
+      "Gluten-free",
+      "High-protein"
+    ],
+    "desc": "Fragrant cumin-infused brown lentils and basmati rice topped with heaps of sweet, dark caramelized onions.",
+    "image": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&h=380&fit=crop&auto=format",
+    "cal": "340 cal",
+    "rating": 4.9,
+    "accent": "#F5D66F",
+    "servings": 3,
+    "ingredients": [
+      {
+        "name": "Lentils",
+        "amount": 150,
+        "unit": "g (brown/green)"
+      },
+      {
+        "name": "Rice",
+        "amount": 150,
+        "unit": "g (basmati)"
+      },
+      {
+        "name": "Onion",
+        "amount": 2,
+        "unit": "large"
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "Cumin",
+        "amount": 1.5,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "Thinly slice onions and slowly cook in olive oil for 15 minutes until dark brown and deeply caramelized.",
+      "Boil lentils in water for 12 minutes until half-cooked; drain.",
+      "Combine rice, lentils, cumin, salt, and half the caramelized onions in a pot with 400ml water.",
+      "Cover and steam for 14 minutes until rice is fluffy; garnish with remaining crispy sweet onions."
+    ],
+    "step_timers": [
+      0,
+      900,
+      720,
+      840
+    ],
+    "substitution": "Serve with cool plain yogurt or cucumber tzatziki.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "chef",
+    "id": 111,
+    "match": 95,
+    "stepTimers": [
+      0,
+      900,
+      720,
+      840
+    ]
+  },
+  {
+    "name": "Fluffy Banana Buttermilk Hotcakes",
+    "cuisine": "American",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian"
+    ],
+    "desc": "Golden, cloud-soft pancakes folded with sweet ripe bananas and griddled with butter, served with maple syrup.",
+    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "cal": "320 cal",
+    "rating": 4.8,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Banana",
+        "amount": 1,
+        "unit": "ripe"
+      },
+      {
+        "name": "Flour",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "Milk",
+        "amount": 150,
+        "unit": "ml"
+      },
+      {
+        "name": "Eggs",
+        "amount": 1,
+        "unit": ""
+      },
+      {
+        "name": "Butter",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "Sugar",
+        "amount": 1,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      "Mash ripe banana in a bowl, then whisk in milk, egg, and melted butter.",
+      "Gently fold in flour, baking powder, and sugar without over-mixing (small lumps are good).",
+      "Ladle batter onto a buttered griddle over medium heat; cook until bubbles burst on top (about 2 minutes).",
+      "Flip and cook for 90 seconds until golden brown and fluffy."
+    ],
+    "step_timers": [
+      0,
+      120,
+      60,
+      120
+    ],
+    "substitution": "Fold in chocolate chips or blueberries for an extra treat.",
+    "tastes": [
+      "sweet",
+      "comfort"
+    ],
+    "effort": "easy",
+    "id": 112,
+    "match": 95,
+    "stepTimers": [
+      0,
+      120,
+      60,
+      120
+    ]
+  },
+  {
+    "name": "Crispy Breakfast Hashbrown Skillet",
+    "cuisine": "American",
+    "time": "15 min",
+    "difficulty": "Easy",
+    "tags": [
+      "Vegetarian",
+      "Gluten-free"
+    ],
+    "desc": "Golden, crunchy shredded potato skillet baked with melted cheddar, fresh chives, and runny sunny eggs.",
+    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&h=380&fit=crop&auto=format",
+    "cal": "330 cal",
+    "rating": 4.8,
+    "accent": "#F5D66F",
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Potatoes",
+        "amount": 3,
+        "unit": "medium"
+      },
+      {
+        "name": "Cheese",
+        "amount": 60,
+        "unit": "g (cheddar)"
+      },
+      {
+        "name": "Eggs",
+        "amount": 2,
+        "unit": ""
+      },
+      {
+        "name": "Butter",
+        "amount": 25,
+        "unit": "g"
+      },
+      {
+        "name": "Scallions",
+        "amount": 2,
+        "unit": "stalks"
+      }
+    ],
+    "steps": [
+      "Coarsely shred potatoes; squeeze firmly in a towel to remove all liquid (key for crispness).",
+      "Melt butter in a skillet, press shredded potatoes into an even layer, and cook undisturbed for 6 minutes.",
+      "Flip, scatter cheddar cheese over top, create two indentations, and crack eggs in.",
+      "Cover for 3 minutes until cheese melts and egg whites set."
+    ],
+    "step_timers": [
+      0,
+      180,
+      360,
+      180
+    ],
+    "substitution": "Sprinkle paprika or cayenne pepper for an added kick.",
+    "tastes": [
+      "savory",
+      "comfort"
+    ],
+    "effort": "easy",
+    "id": 113,
+    "match": 95,
+    "stepTimers": [
+      0,
+      180,
+      360,
+      180
+    ]
+  }
+]
