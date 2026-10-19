@@ -7,6 +7,7 @@ from google import genai
 
 from backend.app.core.config import settings
 from backend.app.core.logging import logger
+from backend.app.data.database import save_recipe
 from backend.app.schemas.ingredients import IngredientItem
 from backend.app.schemas.recipes import PreferencesInput
 
@@ -80,9 +81,22 @@ Output ONLY the raw JSON object with NO markdown quotes or commentary.
             text = re.sub(r"\n```$", "", text).strip()
 
         recipe_data = json.loads(text)
-        recipe_data["id"] = 999  # dynamic AI recipe ID
+        recipe_data["cuisine"] = recipe_data.get("cuisine", "Global Fusion")
+        recipe_data["effort"] = recipe_data.get("effort", preferences.effort or "easy")
+        recipe_data["tastes"] = recipe_data.get("tastes", preferences.tastes or ["savory"])
         recipe_data["accent"] = recipe_data.get("accent") or ACCENT_PALETTES[0]
         recipe_data["stepTimers"] = recipe_data.get("stepTimers") or [0] * len(recipe_data.get("steps", []))
+        recipe_data["step_timers"] = recipe_data["stepTimers"]
+
+        # Persist newly synthesized recipe into database so the catalog organically expands
+        try:
+            persisted_id = save_recipe(recipe_data, source="gemini_dynamic")
+            recipe_data["id"] = persisted_id if persisted_id > 0 else 999
+            logger.info("Persisted dynamic Gemini recipe '%s' (ID %d) to SQLite catalog", recipe_data["name"], recipe_data["id"])
+        except Exception as db_exc:
+            logger.warning("Could not persist dynamic recipe to database: %s", db_exc)
+            recipe_data["id"] = 999
+
         return recipe_data
 
     except Exception as exc:

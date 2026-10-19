@@ -28,6 +28,28 @@ async def recommend_recipes(payload: RecommendRequest) -> RecommendResponse:
     )
 
 
+@router.get("/catalog/stats")
+async def get_stats():
+    """Retrieve database catalog statistics including cuisine distribution and total count."""
+    from backend.app.data.database import get_catalog_stats
+    return get_catalog_stats()
+
+
+@router.post("/expand-catalog")
+async def expand_catalog(
+    cuisines: Optional[list[str]] = Query(default=None, description="Optional list of cuisines to expand"),
+    count_per_cuisine: int = Query(default=3, ge=1, le=15, description="Number of recipes to generate per cuisine"),
+    theme: Optional[str] = Query(default=None, description="Optional culinary vibe theme"),
+):
+    """Generate authentic recipes using Gemini 2.0 Flash and persist them into the SQLite database."""
+    from backend.app.data.catalog_generator import expand_catalog_async
+    return await expand_catalog_async(
+        cuisines=cuisines,
+        count_per_cuisine=count_per_cuisine,
+        theme=theme,
+    )
+
+
 @router.get("/{recipe_id}", response_model=RecipeResponse)
 async def get_recipe(recipe_id: int) -> RecipeResponse:
     """Retrieve full details of a specific recipe by ID."""

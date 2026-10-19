@@ -83,3 +83,25 @@ def test_get_recipe_nutrition():
     assert data["calories"] > 0
     assert data["protein_g"] > 0
     assert "USDA" in data["basis"]
+
+
+def test_catalog_stats_endpoint():
+    """Verify GET /api/recipes/catalog/stats returns database size and cuisine distribution."""
+    response = client.get("/api/recipes/catalog/stats")
+    assert response.status_code == 200
+    data = response.json()
+    assert "total_recipes" in data
+    assert data["total_recipes"] >= 100
+    assert "by_cuisine" in data
+    assert "Indian" in data["by_cuisine"]
+    assert "Italian" in data["by_cuisine"]
+
+
+def test_expand_catalog_endpoint_safe_fallback():
+    """Verify POST /api/recipes/expand-catalog runs safely even without API key."""
+    response = client.post("/api/recipes/expand-catalog?cuisines=Italian&count_per_cuisine=1")
+    assert response.status_code == 200
+    data = response.json()
+    assert "added_count" in data
+    assert "total_catalog_size" in data
+
