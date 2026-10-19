@@ -1,0 +1,1 @@
+"""FridgeMind Backend."""
