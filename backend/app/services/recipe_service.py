@@ -1,5 +1,4 @@
-"""Service coordinating multi-cuisine recipe retrieval, dietary filtering, ranking, and surprise generation."""
-
+import math
 import random
 from typing import List, Dict, Any, Optional
 from backend.app.data.database import get_all_recipes, get_recipe_by_id
@@ -41,7 +40,7 @@ async def get_recipe_recommendations(
     # 4. Hybrid ML Ranking (0.45 coverage + 0.25 taste + 0.20 effort + 0.10 practicality)
     ranked = rank_recipes(filtered_candidates, pantry, preferences, theme)
 
-    # 5. Handle Surprise Mode
+    # 5. Handle Temperature-Controlled Surprise Mode
     selected_theme = theme
     source = "hybrid" if ai_recipes else "catalog"
 
@@ -50,11 +49,16 @@ async def get_recipe_recommendations(
         themes = ["cozy", "spicy", "fresh", "chef"]
         selected_theme = random.choice(themes)
 
-        # Sample from the top 5 feasible candidates to ensure quality while adding variety
-        top_pool = ranked[:min(5, len(ranked))]
+        # Softmax temperature sampling over top candidates (temperature T = 0.7)
+        top_pool = ranked[:min(8, len(ranked))]
         if top_pool:
-            chosen = random.choice(top_pool)
-            # Put chosen recipe first
+            scores = [r.get("composite_score", 0.5) for r in top_pool]
+            exp_scores = [math.exp(s / 0.7) for s in scores]
+            sum_exp = sum(exp_scores)
+            weights = [e / sum_exp for e in exp_scores]
+
+            chosen = random.choices(top_pool, weights=weights, k=1)[0]
+            # Prioritize chosen surprise recipe at top of list
             ranked = [chosen] + [r for r in ranked if r["id"] != chosen["id"]]
 
     # Convert to response objects
@@ -71,4 +75,9 @@ async def get_recipe_recommendations(
 def fetch_recipe_detail(recipe_id: int) -> Optional[RecipeResponse]:
     """Retrieve full details of a single recipe."""
     r = get_recipe_by_id(recipe_id)
-    return RecipeResponse(**r) if r else None
+    if not r:
+        return None
+    r.setdefault("matched_ingredients", [])
+    r.setdefault("missing_ingredients", [])
+    r.setdefault("badges", [r.get("cuisine", "Global")])
+    return RecipeResponse(**r)

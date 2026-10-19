@@ -27,3 +27,5 @@ class NutritionSummary(BaseModel):
         description="Explicit estimation disclosure",
     )
     details: List[NutrientBreakdown] = Field(default_factory=list)
+    badges: List[str] = Field(default_factory=list)
+    macro_ratios: Optional[dict] = None

@@ -38,16 +38,41 @@ NUTRIENT_TABLE: Dict[str, Tuple[float, float, float, float, float]] = {
     # Grains & Legumes
     "bread": (265, 9.0, 49.0, 3.2, 2.7),
     "pasta": (371, 13.0, 74.0, 1.5, 3.2),
+    "spaghetti": (158, 5.8, 30.9, 0.9, 1.8),
+    "penne": (158, 5.8, 30.9, 0.9, 1.8),
     "rice": (130, 2.7, 28.0, 0.3, 0.4),
     "poha": (350, 6.8, 77.0, 1.2, 1.5),
     "lentils": (116, 9.0, 20.0, 0.4, 7.9),
     "chickpeas": (164, 8.9, 27.4, 2.6, 7.6),
+    "black beans": (132, 8.9, 23.7, 0.5, 8.7),
     "besan": (387, 22.0, 58.0, 6.7, 10.8),
     "oats": (389, 16.9, 66.3, 6.9, 10.6),
+    "noodles": (138, 4.5, 25.0, 2.1, 1.2),
+    "ramen": (138, 4.5, 25.0, 2.1, 1.2),
+    "tortilla": (218, 5.7, 44.6, 2.8, 4.0),
+    "corn": (86, 3.2, 19.0, 1.2, 2.0),
+
+    # Asian & Plant Proteins
+    "tofu": (76, 8.0, 1.9, 4.8, 0.3),
+    "kimchi": (15, 1.1, 2.4, 0.5, 1.6),
+    "miso": (199, 11.8, 26.5, 6.0, 5.4),
+    "tahini": (595, 17.0, 21.2, 53.8, 9.3),
+    "bok choy": (13, 1.5, 2.2, 0.2, 1.0),
+    "eggplant": (25, 1.0, 6.0, 0.2, 3.0),
+    "zucchini": (17, 1.2, 3.1, 0.3, 1.0),
+    "scallion": (32, 1.8, 7.3, 0.2, 2.6),
+    "scallions": (32, 1.8, 7.3, 0.2, 2.6),
+
+    # Cheeses
+    "feta": (264, 14.2, 4.1, 21.3, 0.0),
+    "mozzarella": (280, 22.0, 2.2, 21.0, 0.0),
+    "cheddar": (403, 24.9, 1.3, 33.1, 0.0),
 
     # Oils & Basics
     "olive oil": (884, 0.0, 0.0, 100.0, 0.0),
     "cooking oil": (884, 0.0, 0.0, 100.0, 0.0),
+    "sesame oil": (884, 0.0, 0.0, 100.0, 0.0),
+    "soy sauce": (53, 8.1, 4.9, 0.6, 0.8),
 }
 
 
@@ -140,6 +165,32 @@ def calculate_recipe_nutrition(
         NutrientBreakdown(name="Fiber", amount=per_serving_fiber, unit="g"),
     ]
 
+    # Calculate Macro Energy Ratios
+    macro_cal = (per_serving_protein * 4.0) + (per_serving_carbs * 4.0) + (per_serving_fat * 9.0)
+    if macro_cal > 0:
+        protein_pct = round((per_serving_protein * 4.0 / macro_cal) * 100, 1)
+        carbs_pct = round((per_serving_carbs * 4.0 / macro_cal) * 100, 1)
+        fat_pct = round((per_serving_fat * 9.0 / macro_cal) * 100, 1)
+    else:
+        protein_pct, carbs_pct, fat_pct = 0.0, 0.0, 0.0
+
+    macro_ratios = {
+        "protein_pct": protein_pct,
+        "carbs_pct": carbs_pct,
+        "fat_pct": fat_pct,
+    }
+
+    # Generate Dynamic Nutrition Badges
+    badges = []
+    if per_serving_protein >= 20.0 or protein_pct >= 25.0:
+        badges.append(f"High Protein ({int(per_serving_protein)}g)")
+    if per_serving_cal <= 300:
+        badges.append("Low Calorie (<300 kcal)")
+    if per_serving_fiber >= 4.0:
+        badges.append("High Fiber")
+    if per_serving_carbs <= 15.0 and per_serving_fat >= 12.0:
+        badges.append("Keto Friendly")
+
     return NutritionSummary(
         calories=per_serving_cal,
         protein_g=per_serving_protein,
@@ -150,4 +201,6 @@ def calculate_recipe_nutrition(
         basis="Standard USDA FoodData Central composition tables",
         assumptions=f"Nutritional values calculated from raw ingredient weights divided by {servings_count} servings; cooking absorption and oil uptake may vary.",
         details=details,
+        badges=badges,
+        macro_ratios=macro_ratios,
     )

@@ -33,6 +33,10 @@ class RecipeResponse(BaseModel):
     stepTimers: List[int] = Field(default_factory=list, description="Step countdown durations in seconds")
     substitution: str = ""
     ai_reason: Optional[str] = None
+    cuisine: Optional[str] = "Global"
+    matched_ingredients: List[str] = Field(default_factory=list)
+    missing_ingredients: List[str] = Field(default_factory=list)
+    badges: List[str] = Field(default_factory=list)
 
 
 class PreferencesInput(BaseModel):

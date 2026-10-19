@@ -74,3 +74,75 @@ def test_rank_recipes_ordering():
     assert ranked[0]["name"] == "Paneer Dish"
     assert ranked[0]["match"] >= ranked[1]["match"]
     assert "low-waste" in ranked[0]["ai_reason"]
+
+
+def test_perishability_shelf_boost():
+    """Verify ingredients in 'use_first' shelf boost recipe rank over stable pantry items."""
+    recipes = [
+        {
+            "id": 1,
+            "name": "Spinach Sauté",
+            "ingredients": [{"name": "Spinach"}],
+            "tastes": ["savory"],
+            "effort": "easy",
+            "rating": 4.5,
+            "time": "10 min",
+        },
+        {
+            "id": 2,
+            "name": "Potato Roast",
+            "ingredients": [{"name": "Potato"}],
+            "tastes": ["savory"],
+            "effort": "easy",
+            "rating": 4.5,
+            "time": "10 min",
+        },
+    ]
+    # Spinach is expiring on the use_first shelf, Potato is shelf-stable
+    pantry = [
+        IngredientItem(id=1, name="Spinach", qty="100g", emoji="🥬", shelf="use_first"),
+        IngredientItem(id=2, name="Potato", qty="2", emoji="🥔", shelf="fresh_finds"),
+    ]
+    pref = PreferencesInput(tastes=["savory"], effort="easy")
+
+    ranked = rank_recipes(recipes, pantry, pref)
+    # The spinach recipe must rank first because it rescues an expiring ingredient
+    assert ranked[0]["name"] == "Spinach Sauté"
+    assert "Spinach" in ranked[0]["rescued_use_first"]
+    assert "Zero Waste" in ranked[0]["badges"]
+    assert "Spinach" in ranked[0]["ai_reason"]
+
+
+def test_missing_and_matched_ingredients_breakdown():
+    """Verify matched and missing ingredient lists and badges are cleanly populated."""
+    recipes = [
+        {
+            "id": 1,
+            "name": "Avocado Toast",
+            "ingredients": [{"name": "Bread"}, {"name": "Avocado"}, {"name": "Eggs"}],
+            "tastes": ["fresh"],
+            "effort": "easy",
+            "rating": 4.9,
+            "time": "10 min",
+            "tags": ["Vegetarian", "High-protein"],
+            "cuisine": "American",
+            "substitution": "Sunny fried eggs work as well as poached eggs.",
+        }
+    ]
+    pantry = [
+        IngredientItem(id=1, name="Bread", qty="2 slices", emoji="🍞"),
+        IngredientItem(id=2, name="Avocado", qty="1", emoji="🥑"),
+    ]
+    pref = PreferencesInput(tastes=["fresh"], effort="easy")
+
+    ranked = rank_recipes(recipes, pantry, pref)
+    recipe = ranked[0]
+    assert "Bread" in recipe["matched_ingredients"]
+    assert "Avocado" in recipe["matched_ingredients"]
+    assert "Eggs" in recipe["missing_ingredients"]
+    assert recipe["matched_count"] == 2
+    assert recipe["total_ingredients"] == 3
+    assert "Eggs" in recipe["ai_reason"]
+    assert "Quick & Easy" in recipe["badges"]
+    assert "High-protein" in recipe["badges"]
+

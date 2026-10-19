@@ -29,3 +29,8 @@ def test_calculate_recipe_nutrition():
     assert summary.protein_g > 5.0
     assert "USDA" in summary.basis
     assert len(summary.details) >= 4
+    assert summary.macro_ratios is not None
+    assert "protein_pct" in summary.macro_ratios
+    assert "carbs_pct" in summary.macro_ratios
+    assert "fat_pct" in summary.macro_ratios
+    assert isinstance(summary.badges, list)
