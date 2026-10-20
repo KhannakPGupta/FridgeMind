@@ -50,8 +50,28 @@ async def get_recipe_recommendations(
         for ar in ai_recipes:
             filtered_candidates.insert(0, ar)
 
+    # In-memory candidate deduplication by name
+    seen_cand_names = set()
+    deduped_candidates = []
+    for cand in filtered_candidates:
+        cand_name = cand.get("name", "").strip().lower()
+        if cand_name and cand_name not in seen_cand_names:
+            seen_cand_names.add(cand_name)
+            deduped_candidates.append(cand)
+    filtered_candidates = deduped_candidates
+
     # 4. Hybrid ML Ranking (0.45 coverage + 0.25 taste + 0.20 effort + 0.10 practicality)
     ranked = rank_recipes(filtered_candidates, pantry, preferences, theme)
+
+    # Defensive deduplication of ranked results
+    seen_ranked_names = set()
+    deduped_ranked = []
+    for r in ranked:
+        r_name = r.get("name", "").strip().lower()
+        if r_name and r_name not in seen_ranked_names:
+            seen_ranked_names.add(r_name)
+            deduped_ranked.append(r)
+    ranked = deduped_ranked
 
     # 5. Handle Temperature-Controlled Surprise Mode
     selected_theme = theme
@@ -72,7 +92,7 @@ async def get_recipe_recommendations(
 
             chosen = random.choices(top_pool, weights=weights, k=1)[0]
             # Prioritize chosen surprise recipe at top of list
-            ranked = [chosen] + [r for r in ranked if r["id"] != chosen["id"]]
+            ranked = [chosen] + [r for r in ranked if r["id"] != chosen["id"] and r.get("name", "").strip().lower() != chosen.get("name", "").strip().lower()]
 
     # 6. Enrich recipes with smart pantry substitutions
     pantry_names = [i.name for i in pantry]

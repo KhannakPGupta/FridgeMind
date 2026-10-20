@@ -78,7 +78,7 @@
       "Vegetarian"
     ],
     "desc": "Crispy toast with golden garlic butter, melted cheese & vine-ripened tomatoes.",
-    "image": "https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=600&h=380&fit=crop&auto=format",
     "cal": "280 cal",
     "rating": 4.6,
     "match": 95,
@@ -285,7 +285,7 @@
       "Gluten-free"
     ],
     "desc": "Spiced crumbled paneer tossed with buttery onions, juicy tomatoes, and fresh green chilies.",
-    "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&h=380&fit=crop&auto=format",
     "cal": "340 cal",
     "rating": 4.9,
     "match": 95,
@@ -325,7 +325,7 @@
     ],
     "steps": [
       "Crumble the fresh paneer gently with your fingers.",
-      "Melt butter in a skillet, sauté finely chopped onions until translucent, then add green chili and ginger.",
+      "Melt butter in a skillet, saut\u00e9 finely chopped onions until translucent, then add green chili and ginger.",
       "Add chopped tomatoes, turmeric, and salt; cook until soft and oil leaves the edges.",
       "Fold in crumbled paneer, cook on medium heat for 3 minutes, and garnish with fresh coriander."
     ],
@@ -424,7 +424,7 @@
       "Gluten-free"
     ],
     "desc": "Crispy golden potato cubes tossed with aromatic cumin seeds, green chilies, and fresh lemon juice.",
-    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=380&fit=crop&auto=format",
     "cal": "210 cal",
     "rating": 4.7,
     "match": 95,
@@ -488,7 +488,7 @@
       "Gluten-free"
     ],
     "desc": "Velvety spiced scrambled eggs cooked with caramelised onions, tomatoes, ginger, and fresh herbs.",
-    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=600&h=380&fit=crop&auto=format",
     "cal": "270 cal",
     "rating": 4.8,
     "match": 95,
@@ -727,7 +727,7 @@
     ],
     "steps": [
       "Blanch the spinach in boiling water for 2 minutes, plunge into cold water, and blend into a bright green puree.",
-      "In a heavy pan, melt butter and sauté minced garlic and chopped onion until golden.",
+      "In a heavy pan, melt butter and saut\u00e9 minced garlic and chopped onion until golden.",
       "Pour in the spinach puree, simmer gently with salt and garam masala for 5 minutes.",
       "Add milk/cream and gently slide in the paneer cubes; simmer 3 more minutes and serve warm."
     ],
@@ -893,8 +893,8 @@
     "tags": [
       "Vegetarian"
     ],
-    "desc": "Golden caramelized mushrooms sautéed with garlic butter and herbs piled on crusty bread.",
-    "image": "https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=600&h=380&fit=crop&auto=format",
+    "desc": "Golden caramelized mushrooms saut\u00e9ed with garlic butter and herbs piled on crusty bread.",
+    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=380&fit=crop&auto=format",
     "cal": "260 cal",
     "rating": 4.7,
     "match": 95,
@@ -1001,7 +1001,7 @@
       180,
       120
     ],
-    "substitution": "Add sautéed spinach or mushrooms for extra nutrition.",
+    "substitution": "Add saut\u00e9ed spinach or mushrooms for extra nutrition.",
     "tastes": [
       "creamy",
       "comfort",
@@ -1092,7 +1092,7 @@
       "High-protein"
     ],
     "desc": "Hearty chickpeas simmered in a tangy ginger, garlic, and tomato-onion gravy with aromatic spices.",
-    "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=380&fit=crop&auto=format",
     "cal": "320 cal",
     "rating": 4.9,
     "match": 95,
@@ -1131,7 +1131,7 @@
       }
     ],
     "steps": [
-      "Sauté finely chopped onions, ginger, and garlic in oil until deep golden.",
+      "Saut\u00e9 finely chopped onions, ginger, and garlic in oil until deep golden.",
       "Add crushed tomatoes, turmeric, garam masala, and salt; cook until thick.",
       "Fold in cooked chickpeas with 1/2 cup water; simmer for 10 minutes, lightly mashing some chickpeas.",
       "Finish with a squeeze of fresh lemon juice and fresh coriander."
@@ -1231,7 +1231,7 @@
       "High-protein"
     ],
     "desc": "A beloved Chinese homestyle classic: silky scrambled eggs tossed with juicy, sweet-savory tomatoes and scallions.",
-    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=380&fit=crop&auto=format",
     "cal": "250 cal",
     "rating": 4.9,
     "match": 95,
@@ -1293,7 +1293,7 @@
       "Vegetarian"
     ],
     "desc": "Spicy, savory Korean comfort food fried rice with tangy fermented kimchi, garlic, and a crispy fried egg.",
-    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&h=380&fit=crop&auto=format",
     "cal": "380 cal",
     "rating": 4.8,
     "match": 95,
@@ -1364,7 +1364,7 @@
       "High-protein"
     ],
     "desc": "Crispy pan-seared tofu cubes and tender bok choy tossed in a fragrant ginger-garlic soy reduction.",
-    "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=380&fit=crop&auto=format",
     "cal": "230 cal",
     "rating": 4.7,
     "match": 95,
@@ -1432,7 +1432,7 @@
       "Vegetarian"
     ],
     "desc": "Chewy noodles tossed in a rich toasted sesame oil, garlic, soy sauce, and scallion sauce.",
-    "image": "https://images.unsplash.com/photo-1621996346565-e3d5d6281048?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&h=380&fit=crop&auto=format",
     "cal": "390 cal",
     "rating": 4.8,
     "match": 95,
@@ -1495,7 +1495,7 @@
       "Gluten-free",
       "High-protein"
     ],
-    "desc": "Classic Mexican breakfast scramble featuring the colors of the Mexican flag: tomatoes, onions, and jalapeños.",
+    "desc": "Classic Mexican breakfast scramble featuring the colors of the Mexican flag: tomatoes, onions, and jalape\u00f1os.",
     "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
     "cal": "260 cal",
     "rating": 4.8,
@@ -1519,7 +1519,7 @@
         "unit": ""
       },
       {
-        "name": "Jalapeño",
+        "name": "Jalape\u00f1o",
         "amount": 1,
         "unit": ""
       },
@@ -1530,8 +1530,8 @@
       }
     ],
     "steps": [
-      "Finely dice the onion, tomato, and jalapeño pepper.",
-      "Heat oil in a skillet, sauté onion and jalapeño until soft, then add tomato and cook for 2 minutes.",
+      "Finely dice the onion, tomato, and jalape\u00f1o pepper.",
+      "Heat oil in a skillet, saut\u00e9 onion and jalape\u00f1o until soft, then add tomato and cook for 2 minutes.",
       "Pour in beaten eggs with salt, folding gently over medium-low heat until fluffy and glossy.",
       "Serve immediately with warm corn tortillas."
     ],
@@ -1541,7 +1541,7 @@
       120,
       180
     ],
-    "substitution": "Serrano peppers can replace jalapeños for more heat.",
+    "substitution": "Serrano peppers can replace jalape\u00f1os for more heat.",
     "tastes": [
       "spicy",
       "savory",
@@ -1559,7 +1559,7 @@
       "Vegetarian"
     ],
     "desc": "Crispy golden tortillas folded with seasoned black beans, sweet corn, and melty cheese.",
-    "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=600&h=380&fit=crop&auto=format",
     "cal": "380 cal",
     "rating": 4.9,
     "match": 95,
@@ -1604,7 +1604,7 @@
       180,
       180
     ],
-    "substitution": "Add diced avocado or jalapeños inside for extra kick.",
+    "substitution": "Add diced avocado or jalape\u00f1os inside for extra kick.",
     "tastes": [
       "savory",
       "comfort"
@@ -1622,7 +1622,7 @@
       "Gluten-free"
     ],
     "desc": "Crisp tortilla chips lightly simmered in warm salsa roja, topped with crumbled cheese and onions.",
-    "image": "https://images.unsplash.com/photo-1590412200988-a436970781fa?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=380&fit=crop&auto=format",
     "cal": "340 cal",
     "rating": 4.8,
     "match": 95,
@@ -1640,7 +1640,7 @@
         "unit": ""
       },
       {
-        "name": "Jalapeño",
+        "name": "Jalape\u00f1o",
         "amount": 1,
         "unit": ""
       },
@@ -1662,7 +1662,7 @@
     ],
     "steps": [
       "Cut tortillas into triangles and fry or bake until golden and crisp.",
-      "Blend tomatoes, jalapeño, onion, and garlic with salt into a smooth red salsa.",
+      "Blend tomatoes, jalape\u00f1o, onion, and garlic with salt into a smooth red salsa.",
       "Simmer the salsa in a skillet for 4 minutes until thickened.",
       "Toss in the crispy tortilla chips until coated but still crunch-tender; top with cheese and onion."
     ],
@@ -1825,7 +1825,7 @@
       "Vegetarian"
     ],
     "desc": "The quintessential Roman late-night pasta: spaghetti tossed in golden garlic-infused olive oil and chili flakes.",
-    "image": "https://images.unsplash.com/photo-1621996346565-e3d5d6281048?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&h=380&fit=crop&auto=format",
     "cal": "390 cal",
     "rating": 4.8,
     "match": 95,
@@ -1879,7 +1879,7 @@
   },
   {
     "id": 44,
-    "name": "French Herb Omelette with Sautéed Spinach",
+    "name": "French Herb Omelette with Saut\u00e9ed Spinach",
     "cuisine": "Continental",
     "time": "10 min",
     "difficulty": "Easy",
@@ -1918,10 +1918,10 @@
       }
     ],
     "steps": [
-      "Sauté spinach in 5g butter for 90 seconds until wilted; season and set aside.",
+      "Saut\u00e9 spinach in 5g butter for 90 seconds until wilted; season and set aside.",
       "Vigorously whisk eggs with chopped parsley and salt until completely uniform.",
       "Melt remaining butter in a non-stick pan over medium heat; pour in eggs, stirring in small circles with a spatula.",
-      "Lay sautéed spinach across the center, roll the omelette smoothly, and slide onto a plate seam-side down."
+      "Lay saut\u00e9ed spinach across the center, roll the omelette smoothly, and slide onto a plate seam-side down."
     ],
     "stepTimers": [
       0,
@@ -2091,8 +2091,8 @@
       "Vegetarian",
       "Gluten-free"
     ],
-    "desc": "Fire-roasted smoky eggplant mashed and sautéed with sweet onions, green chilies, and ripe tomatoes.",
-    "image": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&h=380&fit=crop&auto=format",
+    "desc": "Fire-roasted smoky eggplant mashed and saut\u00e9ed with sweet onions, green chilies, and ripe tomatoes.",
+    "image": "https://images.unsplash.com/photo-1628294895950-9805252327bc?w=600&h=380&fit=crop&auto=format",
     "cal": "210 cal",
     "rating": 4.8,
     "match": 95,
@@ -2133,7 +2133,7 @@
     "steps": [
       "Roast the whole eggplant directly over open flame until skin is completely charred and flesh is tender.",
       "Peel the charred skin off, mash the smoky flesh thoroughly with a fork.",
-      "Heat oil in a pan, sauté onions, ginger, and green chilies until light golden.",
+      "Heat oil in a pan, saut\u00e9 onions, ginger, and green chilies until light golden.",
       "Add tomatoes and cook until soft, then stir in mashed eggplant and finish with fresh coriander."
     ],
     "stepTimers": [
@@ -2142,7 +2142,7 @@
       300,
       300
     ],
-    "substitution": "Roast in an oven at 220°C (425°F) for 30 minutes if you don't have an open flame.",
+    "substitution": "Roast in an oven at 220\u00b0C (425\u00b0F) for 30 minutes if you don't have an open flame.",
     "tastes": [
       "savory",
       "spicy"
@@ -2161,7 +2161,7 @@
       "High-protein"
     ],
     "desc": "Sweet green peas and golden paneer cubes in a lightly spiced, fragrant onion-tomato curry.",
-    "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&h=380&fit=crop&auto=format",
     "cal": "340 cal",
     "rating": 4.7,
     "match": 95,
@@ -2201,7 +2201,7 @@
     ],
     "steps": [
       "Briefly sear cubed paneer in a drop of oil until edges are lightly golden; set aside.",
-      "Sauté cumin seeds, finely diced onion, and ginger in the same pan.",
+      "Saut\u00e9 cumin seeds, finely diced onion, and ginger in the same pan.",
       "Add pureed tomatoes, turmeric, and salt; cook until oil begins to release.",
       "Toss in green peas and seared paneer with 100ml water; simmer for 5 minutes."
     ],
@@ -2228,7 +2228,7 @@
       "Vegetarian"
     ],
     "desc": "Crispy samosas crushed and smothered with warm spiced chickpeas, cool yogurt, and tangy chutneys.",
-    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&h=380&fit=crop&auto=format",
     "cal": "420 cal",
     "rating": 4.9,
     "match": 95,
@@ -2297,7 +2297,7 @@
       "High-protein"
     ],
     "desc": "Golden-seared hard boiled eggs simmered in a deeply spiced rustic tomato, onion, and garlic masala.",
-    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1628294895950-9805252327bc?w=600&h=380&fit=crop&auto=format",
     "cal": "320 cal",
     "rating": 4.8,
     "match": 95,
@@ -2366,7 +2366,7 @@
       "Gluten-free"
     ],
     "desc": "Fluffy long-grain basmati rice tempered with whole cumin seeds, bay leaf, peas, and crisp carrots.",
-    "image": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&h=380&fit=crop&auto=format",
     "cal": "290 cal",
     "rating": 4.7,
     "match": 95,
@@ -2434,7 +2434,7 @@
       "Gluten-free"
     ],
     "desc": "Soothing soft rice folded into fresh creamy yogurt with a crisp mustard-curry leaf tadka.",
-    "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&h=380&fit=crop&auto=format",
     "cal": "260 cal",
     "rating": 4.8,
     "match": 95,
@@ -2549,7 +2549,7 @@
     "steps": [
       "Boil ramen noodles according to package directions; drain and divide into bowls.",
       "Sear cubed tofu in sesame oil until golden on all sides.",
-      "In a saucepan, sauté minced garlic, whisk in 500ml water and miso paste over gentle heat without boiling.",
+      "In a saucepan, saut\u00e9 minced garlic, whisk in 500ml water and miso paste over gentle heat without boiling.",
       "Ladle hot miso broth over noodles, top with seared tofu, scallions, and a drizzle of sesame oil."
     ],
     "stepTimers": [
@@ -2577,7 +2577,7 @@
       "High-protein"
     ],
     "desc": "Delicately sweet and savory golden rolled eggs, layered into a tender, pillow-soft omelette log.",
-    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=600&h=380&fit=crop&auto=format",
     "cal": "220 cal",
     "rating": 4.8,
     "match": 95,
@@ -2784,7 +2784,7 @@
       "Vegetarian"
     ],
     "desc": "Chewy noodles tossed in dark savory soy sauce and fragrant slow-caramelized spring onion oil.",
-    "image": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&h=380&fit=crop&auto=format",
     "cal": "340 cal",
     "rating": 4.8,
     "match": 95,
@@ -2846,7 +2846,7 @@
       "Vegetarian"
     ],
     "desc": "Wok-seared jasmine rice tossed with golden eggs, sweet peas, crisp scallions, and toasted sesame oil.",
-    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&h=380&fit=crop&auto=format",
     "cal": "360 cal",
     "rating": 4.8,
     "match": 95,
@@ -2915,7 +2915,7 @@
       "High-protein"
     ],
     "desc": "Pan-crisped golden tofu simmered in a savory, spicy Korean chili, garlic, and scallion sauce.",
-    "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=380&fit=crop&auto=format",
     "cal": "250 cal",
     "rating": 4.8,
     "match": 95,
@@ -3082,7 +3082,7 @@
       },
       {
         "amount": 1,
-        "name": "Jalapeño",
+        "name": "Jalape\u00f1o",
         "unit": ""
       },
       {
@@ -3093,7 +3093,7 @@
     ],
     "steps": [
       "Briefly fry corn tortillas in oil for 20 seconds each until warm and pliable.",
-      "Simmer blended tomatoes, jalapeño, and garlic in a skillet until thickened into ranchero salsa.",
+      "Simmer blended tomatoes, jalape\u00f1o, and garlic in a skillet until thickened into ranchero salsa.",
       "Fry eggs sunny-side up in a separate skillet.",
       "Spread warm mashed beans over each tortilla, crown with an egg, and spoon salsa generously over top."
     ],
@@ -3122,7 +3122,7 @@
       "Vegetarian",
       "Gluten-free"
     ],
-    "desc": "Buttery hass avocados hand-mashed with lime juice, fresh cilantro, fiery jalapeño, and diced plum tomatoes.",
+    "desc": "Buttery hass avocados hand-mashed with lime juice, fresh cilantro, fiery jalape\u00f1o, and diced plum tomatoes.",
     "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=380&fit=crop&auto=format",
     "cal": "240 cal",
     "rating": 4.9,
@@ -3157,14 +3157,14 @@
       },
       {
         "amount": 1,
-        "name": "Jalapeño",
+        "name": "Jalape\u00f1o",
         "unit": ""
       }
     ],
     "steps": [
       "Halve avocados, scoop flesh into a molcajete or bowl, and mash roughly with a fork.",
       "Immediately fold in fresh lime juice and coarse sea salt to prevent browning.",
-      "Fold in finely diced red onion, seeded jalapeño, and tomatoes.",
+      "Fold in finely diced red onion, seeded jalape\u00f1o, and tomatoes.",
       "Finish with chopped cilantro and serve immediately with warm tortilla chips."
     ],
     "stepTimers": [
@@ -3262,7 +3262,7 @@
       "Gluten-free"
     ],
     "desc": "Charred sweet corn tossed in creamy lime dressing, chili powder, and salty crumbled cheese.",
-    "image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=380&fit=crop&auto=format",
     "cal": "230 cal",
     "rating": 4.8,
     "match": 95,
@@ -3301,7 +3301,7 @@
       }
     ],
     "steps": [
-      "Sauté sweet corn in a hot skillet with 1 tsp butter until kernels take on charred, golden spots.",
+      "Saut\u00e9 sweet corn in a hot skillet with 1 tsp butter until kernels take on charred, golden spots.",
       "Transfer charred corn to a bowl and let cool for 2 minutes.",
       "Fold in mayonnaise, lime juice, and chopped cilantro.",
       "Dust generously with chili powder and crumbled cotija or feta cheese."
@@ -3333,7 +3333,7 @@
       "High-protein"
     ],
     "desc": "Ultra-smooth whipped chickpeas with nutty tahini, fresh garlic, lemon, and a pool of golden olive oil.",
-    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1577906096429-f73c2c312435?w=600&h=380&fit=crop&auto=format",
     "cal": "290 cal",
     "rating": 4.9,
     "match": 95,
@@ -3401,8 +3401,8 @@
       "Vegetarian",
       "Gluten-free"
     ],
-    "desc": "Tender sautéed spinach, fragrant fresh dill, scallions, and melted Greek feta cheese cooked in one skillet.",
-    "image": "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=600&h=380&fit=crop&auto=format",
+    "desc": "Tender saut\u00e9ed spinach, fragrant fresh dill, scallions, and melted Greek feta cheese cooked in one skillet.",
+    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&h=380&fit=crop&auto=format",
     "cal": "260 cal",
     "rating": 4.8,
     "match": 95,
@@ -3441,7 +3441,7 @@
       }
     ],
     "steps": [
-      "Sauté sliced scallions in olive oil until soft and glossy.",
+      "Saut\u00e9 sliced scallions in olive oil until soft and glossy.",
       "Wilt in fresh spinach in batches until completely tender; drain excess liquid.",
       "Stir in chopped dill, black pepper, and crumbled feta cheese.",
       "Crack eggs into pockets between the spinach and cover until whites are set."
@@ -3471,7 +3471,7 @@
       "High-protein"
     ],
     "desc": "Golden herb-packed chickpea falafels nestled inside warm fluffy pita with crisp tomatoes and tahini sauce.",
-    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=380&fit=crop&auto=format",
     "cal": "390 cal",
     "rating": 4.8,
     "match": 95,
@@ -3521,7 +3521,7 @@
       360,
       60
     ],
-    "substitution": "Air fry at 190°C (375°F) for 12 minutes with a light spray of oil for a low-oil version.",
+    "substitution": "Air fry at 190\u00b0C (375\u00b0F) for 12 minutes with a light spray of oil for a low-oil version.",
     "tastes": [
       "savory",
       "fresh",
@@ -3580,7 +3580,7 @@
     ],
     "steps": [
       "Boil penne pasta in well-salted water until al dente.",
-      "Sauté sliced garlic and red chili flakes gently in olive oil until golden.",
+      "Saut\u00e9 sliced garlic and red chili flakes gently in olive oil until golden.",
       "Add crushed tomatoes and simmer vigorously for 10 minutes until sauce thickens.",
       "Toss pasta and fresh parsley directly in the simmering arrabbiata sauce."
     ],
@@ -3608,7 +3608,7 @@
       "Gluten-free"
     ],
     "desc": "Slow-simmered arborio rice with caramelized garlic butter mushrooms, white wine aroma, and parmesan.",
-    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=380&fit=crop&auto=format",
     "cal": "420 cal",
     "rating": 4.9,
     "match": 95,
@@ -3648,7 +3648,7 @@
     ],
     "steps": [
       "Sear sliced mushrooms in half the butter until deeply browned and caramelized; set aside.",
-      "Sauté minced onion and rice in remaining butter until grains turn translucent.",
+      "Saut\u00e9 minced onion and rice in remaining butter until grains turn translucent.",
       "Add warm broth one ladle at a time, stirring steadily until absorbed before adding the next.",
       "Stir in caramelized mushrooms and parmesan cheese off the heat for ultimate creaminess."
     ],
@@ -3677,7 +3677,7 @@
       "Gluten-free"
     ],
     "desc": "The quintessential Spanish tapas omelette: tender olive-oil poached potatoes and sweet onions folded with rich eggs.",
-    "image": "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=600&h=380&fit=crop&auto=format",
     "cal": "340 cal",
     "rating": 4.9,
     "match": 95,
@@ -3944,7 +3944,7 @@
       "Vegetarian"
     ],
     "desc": "Crispy cornstarch-crusted silken tofu cubes bathed in a warm, fragrant soy-mirin dashi broth.",
-    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=380&fit=crop&auto=format",
     "cal": "240 cal",
     "rating": 4.9,
     "accent": "#C9DCC5",
@@ -4086,8 +4086,8 @@
       "Vegetarian",
       "High-protein"
     ],
-    "desc": "Warm rice crowned with seasoned sautéed spinach, carrots, bean sprouts, fried egg, and gochujang sauce.",
-    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=380&fit=crop&auto=format",
+    "desc": "Warm rice crowned with seasoned saut\u00e9ed spinach, carrots, bean sprouts, fried egg, and gochujang sauce.",
+    "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=380&fit=crop&auto=format",
     "cal": "420 cal",
     "rating": 4.9,
     "accent": "#FFD5C2",
@@ -4126,7 +4126,7 @@
     ],
     "steps": [
       "Quickly blanch spinach and squeeze dry; toss with sesame oil and salt.",
-      "Sauté julienned carrots in sesame oil for 2 minutes until tender.",
+      "Saut\u00e9 julienned carrots in sesame oil for 2 minutes until tender.",
       "Fry eggs sunny-side up until edges are crisp and yolks runny.",
       "Arrange rice in bowls, place seasoned vegetables in neat sections, top with egg and a spoonful of gochujang."
     ],
@@ -4237,7 +4237,7 @@
       "Vegetarian"
     ],
     "desc": "Crispy pan-toasted flatbread layered with sweet crushed plum tomatoes, melted mozzarella, and fresh basil.",
-    "image": "https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=380&fit=crop&auto=format",
     "cal": "350 cal",
     "rating": 4.9,
     "accent": "#FFD5C2",
@@ -4311,7 +4311,7 @@
       "Vegetarian"
     ],
     "desc": "Al dente penne pasta tossed in a vibrant, velvety pesto made with fresh basil, walnuts, garlic, and parmesan.",
-    "image": "https://images.unsplash.com/photo-1621996346565-e3d5d6281048?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&h=380&fit=crop&auto=format",
     "cal": "410 cal",
     "rating": 4.8,
     "accent": "#C9DCC5",
@@ -4618,7 +4618,7 @@
       "High-protein"
     ],
     "desc": "Fragrant cumin-infused brown lentils and basmati rice topped with heaps of sweet, dark caramelized onions.",
-    "image": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&h=380&fit=crop&auto=format",
     "cal": "340 cal",
     "rating": 4.9,
     "accent": "#F5D66F",
@@ -4686,7 +4686,7 @@
       "Vegetarian"
     ],
     "desc": "Golden, cloud-soft pancakes folded with sweet ripe bananas and griddled with butter, served with maple syrup.",
-    "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&h=380&fit=crop&auto=format",
     "cal": "320 cal",
     "rating": 4.8,
     "accent": "#F5D66F",
@@ -4760,7 +4760,7 @@
       "Gluten-free"
     ],
     "desc": "Golden, crunchy shredded potato skillet baked with melted cheddar, fresh chives, and runny sunny eggs.",
-    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&h=380&fit=crop&auto=format",
+    "image": "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=380&fit=crop&auto=format",
     "cal": "330 cal",
     "rating": 4.8,
     "accent": "#F5D66F",

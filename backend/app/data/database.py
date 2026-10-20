@@ -55,6 +55,7 @@ def init_db():
 
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_recipes_cuisine ON recipes(cuisine)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_recipes_effort ON recipes(effort)")
+        cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_recipes_name_unique ON recipes(lower(name))")
 
         # Sub-millisecond candidate retrieval via SQLite FTS5
         cursor.execute("""
@@ -212,9 +213,19 @@ def bulk_insert_recipes(recipes: List[Dict[str, Any]], source: str = "catalog") 
     """Insert multiple recipes efficiently and sync them into FTS index."""
     init_db()
     inserted = 0
+
+    # Defensive in-memory deduplication of the incoming batch
+    unique_batch = []
+    seen = set()
+    for r in recipes:
+        clean_name = r.get("name", "").strip().lower()
+        if clean_name and clean_name not in seen:
+            seen.add(clean_name)
+            unique_batch.append(r)
+
     with get_db_connection() as conn:
         cursor = conn.cursor()
-        for r in recipes:
+        for r in unique_batch:
             try:
                 cursor.execute("""
                     INSERT OR IGNORE INTO recipes (
@@ -290,15 +301,25 @@ def search_candidate_recipes_fts(pantry_terms: List[str], limit: int = 60) -> Li
                 LIMIT ?
             """, (fts_query, limit))
             rows = cursor.fetchall()
-            results = [row_to_recipe_dict(r) for r in rows]
+            
+            # Deduplicate by name
+            results: List[Dict[str, Any]] = []
+            seen_names = set()
+            for r in rows:
+                recipe_dict = row_to_recipe_dict(r)
+                name_key = recipe_dict["name"].strip().lower()
+                if name_key not in seen_names:
+                    seen_names.add(name_key)
+                    results.append(recipe_dict)
 
             # If FTS matched fewer than 15 recipes, supplement from catalog to ensure broad recommendation pool
             if len(results) < 15:
-                existing_ids = {r["id"] for r in results}
                 all_recipes = get_all_recipes()
                 for ar in all_recipes:
-                    if ar["id"] not in existing_ids:
+                    name_key = ar["name"].strip().lower()
+                    if name_key not in seen_names:
                         results.append(ar)
+                        seen_names.add(name_key)
                     if len(results) >= limit:
                         break
 

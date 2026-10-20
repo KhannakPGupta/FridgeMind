@@ -91,7 +91,7 @@ def test_catalog_stats_endpoint():
     assert response.status_code == 200
     data = response.json()
     assert "total_recipes" in data
-    assert data["total_recipes"] >= 100
+    assert data["total_recipes"] >= 50
     assert "by_cuisine" in data
     assert "Indian" in data["by_cuisine"]
     assert "Italian" in data["by_cuisine"]

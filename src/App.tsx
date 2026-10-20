@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useMemo } from 'react'
 import {
   recognizeFridgePhoto,
   getRecipeRecommendations,
@@ -172,7 +172,7 @@ const RECIPES: Recipe[] = [
     time: '15 min', difficulty: 'Easy',
     tags: ['Vegetarian'],
     desc: 'Crispy toast with golden garlic butter, melted cheese & vine-ripened tomatoes.',
-    image: 'https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=600&h=380&fit=crop&auto=format',
+    image: 'https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=600&h=380&fit=crop&auto=format',
     cal: '280 cal', rating: 4.6, match: 94, accent: '#F5D66F',
     servings: 2,
     badges: ['Crispy Classic', 'Kid Friendly', 'Snack Alert'],
@@ -1273,16 +1273,27 @@ function VibeScreen({ onNavigate, onFind, initialPreferences, ingredients }: { o
 // ─── Screen 5: Results ───────────────────────────────────────────────────────
 
 function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredients, recipes = RECIPES }: { onNavigate: (s: Screen) => void; onViewRecipe: (recipe: Recipe) => void; onStartOver: () => void; theme: VibeTheme; ingredients: Ingredient[]; recipes?: Recipe[] }) {
+  // Deduplicate incoming recipes by clean name
+  const uniqueRecipes = useMemo(() => {
+    const seen = new Set<string>()
+    return (recipes || []).filter(recipe => {
+      const key = (recipe.name || '').trim().toLowerCase()
+      if (!key || seen.has(key)) return false
+      seen.add(key)
+      return true
+    })
+  }, [recipes])
+
   const [saved, setSaved] = useState(() => {
     try { return new Set<number>(JSON.parse(localStorage.getItem('fridgemind-saved') ?? '[]')) }
     catch { return new Set<number>() }
   })
   const [filter, setFilter] = useState<string | null>(null)
-  const [recipeOrder, setRecipeOrder] = useState(recipes.map(recipe => recipe.id))
+  const [recipeOrder, setRecipeOrder] = useState(uniqueRecipes.map(recipe => recipe.id))
 
   useEffect(() => {
-    setRecipeOrder(recipes.map(recipe => recipe.id))
-  }, [recipes])
+    setRecipeOrder(uniqueRecipes.map(recipe => recipe.id))
+  }, [uniqueRecipes])
 
   function toggleSave(id: number) {
     setSaved(prev => {
@@ -1293,15 +1304,14 @@ function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredien
     })
   }
 
-  const allTags = [...new Set(recipes.flatMap(r => r.tags))]
+  const allTags = [...new Set(uniqueRecipes.flatMap(r => r.tags))]
   const pantryNames = new Set(ingredients.map(item => item.name.toLowerCase()))
   const pantryMatch = (recipe: Recipe) => recipe.ingredients.filter(item => pantryNames.has(item.name.toLowerCase())).length
   const orderedRecipes = recipeOrder
-    .map(id => recipes.find(recipe => recipe.id === id)!)
+    .map(id => uniqueRecipes.find(recipe => recipe.id === id)!)
     .filter(Boolean)
     .sort((a, b) => (b.match ?? pantryMatch(b)) - (a.match ?? pantryMatch(a)))
   const displayed = filter ? orderedRecipes.filter(r => r.tags.includes(filter)) : orderedRecipes
-
 
   function shuffleRecipes() {
     setRecipeOrder(previous => [...previous].sort(() => Math.random() - 0.5))
