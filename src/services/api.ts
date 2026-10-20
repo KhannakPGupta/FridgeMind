@@ -204,3 +204,51 @@ export async function getRecipeNutrition(recipeId: number, servings: number = 2)
   }
   return null
 }
+
+export interface SubstitutionOption {
+  original: string
+  substitute: string
+  ratio: string
+  flavor_impact: string
+  notes: string
+  dietary_tags?: string[]
+}
+
+/**
+ * Look up feasible culinary substitutions for any ingredient.
+ */
+export async function lookupSubstitutions(ingredient: string): Promise<SubstitutionOption[]> {
+  try {
+    const res = await fetch(`${API_BASE}/recipes/substitutions/lookup?ingredient=${encodeURIComponent(ingredient)}`)
+    if (res.ok) {
+      return await res.json()
+    }
+  } catch (err) {
+    console.warn('[FridgeMind API] Substitution lookup unreachable:', err)
+  }
+  return []
+}
+
+/**
+ * Adapt a recipe by swapping an ingredient dynamically on the backend.
+ */
+export async function substituteRecipeIngredient(
+  recipeId: number,
+  replace: string,
+  substituteWith: string
+): Promise<{ recipe: Recipe; message: string } | null> {
+  try {
+    const res = await fetch(`${API_BASE}/recipes/${recipeId}/substitute`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ replace, substitute_with: substituteWith }),
+    })
+    if (res.ok) {
+      return await res.json()
+    }
+  } catch (err) {
+    console.warn('[FridgeMind API] Substitute endpoint unreachable:', err)
+  }
+  return null
+}
+
