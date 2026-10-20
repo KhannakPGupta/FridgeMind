@@ -121,9 +121,29 @@ FridgeMind/
 
 ---
 
+## 🐳 Docker & Production Deployment (Step 7)
+
+FridgeMind includes a multi-stage `Dockerfile` and `docker-compose.yml` for unified single-command deployment:
+
+### 1. Single-Command Local Container Run
+```bash
+docker compose up --build
+```
+* Builds the Vite React frontend in a Node 22 build container.
+* Packages the production bundle into a lightweight Python 3.13 image.
+* Serves the entire application and API unified on `http://localhost:8000`.
+* Persists database recipes and dynamic generated dishes in a Docker volume (`fridgemind_data`).
+
+### 2. Cloud Deployment Options
+* **Render**: Connect your GitHub repository. Select **Web Service** and choose **Docker** runtime. Render will automatically detect [render.yaml](file:///D:/Khannak/Coding/Projects/FridgeMind/render.yaml).
+* **Fly.io**: Run `fly launch` in the repository root. Fly will automatically use [fly.toml](file:///D:/Khannak/Coding/Projects/FridgeMind/fly.toml) and deploy the container.
+* **Vercel**: Deploy the frontend directly with [vercel.json](file:///D:/Khannak/Coding/Projects/FridgeMind/vercel.json) rewrites pointing to your hosted API.
+
+---
+
 ## 🧪 Automated Testing
 
-Run the comprehensive 25-test backend test suite:
+Run the comprehensive 39-test backend test suite:
 ```powershell
 backend\.venv\Scripts\pytest backend/tests -v
 ```
@@ -135,6 +155,10 @@ Verified test coverage includes:
 - 4-signal hybrid ranking formula verification
 - Nutrition aggregation & serving size scaling
 - Recipe recommendation and Surprise mode endpoints
+- SQLite FTS5 sub-millisecond candidate retrieval
+- Dynamic dish-specific culinary image resolution
+- Interactive culinary substitutions engine and dynamic recipe adaptation
+
 
 ---
 

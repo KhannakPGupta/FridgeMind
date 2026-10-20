@@ -75,25 +75,77 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
+from pathlib import Path
+from typing import Optional
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from fastapi import HTTPException
+
 from backend.app.api.health import router as health_router
 from backend.app.api.ingredients import router as ingredients_router
 from backend.app.api.recipes import router as recipes_router
 
 
-# Include API Routers
+# Include API Routers first so they take route priority
 app.include_router(health_router, prefix=settings.API_V1_PREFIX)
 app.include_router(ingredients_router, prefix=settings.API_V1_PREFIX)
 app.include_router(recipes_router, prefix=settings.API_V1_PREFIX)
 
 
+def get_frontend_dist() -> Optional[Path]:
+    """Locate pre-built frontend distribution directory across local and container environments."""
+    candidates = [
+        Path(__file__).resolve().parent.parent.parent.parent / "dist",  # repo root / dist
+        Path(__file__).resolve().parent.parent.parent / "dist",         # backend / dist
+        Path("/app/dist"),                                             # Docker standard
+        Path("/app/frontend_dist"),
+    ]
+    for p in candidates:
+        if p.is_dir() and (p / "index.html").is_file():
+            return p
+    return None
 
 
-@app.get("/")
-async def root():
-    """Root endpoint redirecting to docs or health."""
-    return {
-        "name": settings.PROJECT_NAME,
-        "version": settings.VERSION,
-        "docs": "/docs",
-        "health": f"{settings.API_V1_PREFIX}/health",
-    }
+frontend_dist = get_frontend_dist()
+
+if frontend_dist:
+    assets_dir = frontend_dist / "assets"
+    if assets_dir.is_dir():
+        app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+
+    @app.get("/")
+    async def root(request: Request):
+        """Serve SPA index.html for web browsers, or JSON metadata for API clients."""
+        accept = request.headers.get("accept", "")
+        if "text/html" in accept:
+            return FileResponse(frontend_dist / "index.html")
+        return {
+            "name": settings.PROJECT_NAME,
+            "version": settings.VERSION,
+            "docs": "/docs",
+            "health": f"{settings.API_V1_PREFIX}/health",
+        }
+
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        """Serve compiled frontend static files or fallback to index.html for client-side routing."""
+        if full_path.startswith("api") or full_path in ("docs", "redoc", "openapi.json"):
+            raise HTTPException(status_code=404, detail="Not Found")
+
+        file_path = frontend_dist / full_path
+        if file_path.is_file():
+            return FileResponse(file_path)
+
+        return FileResponse(frontend_dist / "index.html")
+else:
+    @app.get("/")
+    async def root():
+        """Root endpoint returning API metadata when frontend dist is not built."""
+        return {
+            "name": settings.PROJECT_NAME,
+            "version": settings.VERSION,
+            "docs": "/docs",
+            "health": f"{settings.API_V1_PREFIX}/health",
+        }
+
+
