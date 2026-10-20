@@ -9,30 +9,17 @@ import json
 import re
 from typing import List, Dict, Any, Optional
 from google import genai
+from google.genai import types
 
 from backend.app.core.config import settings
 from backend.app.core.logging import logger
 from backend.app.data.database import save_recipe
 from backend.app.schemas.ingredients import IngredientItem
-from backend.app.schemas.recipes import PreferencesInput
+from backend.app.schemas.recipes import PreferencesInput, GeneratedRecipe
+from backend.app.services.image_service import resolve_dish_image
 
 
 ACCENT_PALETTES = ["#FFD5C2", "#F5D66F", "#C9DCC5", "#F6C8D0"]
-
-CUISINE_IMAGE_FALLBACKS = {
-    "Italian": "https://images.unsplash.com/photo-1621996346565-e3d5d6281048?w=600&h=380&fit=crop&auto=format",
-    "Mexican": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=380&fit=crop&auto=format",
-    "Japanese": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&h=380&fit=crop&auto=format",
-    "Chinese": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=600&h=380&fit=crop&auto=format",
-    "Thai": "https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&h=380&fit=crop&auto=format",
-    "Korean": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=380&fit=crop&auto=format",
-    "Mediterranean": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=380&fit=crop&auto=format",
-    "French": "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=600&h=380&fit=crop&auto=format",
-    "American": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
-    "Indian": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&h=380&fit=crop&auto=format",
-}
-
-DEFAULT_IMAGE = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=380&fit=crop&auto=format"
 
 
 async def generate_dynamic_recipes(
@@ -63,41 +50,20 @@ Vibe theme: {theme}
 Generate {count} distinct, authentic, highly rated recipes across DIFFERENT global cuisines (e.g. Italian, Mexican, East Asian, Mediterranean, Indian, Japanese, Continental).
 Ensure maximum utilization of the user's available ingredients while keeping recipes practical and delicious.
 You may include standard kitchen basics (cooking oil, salt, pepper, water).
-
-Return ONLY a valid JSON array of {count} recipe objects: [{{...}}, {{...}}].
-Each object must adhere strictly to this schema:
-{{
-  "name": "Distinct Authentic Recipe Name",
-  "cuisine": "Cuisine Name (e.g. Italian, Mexican, Japanese, etc.)",
-  "time": "e.g. 15 min",
-  "difficulty": "Easy" or "Medium",
-  "tags": ["Vegetarian", "High-protein", etc.],
-  "desc": "One mouthwatering sentence describing the dish.",
-  "cal": "e.g. 320 cal",
-  "rating": 4.8,
-  "accent": "#FFD5C2" or "#F5D66F" or "#C9DCC5" or "#F6C8D0",
-  "servings": 2,
-  "ingredients": [
-    {{"name": "Ingredient 1", "amount": 2.0, "unit": "slices or g or ml or cloves"}},
-    {{"name": "Ingredient 2", "amount": 100.0, "unit": "g"}}
-  ],
-  "steps": [
-    "Step 1 instruction...",
-    "Step 2 instruction...",
-    "Step 3 instruction..."
-  ],
-  "stepTimers": [0, 180, 240],
-  "substitution": "Easy swap suggestion if a key ingredient is missing.",
-  "tastes": ["savory", "spicy" or tastes from: savory, spicy, sweet, tangy, creamy, fresh, comfort],
-  "effort": "lazy" or "easy" or "chef"
-}}
-
-Output ONLY the raw JSON array with NO markdown quotes or commentary.
+Provide accurate cooking steps and active step countdown timers.
 """
+
+        # Gemini 2.0 Flash structured JSON schema configuration
+        config = types.GenerateContentConfig(
+            response_mime_type="application/json",
+            response_schema=list[GeneratedRecipe],
+            temperature=0.7,
+        )
 
         response = client.models.generate_content(
             model=settings.GEMINI_MODEL,
             contents=prompt,
+            config=config,
         )
 
         text = response.text.strip()
@@ -118,7 +84,12 @@ Output ONLY the raw JSON array with NO markdown quotes or commentary.
             recipe_data["effort"] = recipe_data.get("effort", preferences.effort or "easy")
             recipe_data["tastes"] = recipe_data.get("tastes", preferences.tastes or ["savory"])
             recipe_data["accent"] = recipe_data.get("accent") or ACCENT_PALETTES[idx % len(ACCENT_PALETTES)]
-            recipe_data["image"] = recipe_data.get("image") or CUISINE_IMAGE_FALLBACKS.get(cuisine, DEFAULT_IMAGE)
+
+            # Dynamic dish-specific image resolution
+            ing_names = [i.get("name", "") if isinstance(i, dict) else getattr(i, "name", "") for i in recipe_data.get("ingredients", [])]
+            if not recipe_data.get("image") or "unsplash.com" not in recipe_data.get("image", ""):
+                recipe_data["image"] = resolve_dish_image(recipe_data["name"], cuisine, ing_names)
+
             recipe_data["stepTimers"] = recipe_data.get("stepTimers") or [0] * len(recipe_data.get("steps", []))
             recipe_data["step_timers"] = recipe_data["stepTimers"]
 

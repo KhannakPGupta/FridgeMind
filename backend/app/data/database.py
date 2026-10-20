@@ -8,6 +8,9 @@ from backend.app.core.config import settings
 from backend.app.core.logging import logger
 
 
+import re
+
+
 def get_db_connection() -> sqlite3.Connection:
     """Return an open SQLite database connection with row factory."""
     db_path = settings.DATABASE_PATH
@@ -18,7 +21,7 @@ def get_db_connection() -> sqlite3.Connection:
 
 
 def init_db():
-    """Create recipe table and indexes if they do not exist, and migrate missing columns."""
+    """Create recipe table, FTS5 virtual table, and indexes if they do not exist."""
     with get_db_connection() as conn:
         cursor = conn.cursor()
         cursor.execute("""
@@ -52,7 +55,30 @@ def init_db():
 
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_recipes_cuisine ON recipes(cuisine)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_recipes_effort ON recipes(effort)")
+
+        # Sub-millisecond candidate retrieval via SQLite FTS5
+        cursor.execute("""
+            CREATE VIRTUAL TABLE IF NOT EXISTS recipes_fts USING fts5(
+                recipe_id UNINDEXED,
+                name,
+                cuisine,
+                tags,
+                ingredients_text,
+                tastes
+            )
+        """)
+
+        # Sync FTS table if empty but main table has data
+        cursor.execute("SELECT COUNT(*) FROM recipes_fts")
+        fts_count = cursor.fetchone()[0]
+        if fts_count == 0:
+            cursor.execute("""
+                INSERT INTO recipes_fts (recipe_id, name, cuisine, tags, ingredients_text, tastes)
+                SELECT id, name, cuisine, tags, ingredients, tastes FROM recipes
+            """)
+
         conn.commit()
+
 
 
 def row_to_recipe_dict(row: sqlite3.Row) -> Dict[str, Any]:
@@ -154,12 +180,36 @@ def save_recipe(recipe: Dict[str, Any], source: str = "gemini") -> int:
             recipe.get("effort", "easy"),
             source,
         ))
+        recipe_id = cursor.lastrowid or 0
+        if recipe_id == 0:
+            cursor.execute("SELECT id FROM recipes WHERE name = ?", (recipe["name"],))
+            row = cursor.fetchone()
+            if row:
+                recipe_id = row["id"]
+
+        # Sync into FTS
+        try:
+            cursor.execute("DELETE FROM recipes_fts WHERE recipe_id = ?", (recipe_id,))
+            cursor.execute("""
+                INSERT INTO recipes_fts (recipe_id, name, cuisine, tags, ingredients_text, tastes)
+                VALUES (?, ?, ?, ?, ?, ?)
+            """, (
+                recipe_id,
+                recipe["name"],
+                recipe.get("cuisine", "Global"),
+                json.dumps(recipe.get("tags", [])),
+                json.dumps(recipe.get("ingredients", [])),
+                json.dumps(recipe.get("tastes", ["savory"])),
+            ))
+        except Exception as fts_exc:
+            logger.warning("Could not sync FTS for recipe %s: %s", recipe.get("name"), fts_exc)
+
         conn.commit()
-        return cursor.lastrowid or 0
+        return recipe_id
 
 
 def bulk_insert_recipes(recipes: List[Dict[str, Any]], source: str = "catalog") -> int:
-    """Insert multiple recipes efficiently, ignoring duplicates."""
+    """Insert multiple recipes efficiently and sync them into FTS index."""
     init_db()
     inserted = 0
     with get_db_connection() as conn:
@@ -196,8 +246,67 @@ def bulk_insert_recipes(recipes: List[Dict[str, Any]], source: str = "catalog") 
                     inserted += 1
             except Exception as exc:
                 logger.warning("Could not insert recipe '%s': %s", r.get("name"), exc)
+
+        # Refresh FTS virtual index
+        try:
+            cursor.execute("DELETE FROM recipes_fts")
+            cursor.execute("""
+                INSERT INTO recipes_fts (recipe_id, name, cuisine, tags, ingredients_text, tastes)
+                SELECT id, name, cuisine, tags, ingredients, tastes FROM recipes
+            """)
+        except Exception as fts_exc:
+            logger.warning("Could not refresh FTS after bulk insert: %s", fts_exc)
+
         conn.commit()
     return inserted
+
+
+def search_candidate_recipes_fts(pantry_terms: List[str], limit: int = 60) -> List[Dict[str, Any]]:
+    """Sub-millisecond candidate retrieval using SQLite FTS5 index.
+
+    Matches recipes containing any of the normalized pantry terms across their
+    ingredients, recipe name, tags, or taste profile.
+    """
+    init_db()
+    clean_terms = []
+    for t in pantry_terms:
+        cleaned = re.sub(r"[^\w\s]", "", t).strip()
+        if cleaned and len(cleaned) > 1:
+            clean_terms.append(f'"{cleaned}"')
+
+    if not clean_terms:
+        return get_all_recipes()
+
+    fts_query = " OR ".join(clean_terms)
+
+    with get_db_connection() as conn:
+        cursor = conn.cursor()
+        try:
+            cursor.execute("""
+                SELECT r.* FROM recipes r
+                JOIN recipes_fts fts ON r.id = fts.recipe_id
+                WHERE recipes_fts MATCH ?
+                ORDER BY rank
+                LIMIT ?
+            """, (fts_query, limit))
+            rows = cursor.fetchall()
+            results = [row_to_recipe_dict(r) for r in rows]
+
+            # If FTS matched fewer than 15 recipes, supplement from catalog to ensure broad recommendation pool
+            if len(results) < 15:
+                existing_ids = {r["id"] for r in results}
+                all_recipes = get_all_recipes()
+                for ar in all_recipes:
+                    if ar["id"] not in existing_ids:
+                        results.append(ar)
+                    if len(results) >= limit:
+                        break
+
+            return results
+        except Exception as exc:
+            logger.warning("FTS search failed for query '%s' (%s), using full catalog fallback", fts_query, exc)
+            return get_all_recipes()
+
 
 
 def get_catalog_stats() -> Dict[str, Any]:

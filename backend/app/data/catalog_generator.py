@@ -10,10 +10,13 @@ import json
 import re
 from typing import List, Dict, Any, Optional
 from google import genai
+from google.genai import types
 
 from backend.app.core.config import settings
 from backend.app.core.logging import logger
 from backend.app.data.database import bulk_insert_recipes, get_recipe_count, get_catalog_stats
+from backend.app.schemas.recipes import GeneratedRecipe
+from backend.app.services.image_service import resolve_dish_image
 
 
 CUISINES_LIST = [
@@ -22,20 +25,6 @@ CUISINES_LIST = [
     "American", "Vietnamese", "Turkish"
 ]
 
-CUISINE_IMAGE_MAP = {
-    "Indian": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&h=380&fit=crop&auto=format",
-    "Italian": "https://images.unsplash.com/photo-1621996346565-e3d5d6281048?w=600&h=380&fit=crop&auto=format",
-    "Mexican": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=380&fit=crop&auto=format",
-    "Japanese": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&h=380&fit=crop&auto=format",
-    "Chinese": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=600&h=380&fit=crop&auto=format",
-    "Thai": "https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&h=380&fit=crop&auto=format",
-    "Korean": "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=380&fit=crop&auto=format",
-    "Mediterranean": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=380&fit=crop&auto=format",
-    "French": "https://images.unsplash.com/photo-1510693206972-df098062cb71?w=600&h=380&fit=crop&auto=format",
-    "American": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=380&fit=crop&auto=format",
-}
-
-DEFAULT_IMAGE = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=380&fit=crop&auto=format"
 ACCENT_PALETTES = ["#FFD5C2", "#F5D66F", "#C9DCC5", "#F6C8D0"]
 
 
@@ -58,42 +47,20 @@ async def generate_recipes_batch_with_gemini(
 You are an executive master chef specializing in global culinary arts.
 Generate {count} distinct, authentic, highly rated {cuisine} recipes{theme_clause}.
 Ensure a balanced mix of quick weekday favorites, hearty comfort foods, and diverse dietary options (vegetarian, high-protein, vegan).
-
-For each recipe, return a JSON object adhering exactly to this schema:
-{{
-  "name": "Distinct Authentic Recipe Name",
-  "cuisine": "{cuisine}",
-  "time": "e.g. 15 min",
-  "difficulty": "Easy" or "Medium",
-  "tags": ["Vegetarian", "High-protein", etc.],
-  "desc": "One mouthwatering sentence describing the dish.",
-  "image": "{CUISINE_IMAGE_MAP.get(cuisine, DEFAULT_IMAGE)}",
-  "cal": "e.g. 320 cal",
-  "rating": 4.8,
-  "accent": "#FFD5C2" or "#F5D66F" or "#C9DCC5" or "#F6C8D0",
-  "servings": 2,
-  "ingredients": [
-    {{"name": "Ingredient 1", "amount": 2.0, "unit": "slices or g or ml or cloves"}},
-    {{"name": "Ingredient 2", "amount": 100.0, "unit": "g"}}
-  ],
-  "steps": [
-    "Step 1 instruction...",
-    "Step 2 instruction...",
-    "Step 3 instruction..."
-  ],
-  "stepTimers": [0, 180, 240],
-  "substitution": "Easy swap suggestion if a key ingredient is missing.",
-  "tastes": ["savory", "spicy" or other tastes from: spicy, savory, sweet, tangy, creamy, fresh, comfort],
-  "effort": "lazy" or "easy" or "chef"
-}}
-
-Return ONLY a valid JSON array of {count} recipe objects: [{{...}}, {{...}}].
-Output raw JSON only with NO markdown code fences or commentary.
+Provide authentic dishes with practical ingredients and accurate cooking step timers.
 """
+
+        # Gemini 2.0 structured output configuration
+        config = types.GenerateContentConfig(
+            response_mime_type="application/json",
+            response_schema=list[GeneratedRecipe],
+            temperature=0.7,
+        )
 
         response = client.models.generate_content(
             model=settings.GEMINI_MODEL,
             contents=prompt,
+            config=config,
         )
 
         text = response.text.strip()
@@ -101,14 +68,19 @@ Output raw JSON only with NO markdown code fences or commentary.
             text = re.sub(r"^```(?:json)?\n", "", text)
             text = re.sub(r"\n```$", "", text).strip()
 
-        recipes = json.loads(text)
+        recipes_raw = json.loads(text)
         valid_recipes = []
-        for r in recipes:
-            if "name" in r and "ingredients" in r and "steps" in r:
+        for r in recipes_raw:
+            if isinstance(r, dict) and "name" in r and "ingredients" in r and "steps" in r:
+                r["cuisine"] = r.get("cuisine") or cuisine
                 r["step_timers"] = r.get("stepTimers", [0] * len(r.get("steps", [])))
-                r["accent"] = r.get("accent", ACCENT_PALETTES[len(valid_recipes) % len(ACCENT_PALETTES)])
-                if not r.get("image") or r["image"] == DEFAULT_IMAGE:
-                    r["image"] = CUISINE_IMAGE_MAP.get(cuisine, DEFAULT_IMAGE)
+                r["accent"] = r.get("accent") or ACCENT_PALETTES[len(valid_recipes) % len(ACCENT_PALETTES)]
+
+                # Dynamic dish-specific image resolution
+                ing_names = [i.get("name", "") if isinstance(i, dict) else getattr(i, "name", "") for i in r.get("ingredients", [])]
+                if not r.get("image") or "unsplash.com" not in r.get("image", ""):
+                    r["image"] = resolve_dish_image(r["name"], cuisine, ing_names)
+
                 valid_recipes.append(r)
 
         return valid_recipes

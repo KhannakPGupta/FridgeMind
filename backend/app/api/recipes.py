@@ -1,18 +1,21 @@
-"""API endpoints for recipe recommendations, details, and nutrition calculation."""
-
-from typing import Optional
+from typing import Optional, List
 from fastapi import APIRouter, HTTPException, Query, status
 from backend.app.schemas.recipes import (
     RecommendRequest,
     RecommendResponse,
     RecipeResponse,
+    SubstitutionOption,
+    SubstituteRequest,
+    SubstituteResponse,
 )
 from backend.app.schemas.nutrition import NutritionSummary
 from backend.app.services.recipe_service import (
     get_recipe_recommendations,
     fetch_recipe_detail,
+    apply_recipe_substitution,
 )
 from backend.app.services.nutrition_service import calculate_recipe_nutrition
+from backend.app.ml.substitutions import get_substitutions_for_ingredient
 
 router = APIRouter(prefix="/recipes", tags=["Recipes"])
 
@@ -26,6 +29,14 @@ async def recommend_recipes(payload: RecommendRequest) -> RecommendResponse:
         theme=payload.theme or "cozy",
         surprise=payload.surprise,
     )
+
+
+@router.get("/substitutions/lookup", response_model=List[SubstitutionOption])
+async def lookup_ingredient_substitutions(
+    ingredient: str = Query(..., description="Ingredient name to look up swaps for"),
+) -> List[SubstitutionOption]:
+    """Look up authentic culinary substitutions, ratios, and cooking tips for any ingredient."""
+    return get_substitutions_for_ingredient(ingredient)
 
 
 @router.get("/catalog/stats")
@@ -60,6 +71,39 @@ async def get_recipe(recipe_id: int) -> RecipeResponse:
             detail=f"Recipe with ID {recipe_id} not found.",
         )
     return recipe
+
+
+@router.get("/{recipe_id}/substitutions", response_model=List[SubstitutionOption])
+async def get_recipe_substitutions(recipe_id: int) -> List[SubstitutionOption]:
+    """Retrieve feasible ingredient substitutions for all items in a recipe."""
+    recipe = fetch_recipe_detail(recipe_id)
+    if not recipe:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Recipe with ID {recipe_id} not found.",
+        )
+    return recipe.available_substitutions
+
+
+@router.post("/{recipe_id}/substitute", response_model=SubstituteResponse)
+async def substitute_recipe_ingredient(
+    recipe_id: int,
+    payload: SubstituteRequest,
+) -> SubstituteResponse:
+    """Adapt a recipe by dynamically swapping an ingredient and adjusting steps, tags, and badges."""
+    result = apply_recipe_substitution(recipe_id, payload.replace, payload.substitute_with)
+    if not result:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Recipe with ID {recipe_id} not found.",
+        )
+    adapted_recipe, applied_option = result
+    return SubstituteResponse(
+        recipe=adapted_recipe,
+        applied_substitution=applied_option,
+        message=f"Successfully substituted {payload.replace} with {payload.substitute_with}.",
+    )
+
 
 
 @router.get("/{recipe_id}/nutrition", response_model=NutritionSummary)

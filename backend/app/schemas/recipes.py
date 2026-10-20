@@ -13,6 +13,17 @@ class RecipeIngredient(BaseModel):
     unit: str = ""
 
 
+class SubstitutionOption(BaseModel):
+    """Feasible ingredient substitution with ratio and practical cooking notes."""
+
+    original: str
+    substitute: str
+    ratio: str = "1:1"
+    flavor_impact: str = "neutral"
+    notes: str = ""
+    dietary_tags: List[str] = Field(default_factory=list)
+
+
 class RecipeResponse(BaseModel):
     """Complete recipe object matching the frontend TypeScript Recipe type."""
 
@@ -37,6 +48,55 @@ class RecipeResponse(BaseModel):
     matched_ingredients: List[str] = Field(default_factory=list)
     missing_ingredients: List[str] = Field(default_factory=list)
     badges: List[str] = Field(default_factory=list)
+    available_substitutions: List[SubstitutionOption] = Field(
+        default_factory=list,
+        description="Feasible pantry swaps for missing or alternative ingredients",
+    )
+
+
+class SubstituteRequest(BaseModel):
+    """Request payload to adapt a recipe with an ingredient substitution."""
+
+    replace: str
+    substitute_with: str
+
+
+class SubstituteResponse(BaseModel):
+    """Response payload after applying an ingredient substitution to a recipe."""
+
+    recipe: RecipeResponse
+    applied_substitution: SubstitutionOption
+    message: str
+
+
+class GeneratedRecipeIngredient(BaseModel):
+    """Ingredient item for Gemini structured recipe generation."""
+
+    name: str
+    amount: float
+    unit: str = ""
+
+
+class GeneratedRecipe(BaseModel):
+    """Pydantic model for Gemini 2.0 Flash structured JSON schema generation."""
+
+    name: str
+    cuisine: str = "Global"
+    time: str = "20 min"
+    difficulty: str = "Easy"
+    tags: List[str] = Field(default_factory=list)
+    desc: str
+    image: Optional[str] = None
+    cal: str = "320 cal"
+    rating: float = 4.8
+    accent: Optional[str] = "#FFD5C2"
+    servings: int = 2
+    ingredients: List[GeneratedRecipeIngredient]
+    steps: List[str]
+    stepTimers: List[int] = Field(default_factory=list)
+    substitution: str = ""
+    tastes: List[str] = Field(default_factory=list)
+    effort: str = "easy"
 
 
 class PreferencesInput(BaseModel):
@@ -64,3 +124,4 @@ class RecommendResponse(BaseModel):
     total_found: int
     selected_theme: str
     source: str = Field(default="catalog", description="'catalog', 'gemini_adapted', or 'hybrid'")
+
