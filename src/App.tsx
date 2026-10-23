@@ -5,11 +5,17 @@ import {
   normalizeManualIngredients,
   getRecipeNutrition,
   checkApiHealth,
+  fetchRecipeSubstitutions,
+  lookupSubstitutions,
+  substituteRecipeIngredient,
+  fetchCatalogStats,
   type Ingredient,
   type RecipeIngredient,
   type Recipe,
   type Preferences,
   type NutritionSummary,
+  type SubstitutionOption,
+  type CatalogStats,
 } from './services/api'
 
 type Screen = 'home' | 'input' | 'ingredients' | 'vibe' | 'results' | 'recipe'
@@ -1521,16 +1527,39 @@ function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredien
   )
 }
 
-function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; onNavigate: (screen: Screen) => void; pantry: Ingredient[] }) {
-  const storageKey = `fridgemind-cooking-${recipe.id}`
+function RecipeDetailScreen({
+  recipe,
+  onNavigate,
+  pantry,
+  onUpdateRecipe,
+}: {
+  recipe: Recipe
+  onNavigate: (screen: Screen) => void
+  pantry: Ingredient[]
+  onUpdateRecipe?: (recipe: Recipe) => void
+}) {
+  const [currentRecipe, setCurrentRecipe] = useState<Recipe>(recipe)
+  const [swapModalOpen, setSwapModalOpen] = useState(false)
+  const [swapTarget, setSwapTarget] = useState<string>('')
+  const [swapOptions, setSwapOptions] = useState<SubstitutionOption[]>([])
+  const [loadingSwaps, setLoadingSwaps] = useState(false)
+  const [swapToast, setSwapToast] = useState<string | null>(null)
+  const [isApplyingSwap, setIsApplyingSwap] = useState(false)
+
+  // Sync internal recipe when prop changes
+  useEffect(() => {
+    setCurrentRecipe(recipe)
+  }, [recipe])
+
+  const storageKey = `fridgemind-cooking-${currentRecipe.id}`
   const savedCooking = (() => {
     try { return JSON.parse(localStorage.getItem(storageKey) ?? '{}') as { servings?: number; checked?: number[]; activeStep?: number; seconds?: number } }
     catch { return {} }
   })()
-  const [servings, setServings] = useState(savedCooking.servings ?? recipe.servings)
+  const [servings, setServings] = useState(savedCooking.servings ?? currentRecipe.servings)
   const [checked, setChecked] = useState(new Set(savedCooking.checked ?? []))
   const [activeStep, setActiveStep] = useState(savedCooking.activeStep ?? 0)
-  const [seconds, setSeconds] = useState(savedCooking.seconds ?? recipe.stepTimers[0])
+  const [seconds, setSeconds] = useState(savedCooking.seconds ?? currentRecipe.stepTimers[0])
   const [timerRunning, setTimerRunning] = useState(false)
   const [timerFinished, setTimerFinished] = useState(false)
   const [focusMode, setFocusMode] = useState(false)
@@ -1541,18 +1570,18 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
   useEffect(() => {
     let isMounted = true
     setLoadingNutrition(true)
-    getRecipeNutrition(recipe.id, servings)
+    getRecipeNutrition(currentRecipe.id, servings)
       .then(data => {
         if (!isMounted) return
         if (data) {
           setNutrition(data)
         } else {
           // Responsive client-side fallback calculation based on recipe baseline
-          const baseCal = parseInt(recipe.cal) || 300
-          const scaledCal = Math.round((baseCal * servings) / (recipe.servings || 2))
-          const protein = Math.round(18 * (servings / (recipe.servings || 2)))
-          const carbs = Math.round(25 * (servings / (recipe.servings || 2)))
-          const fat = Math.round(14 * (servings / (recipe.servings || 2)))
+          const baseCal = parseInt(currentRecipe.cal) || 300
+          const scaledCal = Math.round((baseCal * servings) / (currentRecipe.servings || 2))
+          const protein = Math.round(18 * (servings / (currentRecipe.servings || 2)))
+          const carbs = Math.round(25 * (servings / (currentRecipe.servings || 2)))
+          const fat = Math.round(14 * (servings / (currentRecipe.servings || 2)))
           const totalMacroCal = (protein * 4) + (carbs * 4) + (fat * 9)
           setNutrition({
             calories: scaledCal,
@@ -1577,7 +1606,7 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
         if (isMounted) setLoadingNutrition(false)
       })
     return () => { isMounted = false }
-  }, [recipe.id, servings, recipe.cal, recipe.servings])
+  }, [currentRecipe.id, currentRecipe.ingredients, servings, currentRecipe.cal, currentRecipe.servings])
 
   useEffect(() => {
     localStorage.setItem(storageKey, JSON.stringify({ servings, checked: [...checked], activeStep, seconds }))
@@ -1616,19 +1645,64 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
 
   function selectStep(index: number) {
     setActiveStep(index)
-    setSeconds(recipe.stepTimers[index])
+    setSeconds(currentRecipe.stepTimers[index] || 0)
     setTimerRunning(false)
     setTimerFinished(false)
   }
 
   function formatAmount(ingredient: RecipeIngredient) {
-    const scaled = ingredient.amount * (servings / recipe.servings)
+    const scaled = ingredient.amount * (servings / currentRecipe.servings)
     const amount = Number.isInteger(scaled) ? String(scaled) : String(Math.round(scaled * 10) / 10)
     return `${amount}${ingredient.unit ? ` ${ingredient.unit}` : ''}`
   }
 
+  async function openSwapModal(targetName?: string) {
+    const ingredientName = targetName || currentRecipe.ingredients[0]?.name || ''
+    setSwapTarget(ingredientName)
+    setSwapModalOpen(true)
+    setLoadingSwaps(true)
+    try {
+      const options = await lookupSubstitutions(ingredientName)
+      setSwapOptions(options)
+    } catch {
+      setSwapOptions([])
+    } finally {
+      setLoadingSwaps(false)
+    }
+  }
+
+  async function handleSelectSwapTarget(name: string) {
+    setSwapTarget(name)
+    setLoadingSwaps(true)
+    try {
+      const options = await lookupSubstitutions(name)
+      setSwapOptions(options)
+    } catch {
+      setSwapOptions([])
+    } finally {
+      setLoadingSwaps(false)
+    }
+  }
+
+  async function handleApplySwap(original: string, substituteWith: string) {
+    setIsApplyingSwap(true)
+    try {
+      const res = await substituteRecipeIngredient(currentRecipe, original, substituteWith)
+      setCurrentRecipe(res.recipe)
+      if (onUpdateRecipe) onUpdateRecipe(res.recipe)
+      playKitchenChime('complete')
+      setSwapToast(res.message)
+      setSwapModalOpen(false)
+      window.setTimeout(() => setSwapToast(null), 5000)
+    } catch (err) {
+      console.warn('Failed to apply swap:', err)
+    } finally {
+      setIsApplyingSwap(false)
+    }
+  }
+
   const pantryNames = new Set(pantry.map(item => item.name.toLowerCase()))
-  const availableCount = recipe.ingredients.filter(item => pantryNames.has(item.name.toLowerCase())).length
+  const availableCount = currentRecipe.ingredients.filter(item => pantryNames.has(item.name.toLowerCase())).length
   const minutes = String(Math.floor(seconds / 60)).padStart(2, '0')
   const remainingSeconds = String(seconds % 60).padStart(2, '0')
 
@@ -1639,19 +1713,45 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
       }} label="Cooking mode" />
       <main className="flex-1 px-5 md:px-12 lg:px-20 py-8">
         <div className="max-w-6xl mx-auto">
+          {swapToast && (
+            <div className="mb-6 p-4 rounded-2xl bg-sage/40 border border-sage/80 flex items-center justify-between font-body text-sm text-olive shadow-sm animate-fade-in" role="status">
+              <span className="flex items-center gap-2">
+                <span className="text-xl">🎉</span>
+                <strong>{swapToast}</strong>
+              </span>
+              <button onClick={() => setSwapToast(null)} className="text-olive/60 hover:text-olive text-sm font-bold ml-2">✕</button>
+            </div>
+          )}
+
           <section className="recipe-hero-card">
-            <img src={recipe.image} alt={recipe.name} />
+            <img src={currentRecipe.image} alt={currentRecipe.name} />
             <div className="recipe-hero-copy">
               <span className="font-body font-extrabold text-xs uppercase tracking-[.14em] text-tomato">FridgeMind kitchen notebook</span>
-              <h1 className="font-heading text-4xl md:text-6xl font-semibold text-olive leading-tight">{recipe.name}</h1>
-              <p className="font-body text-olive/60 text-lg">{recipe.desc}</p>
+              <h1 className="font-heading text-4xl md:text-6xl font-semibold text-olive leading-tight">{currentRecipe.name}</h1>
+              <p className="font-body text-olive/60 text-lg">{currentRecipe.desc}</p>
+              {currentRecipe.badges && currentRecipe.badges.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 my-1">
+                  {currentRecipe.badges.map(b => (
+                    <span
+                      key={b}
+                      className={`font-body font-extrabold text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider ${
+                        b.startsWith('Swapped')
+                          ? 'bg-tomato text-white shadow-2xs'
+                          : 'bg-sage/45 text-olive border border-sage/60'
+                      }`}
+                    >
+                      {b.startsWith('Swapped') ? `🔄 ${b}` : b}
+                    </span>
+                  ))}
+                </div>
+              )}
               <div className="flex flex-wrap gap-3">
-                <span>⏱ {recipe.time}</span>
-                <span>🍳 {recipe.difficulty}</span>
-                <span>🔥 {nutrition ? `${nutrition.calories} cal` : recipe.cal}</span>
+                <span>⏱ {currentRecipe.time}</span>
+                <span>🍳 {currentRecipe.difficulty}</span>
+                <span>🔥 {nutrition ? `${nutrition.calories} cal` : currentRecipe.cal}</span>
                 <span className="text-tomato font-extrabold">Serving {servings}</span>
               </div>
-              <p className="font-body font-extrabold text-sm text-olive/70">You already have {availableCount} of {recipe.ingredients.length} ingredients.</p>
+              <p className="font-body font-extrabold text-sm text-olive/70">You already have {availableCount} of {currentRecipe.ingredients.length} ingredients.</p>
             </div>
           </section>
 
@@ -1665,7 +1765,7 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
                   <button aria-label="Increase servings" onClick={() => setServings(value => Math.min(12, value + 1))}>+</button>
                 </div>
               </div>
-              {recipe.ingredients.map((item, index) => {
+              {currentRecipe.ingredients.map((item, index) => {
                 const inPantry = pantryNames.has(item.name.toLowerCase())
                 return (
                 <button key={item.name} aria-pressed={checked.has(index)} onClick={() => setChecked(current => {
@@ -1676,10 +1776,38 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
                   <span className="custom-check">{checked.has(index) ? '✓' : ''}</span>
                   <IngredientIcon name={item.name} className="w-8 h-8" />
                   <span>{item.name}<em className={inPantry ? 'pantry-have' : 'pantry-need'}>{inPantry ? 'have' : 'need'}</em></span>
-                  <small>{formatAmount(item)}</small>
+                  <div className="flex items-center gap-2 ml-auto">
+                    <small>{formatAmount(item)}</small>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        openSwapModal(item.name)
+                      }}
+                      title={`Explore culinary swaps for ${item.name}`}
+                      className="px-2 py-0.5 rounded-lg text-[10px] font-body font-bold text-olive/80 hover:text-white bg-peach/40 hover:bg-tomato border border-peach/70 transition-all flex items-center gap-1 shadow-2xs"
+                    >
+                      <span>🔄</span>
+                      <span className="hidden sm:inline">Swap</span>
+                    </button>
+                  </div>
                 </button>
               )})}
-              <div className="substitution-note"><strong>Easy swap</strong><p>{recipe.substitution}</p></div>
+              <div className="substitution-note group">
+                <div className="flex items-center justify-between mb-1.5">
+                  <strong className="text-olive flex items-center gap-1">
+                    <span>💡</span> Culinary Substitutions
+                  </strong>
+                  <button
+                    type="button"
+                    onClick={() => openSwapModal(currentRecipe.ingredients[0]?.name)}
+                    className="text-xs font-body font-extrabold text-tomato hover:text-[#b53a29] underline decoration-dotted flex items-center gap-1 hover:scale-105 transition-transform"
+                  >
+                    <span>✨ 1-Click Swap Mode</span>
+                  </button>
+                </div>
+                <p className="text-olive/75 text-sm">{currentRecipe.substitution}</p>
+              </div>
 
               {/* Dynamic USDA Nutrition Card */}
               <div className="nutrition-card">
@@ -1727,19 +1855,19 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
             <section className="cooking-steps">
               <div className="cooking-toolbar">
                 <div>
-                  <span>Step {activeStep + 1} of {recipe.steps.length}</span>
-                  <div className="step-progress"><i style={{ width: `${((activeStep + 1) / recipe.steps.length) * 100}%` }} /></div>
+                  <span>Step {activeStep + 1} of {currentRecipe.steps.length}</span>
+                  <div className="step-progress"><i style={{ width: `${((activeStep + 1) / currentRecipe.steps.length) * 100}%` }} /></div>
                 </div>
                 <button aria-pressed={focusMode} onClick={() => setFocusMode(value => !value)}>{focusMode ? 'Show full recipe' : 'Focus mode'}</button>
               </div>
               <div className="timer-card">
-                <div><small>{recipe.stepTimers[activeStep] ? `Step ${activeStep + 1} countdown` : 'No timer needed for this step'}</small><strong aria-live="off" aria-label={`${minutes} minutes and ${remainingSeconds} seconds remaining`}>{minutes}:{remainingSeconds}</strong></div>
+                <div><small>{currentRecipe.stepTimers[activeStep] ? `Step ${activeStep + 1} countdown` : 'No timer needed for this step'}</small><strong aria-live="off" aria-label={`${minutes} minutes and ${remainingSeconds} seconds remaining`}>{minutes}:{remainingSeconds}</strong></div>
                 <button disabled={!seconds && !timerRunning} onClick={() => { setTimerFinished(false); setTimerRunning(value => !value) }}>{timerRunning ? 'Pause' : 'Start timer'}</button>
-                <button onClick={() => { setSeconds(recipe.stepTimers[activeStep]); setTimerRunning(false); setTimerFinished(false) }}>Reset</button>
+                <button onClick={() => { setSeconds(currentRecipe.stepTimers[activeStep] || 0); setTimerRunning(false); setTimerFinished(false) }}>Reset</button>
               </div>
               {timerFinished && <div className="timer-alert" role="alert">Time’s up! Your next delicious move is ready.</div>}
               <h2 className="font-heading text-3xl font-semibold mt-7 mb-4">Let’s cook</h2>
-              {recipe.steps.map((step, index) => (
+              {currentRecipe.steps.map((step, index) => (
                 <button key={step} aria-pressed={activeStep === index} onClick={() => selectStep(index)} className={`cooking-step ${activeStep === index ? 'is-active' : ''}`}>
                   <span>{index + 1}</span>
                   <p>{step}</p>
@@ -1748,7 +1876,7 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
               ))}
               <div className="step-navigation">
                 <button disabled={activeStep === 0} onClick={() => selectStep(activeStep - 1)}>← Previous</button>
-                {activeStep < recipe.steps.length - 1
+                {activeStep < currentRecipe.steps.length - 1
                   ? <button onClick={() => selectStep(activeStep + 1)}>Next step →</button>
                   : <button onClick={() => {
                       setCompleted(true)
@@ -1761,7 +1889,7 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
                 <div className="completion-card" role="status">
                   <span aria-hidden="true">✦</span>
                   <h2 className="font-heading text-3xl font-semibold">You made something wonderful!</h2>
-                  <p>Take a breath, plate it proudly, and enjoy your {recipe.name.toLowerCase()}.</p>
+                  <p>Take a breath, plate it proudly, and enjoy your {currentRecipe.name.toLowerCase()}.</p>
                   <button className="bg-olive text-butter font-body font-extrabold px-8 py-4 rounded-2xl mt-4" onClick={() => onNavigate('results')}>Back to my recipes</button>
                 </div>
               )}
@@ -1769,6 +1897,121 @@ function RecipeDetailScreen({ recipe, onNavigate, pantry }: { recipe: Recipe; on
           </div>
         </div>
       </main>
+
+      {/* Interactive 1-Click Substitution Modal */}
+      {swapModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-olive/50 backdrop-blur-sm animate-fade-in" role="dialog" aria-modal="true">
+          <div className="bg-cream rounded-3xl p-6 md:p-8 max-w-xl w-full border-2 border-yellow/40 shadow-2xl space-y-5 max-h-[90vh] flex flex-col paper-texture">
+            <div className="flex items-center justify-between border-b border-yellow/30 pb-3">
+              <div>
+                <h3 className="font-heading text-2xl font-semibold text-olive flex items-center gap-2">
+                  <span>🔄</span> 1-Click Culinary Swaps
+                </h3>
+                <p className="font-body text-xs text-olive/60 mt-0.5">Adapt this recipe on-the-fly with authentic pantry substitutes</p>
+              </div>
+              <button
+                onClick={() => setSwapModalOpen(false)}
+                className="w-8 h-8 rounded-full bg-peach/40 hover:bg-peach text-olive flex items-center justify-center font-bold text-sm transition-colors"
+                aria-label="Close substitutions dialog"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div>
+              <label className="block font-body font-extrabold text-xs text-olive/70 uppercase tracking-wider mb-2">
+                Select ingredient to replace:
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {currentRecipe.ingredients.map(ing => (
+                  <button
+                    key={ing.name}
+                    type="button"
+                    onClick={() => handleSelectSwapTarget(ing.name)}
+                    className={`px-3 py-1.5 rounded-xl font-body text-xs font-bold transition-all border ${
+                      swapTarget.toLowerCase() === ing.name.toLowerCase()
+                        ? 'bg-olive text-butter border-olive shadow-xs scale-105'
+                        : 'bg-white/80 text-olive border-yellow/40 hover:border-yellow'
+                    }`}
+                  >
+                    {ing.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex-1 overflow-y-auto space-y-3 pr-1">
+              {loadingSwaps ? (
+                <div className="text-center py-8">
+                  <span className="text-3xl animate-spin inline-block mb-2">🍳</span>
+                  <p className="font-body text-xs text-olive/60 font-bold">Scanning culinary substitution matrix…</p>
+                </div>
+              ) : swapOptions.length === 0 ? (
+                <div className="text-center py-8 bg-white/50 rounded-2xl p-4 border border-yellow/30">
+                  <span className="text-3xl block mb-2">🌿</span>
+                  <p className="font-body text-sm font-bold text-olive">No direct swaps found for {swapTarget}</p>
+                  <p className="font-body text-xs text-olive/50 mt-1">Try selecting another ingredient above, or use any tender greens or staple grains you have on hand.</p>
+                </div>
+              ) : (
+                swapOptions.map((opt, idx) => {
+                  const inPantry = pantry.some(p => p.name.toLowerCase().includes(opt.substitute.toLowerCase()) || opt.substitute.toLowerCase().includes(p.name.toLowerCase()))
+                  return (
+                    <div
+                      key={idx}
+                      className={`p-4 rounded-2xl border transition-all ${
+                        inPantry ? 'bg-[#C9DCC5]/30 border-[#A3C29E]' : 'bg-white/70 border-yellow/30'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-3 mb-1.5">
+                        <div>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <strong className="font-heading text-lg text-olive">{opt.substitute}</strong>
+                            <span className="bg-yellow/40 text-olive text-[11px] font-body font-bold px-2 py-0.5 rounded-full border border-yellow/50">
+                              Ratio: {opt.ratio}
+                            </span>
+                            {inPantry && (
+                              <span className="bg-emerald-600 text-white text-[10px] font-body font-extrabold px-2 py-0.5 rounded-full shadow-2xs">
+                                ⭐ In your pantry!
+                              </span>
+                            )}
+                          </div>
+                          <p className="font-body text-xs text-olive/70 italic mt-0.5">Flavor impact: {opt.flavor_impact}</p>
+                        </div>
+                        <button
+                          disabled={isApplyingSwap}
+                          onClick={() => handleApplySwap(swapTarget, opt.substitute)}
+                          className="shrink-0 bg-tomato hover:bg-[#d04332] text-white font-body font-bold text-xs px-3.5 py-2 rounded-xl transition-all shadow-xs hover:scale-105 active:scale-95 disabled:opacity-50"
+                        >
+                          {isApplyingSwap ? 'Adapting…' : 'Apply Swap →'}
+                        </button>
+                      </div>
+                      <p className="font-body text-xs text-olive/60 mt-1">{opt.notes}</p>
+                      {opt.dietary_tags && opt.dietary_tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          {opt.dietary_tags.map(tag => (
+                            <span key={tag} className="text-[10px] font-body font-semibold px-2 py-0.5 rounded-md bg-olive/10 text-olive/70">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })
+              )}
+            </div>
+
+            <div className="pt-2 border-t border-yellow/30 text-right">
+              <button
+                onClick={() => setSwapModalOpen(false)}
+                className="bg-vanilla hover:bg-cream text-olive font-body font-bold text-xs px-5 py-2.5 rounded-xl border border-yellow/50 transition-all"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -1844,7 +2087,7 @@ export default function App() {
           navigate('home')
         }
       }} theme={theme} ingredients={ingredients} onViewRecipe={recipe => { setSelectedRecipe(recipe); navigate('recipe') }} />}
-      {screen === 'recipe'      && <RecipeDetailScreen recipe={selectedRecipe} pantry={ingredients} onNavigate={navigate} />}
+      {screen === 'recipe'      && <RecipeDetailScreen recipe={selectedRecipe} pantry={ingredients} onNavigate={navigate} onUpdateRecipe={setSelectedRecipe} />}
     </div>
   )
 }
