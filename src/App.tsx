@@ -588,6 +588,15 @@ function HomeScreen({ onNavigate }: { onNavigate: (s: Screen) => void }) {
     return () => { isMounted = false }
   }, [])
 
+  useEffect(() => {
+    if (!showCatalogModal) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowCatalogModal(false)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [showCatalogModal])
+
   return (
     <div className="experience-shell screen-enter min-h-screen bg-butter flex flex-col paper-texture">
       {/* NAV */}
@@ -749,7 +758,14 @@ function HomeScreen({ onNavigate }: { onNavigate: (s: Screen) => void }) {
 
       {/* World Recipe Catalog Explorer Modal */}
       {showCatalogModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-olive/50 backdrop-blur-sm animate-fade-in" role="dialog" aria-modal="true">
+        <div
+          onClick={e => {
+            if (e.target === e.currentTarget) setShowCatalogModal(false)
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-olive/50 backdrop-blur-sm animate-fade-in"
+          role="dialog"
+          aria-modal="true"
+        >
           <div className="bg-cream rounded-3xl p-6 md:p-8 max-w-2xl w-full border-2 border-yellow/40 shadow-2xl space-y-5 max-h-[90vh] flex flex-col paper-texture">
             <div className="flex items-center justify-between border-b border-yellow/30 pb-3">
               <div>
@@ -846,13 +862,20 @@ function InputScreen({ onNavigate, onContinue }: { onNavigate: (s: Screen) => vo
   const [normalizing, setNormalizing] = useState(false)
   const [scannedItems, setScannedItems] = useState<Ingredient[] | null>(null)
 
+  const [duplicateWarning, setDuplicateWarning] = useState<string | null>(null)
+
   function addItem() {
     const v = newItem.trim()
-    if (v && !typed.some(item => item.toLowerCase() === v.toLowerCase())) {
-      setTyped(p => [...p, v])
-      setNewItem('')
-      setMethod('type')
+    if (!v) return
+    if (typed.some(item => item.toLowerCase() === v.toLowerCase())) {
+      setDuplicateWarning(`"${v}" is already on your list!`)
+      window.setTimeout(() => setDuplicateWarning(null), 2500)
+      return
     }
+    setDuplicateWarning(null)
+    setTyped(p => [...p, v])
+    setNewItem('')
+    setMethod('type')
   }
 
   async function handleFileScan(file: File) {
@@ -868,10 +891,17 @@ function InputScreen({ onNavigate, onContinue }: { onNavigate: (s: Screen) => vo
   }
 
   async function continueToIngredients() {
-    if (method === 'type' && typed.length) {
+    let currentTyped = typed
+    const v = newItem.trim()
+    if (v && !typed.some(item => item.toLowerCase() === v.toLowerCase())) {
+      currentTyped = [...typed, v]
+      setTyped(currentTyped)
+      setNewItem('')
+    }
+    if (method === 'type' && currentTyped.length) {
       setNormalizing(true)
       try {
-        const normalized = await normalizeManualIngredients(typed)
+        const normalized = await normalizeManualIngredients(currentTyped)
         onContinue(normalized)
       } finally {
         setNormalizing(false)
@@ -889,7 +919,7 @@ function InputScreen({ onNavigate, onContinue }: { onNavigate: (s: Screen) => vo
     }
   }
 
-  const canContinue = method === 'type' ? typed.length > 0 : method === 'scan' && uploaded
+  const canContinue = method === 'type' ? (typed.length > 0 || newItem.trim().length > 0) : method === 'scan' && uploaded
 
   return (
     <div className="experience-shell screen-enter min-h-screen bg-butter flex flex-col paper-texture">
@@ -998,6 +1028,9 @@ function InputScreen({ onNavigate, onContinue }: { onNavigate: (s: Screen) => vo
                     Add +
                   </button>
                 </div>
+                {duplicateWarning && (
+                  <p className="font-body text-xs text-tomato font-bold animate-pulse">{duplicateWarning}</p>
+                )}
                 {typed.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {typed.map((item, i) => (
@@ -1504,7 +1537,16 @@ function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredien
             {displayed.map((recipe, i) => (
               <article
                 key={recipe.id}
-                className="recipe-note bg-cream rounded-3xl overflow-hidden border border-yellow/30 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 group"
+                role="button"
+                tabIndex={0}
+                onClick={() => onViewRecipe(recipe)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    onViewRecipe(recipe)
+                  }
+                }}
+                className="recipe-note bg-cream rounded-3xl overflow-hidden border border-yellow/30 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-tomato"
               >
                 {/* Image area */}
                 <div className="relative h-52 overflow-hidden" style={{ backgroundColor: recipe.accent }}>
@@ -1520,7 +1562,10 @@ function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredien
                   </div>
                   {/* Save button */}
                   <button
-                    onClick={() => toggleSave(recipe.id)}
+                    onClick={e => {
+                      e.stopPropagation()
+                      toggleSave(recipe.id)
+                    }}
                     aria-label={saved.has(recipe.id) ? 'Unsave recipe' : 'Save recipe'}
                     aria-pressed={saved.has(recipe.id)}
                     className={`save-heart absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center text-lg transition-all shadow-md ${saved.has(recipe.id) ? 'is-saved bg-tomato text-white' : 'bg-white/85 text-olive hover:bg-white'}`}
@@ -1595,7 +1640,13 @@ function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredien
                       ))}
                       <span className="font-body text-olive/40 text-xs ml-1.5">{recipe.rating}</span>
                     </div>
-                    <button onClick={() => onViewRecipe(recipe)} className="bg-tomato text-white font-body font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-[#D4614F] hover:scale-105 transition-all shadow-sm">
+                    <button
+                      onClick={e => {
+                        e.stopPropagation()
+                        onViewRecipe(recipe)
+                      }}
+                      className="bg-tomato text-white font-body font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-[#D4614F] hover:scale-105 transition-all shadow-sm"
+                    >
                       View Recipe →
                     </button>
                   </div>
@@ -1659,6 +1710,15 @@ function RecipeDetailScreen({
   useEffect(() => {
     setCurrentRecipe(recipe)
   }, [recipe])
+
+  useEffect(() => {
+    if (!swapModalOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSwapModalOpen(false)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [swapModalOpen])
 
   const storageKey = `fridgemind-cooking-${currentRecipe.id}`
   const savedCooking = (() => {
@@ -2009,7 +2069,14 @@ function RecipeDetailScreen({
 
       {/* Interactive 1-Click Substitution Modal */}
       {swapModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-olive/50 backdrop-blur-sm animate-fade-in" role="dialog" aria-modal="true">
+        <div
+          onClick={e => {
+            if (e.target === e.currentTarget) setSwapModalOpen(false)
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-olive/50 backdrop-blur-sm animate-fade-in"
+          role="dialog"
+          aria-modal="true"
+        >
           <div className="bg-cream rounded-3xl p-6 md:p-8 max-w-xl w-full border-2 border-yellow/40 shadow-2xl space-y-5 max-h-[90vh] flex flex-col paper-texture">
             <div className="flex items-center justify-between border-b border-yellow/30 pb-3">
               <div>
@@ -2161,6 +2228,7 @@ export default function App() {
   }, [ingredients, preferences, selectedRecipe.id, theme])
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
     document.title = screen === 'home' ? 'FridgeMind — Your next meal' : `${screen === 'recipe' ? selectedRecipe.name : screen[0].toUpperCase() + screen.slice(1)} | FridgeMind`
     window.setTimeout(() => {
       const heading = document.querySelector('h1')
