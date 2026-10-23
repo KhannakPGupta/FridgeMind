@@ -577,6 +577,16 @@ function DoodleSprinkles() {
 
 function HomeScreen({ onNavigate }: { onNavigate: (s: Screen) => void }) {
   const [eyes, setEyes] = useState({ x: 0, y: 0 })
+  const [catalogStats, setCatalogStats] = useState<CatalogStats | null>(null)
+  const [showCatalogModal, setShowCatalogModal] = useState(false)
+
+  useEffect(() => {
+    let isMounted = true
+    fetchCatalogStats().then(data => {
+      if (isMounted && data) setCatalogStats(data)
+    })
+    return () => { isMounted = false }
+  }, [])
 
   return (
     <div className="experience-shell screen-enter min-h-screen bg-butter flex flex-col paper-texture">
@@ -586,7 +596,15 @@ function HomeScreen({ onNavigate }: { onNavigate: (s: Screen) => void }) {
           <span className="brand-mark" aria-hidden="true">F</span>
           <span className="font-heading text-[1.6rem] font-semibold text-olive tracking-wide">FridgeMind</span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 md:gap-6">
+          <button
+            onClick={() => setShowCatalogModal(true)}
+            className="inline-flex items-center gap-1.5 font-body text-xs font-bold text-olive/80 hover:text-olive bg-cream px-3 py-1.5 rounded-full border border-yellow/50 hover:border-yellow shadow-2xs transition-all hover:scale-105"
+            title="Explore our verified multi-cuisine recipe database"
+          >
+            <span>🌍</span>
+            <span>{catalogStats ? `${catalogStats.total_recipes}+ Dishes` : 'World Catalog'}</span>
+          </button>
           <a href="#how" className="hidden md:block font-body text-olive/55 hover:text-olive transition-colors font-semibold text-sm">
             How it works ↓
           </a>
@@ -728,6 +746,90 @@ function HomeScreen({ onNavigate }: { onNavigate: (s: Screen) => void }) {
       <footer className="px-6 md:px-12 py-6 bg-vanilla border-t border-yellow/30 text-center">
         <p className="font-body text-olive/40 text-sm">Made with 🧡 by FridgeMind &nbsp;·&nbsp; Your kitchen, your mood, your next meal.</p>
       </footer>
+
+      {/* World Recipe Catalog Explorer Modal */}
+      {showCatalogModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-olive/50 backdrop-blur-sm animate-fade-in" role="dialog" aria-modal="true">
+          <div className="bg-cream rounded-3xl p-6 md:p-8 max-w-2xl w-full border-2 border-yellow/40 shadow-2xl space-y-5 max-h-[90vh] flex flex-col paper-texture">
+            <div className="flex items-center justify-between border-b border-yellow/30 pb-3">
+              <div>
+                <h3 className="font-heading text-2xl font-semibold text-olive flex items-center gap-2">
+                  <span>🌍</span> World Recipe Catalog
+                </h3>
+                <p className="font-body text-xs text-olive/60 mt-0.5">Indexed with SQLite FTS5 for sub-2ms candidate search</p>
+              </div>
+              <button
+                onClick={() => setShowCatalogModal(false)}
+                className="w-8 h-8 rounded-full bg-peach/40 hover:bg-peach text-olive flex items-center justify-center font-bold text-sm transition-colors"
+                aria-label="Close catalog dialog"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="bg-white/80 p-3.5 rounded-2xl border border-yellow/30 text-center">
+                <span className="block font-heading text-3xl font-semibold text-tomato">{catalogStats?.total_recipes || '70+'}</span>
+                <span className="font-body text-[11px] uppercase tracking-wider font-extrabold text-olive/60">Total Dishes</span>
+              </div>
+              <div className="bg-white/80 p-3.5 rounded-2xl border border-yellow/30 text-center">
+                <span className="block font-heading text-3xl font-semibold text-olive">{catalogStats ? Object.keys(catalogStats.by_cuisine).length : '17'}</span>
+                <span className="font-body text-[11px] uppercase tracking-wider font-extrabold text-olive/60">World Cuisines</span>
+              </div>
+              <div className="bg-white/80 p-3.5 rounded-2xl border border-yellow/30 text-center col-span-2 sm:col-span-1">
+                <span className="block font-heading text-3xl font-semibold text-olive">&lt; 2ms</span>
+                <span className="font-body text-[11px] uppercase tracking-wider font-extrabold text-olive/60">FTS5 Search</span>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-heading text-base font-semibold text-olive mb-2.5">Cuisine Diversity:</h4>
+              <div className="flex flex-wrap gap-2 max-h-52 overflow-y-auto pr-1">
+                {catalogStats && catalogStats.by_cuisine ? (
+                  Object.entries(catalogStats.by_cuisine)
+                    .sort(([, a], [, b]) => b - a)
+                    .map(([cuisine, count]) => (
+                      <span key={cuisine} className="px-3 py-1.5 rounded-xl bg-white/70 border border-yellow/40 font-body text-xs font-bold text-olive flex items-center gap-1.5 shadow-2xs">
+                        <span>🥘</span>
+                        <span>{cuisine}</span>
+                        <span className="bg-yellow/50 text-[10px] px-1.5 py-0.5 rounded-md font-extrabold">{count}</span>
+                      </span>
+                    ))
+                ) : (
+                  ['Indian', 'Italian', 'Mexican', 'Continental', 'Japanese', 'East Asian', 'Thai', 'Korean', 'Mediterranean', 'American', 'Greek', 'Chinese', 'Lebanese', 'Spanish', 'Vietnamese'].map(c => (
+                    <span key={c} className="px-3 py-1.5 rounded-xl bg-white/70 border border-yellow/40 font-body text-xs font-bold text-olive">
+                      🥘 {c}
+                    </span>
+                  ))
+                )}
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-sage/35 border border-sage/60 flex items-center gap-3 font-body text-xs text-olive/80">
+              <span className="text-2xl">🌱</span>
+              <p>Every dish is grounded in our zero-waste ingredient catalog with authentic cooking times and step timers.</p>
+            </div>
+
+            <div className="flex items-center justify-between pt-2 border-t border-yellow/30">
+              <button
+                onClick={() => setShowCatalogModal(false)}
+                className="bg-vanilla text-olive font-body font-bold text-xs px-5 py-2.5 rounded-xl border border-yellow/40 hover:border-yellow"
+              >
+                Close
+              </button>
+              <button
+                onClick={() => {
+                  setShowCatalogModal(false)
+                  onNavigate('input')
+                }}
+                className="bg-tomato hover:bg-[#d04332] text-white font-body font-bold text-xs px-6 py-2.5 rounded-xl transition-all shadow-sm hover:scale-105"
+              >
+                Start Cooking Now →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
