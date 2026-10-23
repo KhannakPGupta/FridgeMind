@@ -4,6 +4,7 @@ import {
   getRecipeRecommendations,
   normalizeManualIngredients,
   getRecipeNutrition,
+  checkApiHealth,
   type Ingredient,
   type RecipeIngredient,
   type Recipe,
@@ -490,6 +491,18 @@ function SceneWipe({ screen }: { screen: Screen }) {
 }
 
 function PageHeader({ onBack, label }: { onBack: () => void; label: string }) {
+  const [apiOnline, setApiOnline] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    let isMounted = true
+    checkApiHealth().then(res => {
+      if (isMounted) setApiOnline(!!res)
+    }).catch(() => {
+      if (isMounted) setApiOnline(false)
+    })
+    return () => { isMounted = false }
+  }, [])
+
   const stepMatch = label.match(/\d/)
   const step = stepMatch ? Number(stepMatch[0]) : null
   return (
@@ -504,6 +517,21 @@ function PageHeader({ onBack, label }: { onBack: () => void; label: string }) {
         <span className="brand-mark" aria-hidden="true">F</span>
         <span className="font-heading text-xl font-semibold text-olive">FridgeMind</span>
       </div>
+
+      {apiOnline !== null && (
+        <span
+          title={apiOnline ? 'FastAPI backend active: Live SQLite FTS5 search & ML enabled' : 'Operating in resilient offline mode with built-in culinary catalog'}
+          className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-body font-bold border shadow-2xs transition-all ${
+            apiOnline
+              ? 'bg-[#C9DCC5]/70 text-olive border-[#A3C29E]'
+              : 'bg-[#F5D66F]/45 text-olive border-[#F5D66F]'
+          }`}
+        >
+          <span className={`w-2 h-2 rounded-full ${apiOnline ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
+          {apiOnline ? 'AI Connected' : 'Offline Mode'}
+        </span>
+      )}
+
       {step ? (
         <div className="ml-auto hidden sm:flex items-center gap-2" aria-label={label}>
           {[1, 2, 3, 4].map(item => (
