@@ -1464,9 +1464,16 @@ function ResultsScreen({ onNavigate, onViewRecipe, onStartOver, theme, ingredien
 
                   {/* Missing vs Matched Ingredients */}
                   {recipe.missing_ingredients && recipe.missing_ingredients.length > 0 ? (
-                    <div className="mb-3 px-3 py-1.5 rounded-xl bg-peach/25 border border-peach/50 text-xs font-body flex items-center gap-1.5 text-olive/75">
-                      <span className="text-tomato font-extrabold">Missing:</span>
-                      <span className="font-semibold truncate">{recipe.missing_ingredients.join(', ')}</span>
+                    <div className="mb-3 px-3 py-1.5 rounded-xl bg-peach/25 border border-peach/50 text-xs font-body flex items-center justify-between gap-1.5 text-olive/75">
+                      <div className="flex items-center gap-1.5 truncate">
+                        <span className="text-tomato font-extrabold">Missing:</span>
+                        <span className="font-semibold truncate">{recipe.missing_ingredients.join(', ')}</span>
+                      </div>
+                      {recipe.substitution && (
+                        <span className="shrink-0 text-[10px] font-extrabold text-olive/80 bg-yellow/50 px-2 py-0.5 rounded-md border border-yellow/60">
+                          💡 Swap available
+                        </span>
+                      )}
                     </div>
                   ) : (
                     <div className="mb-3 px-3 py-1.5 rounded-xl bg-sage/30 border border-sage/50 text-xs font-body font-bold text-olive flex items-center gap-1.5">
