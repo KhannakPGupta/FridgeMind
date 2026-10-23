@@ -10,7 +10,7 @@
 [![SQLite FTS5](https://img.shields.io/badge/SQLite-FTS5_Indexed-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/fts5.html)
 [![Gemini 2.0 Flash](https://img.shields.io/badge/Google_Gemini-2.0_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Tests Passing](https://img.shields.io/badge/Pytest-39%2F39_Passing-brightgreen?style=for-the-badge&logo=pytest&logoColor=white)](https://pytest.org/)
+[![Tests Passing](https://img.shields.io/badge/Pytest-45%2F45_Passing-brightgreen?style=for-the-badge&logo=pytest&logoColor=white)](https://pytest.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
 <br/>
@@ -32,11 +32,11 @@
 - [System Architecture](#-system-architecture)
 - [The 4-Signal Hybrid ML Ranking Engine](#-the-4-signal-hybrid-ml-ranking-engine)
 - [Sub-Millisecond SQLite FTS5 Indexing](#-sub-millisecond-sqlite-fts5-indexing)
-- [World Recipe Catalog Distribution (1,122 Dishes)](#-world-recipe-catalog-distribution-1122-dishes)
+- [World Recipe Catalog Distribution](#-world-recipe-catalog-distribution)
 - [Key Features Deep Dive](#-key-features-deep-dive)
 - [Complete REST API Reference](#-complete-rest-api-reference)
 - [Quick Start Guide](#-quick-start-guide)
-- [Automated Testing Suite (39 Tests)](#-automated-testing-suite)
+- [Automated Testing Suite (45 Tests)](#-automated-testing-suite)
 - [Production Deployment](#-production-deployment-options)
 - [Security, Privacy & Zero-Drift](#-security--privacy)
 
@@ -87,7 +87,7 @@
 | 🎯 **Ranking Engine** | **4 Signals** | Coverage ($0.45$), Taste ($0.25$), Effort ($0.20$), Practicality ($0.10$) |
 | ♻️ **Zero-Waste Multiplier** | **1.25× Boost** | Immediate scoring bonus for dishes rescuing expiring produce |
 | 🔄 **Culinary Swaps** | **60+ Rules** | Dairy, protein, binder, and herb substitutions with ratio math |
-| 🧪 **Backend Test Suite** | **39 / 39 Passing** | 100% passing tests across normalizers, ranking, and APIs |
+| 🧪 **Backend Test Suite** | **45 / 45 Passing** | 100% passing tests across normalizers, ranking, substitutions, and APIs |
 | 🐳 **Packaging** | **Docker Ready** | Multi-stage image running frontend, backend, and DB on single port |
 
 ---
@@ -400,7 +400,7 @@ Open your browser at `http://localhost:8443` (or the port displayed in your term
 
 ## 🧪 Automated Testing Suite
 
-FridgeMind includes a comprehensive **39-test backend test suite** covering all critical ML and data pipelines:
+FridgeMind includes a comprehensive **45-test backend test suite** covering all critical ML, substitution, and data pipelines:
 
 ```powershell
 backend\.venv\Scripts\pytest backend/tests -v
@@ -408,17 +408,18 @@ backend\.venv\Scripts\pytest backend/tests -v
 
 ```text
 ============================= test session starts =============================
-backend\tests\test_database.py ..                                        [  5%]
-backend\tests\test_hard_filters.py ...                                   [ 12%]
-backend\tests\test_health.py ..                                          [ 17%]
-backend\tests\test_ingredients_api.py ....                               [ 28%]
-backend\tests\test_normalizer.py ......                                  [ 43%]
-backend\tests\test_nutrition.py ..                                       [ 48%]
-backend\tests\test_ranking.py ......                                     [ 64%]
-backend\tests\test_recipes_api.py ......                                 [ 79%]
+backend\tests\test_database.py ..                                        [  4%]
+backend\tests\test_hard_filters.py ...                                   [ 11%]
+backend\tests\test_health.py ..                                          [ 15%]
+backend\tests\test_ingredients_api.py ....                               [ 24%]
+backend\tests\test_normalizer.py ......                                  [ 37%]
+backend\tests\test_nutrition.py ..                                       [ 42%]
+backend\tests\test_ranking.py ......                                     [ 55%]
+backend\tests\test_recipes_api.py ......                                 [ 68%]
+backend\tests\test_substitution_flow.py ......                           [ 82%]
 backend\tests\test_track_one.py ........                                 [100%]
 
-======================== 39 passed in 0.97s ========================
+======================== 45 passed, 1 warning in 1.09s ========================
 ```
 
 ---
